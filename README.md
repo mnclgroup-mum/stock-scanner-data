@@ -1,1 +1,1 @@
-# stock-scanner-data.
+# stock-scanner-data
