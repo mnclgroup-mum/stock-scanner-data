@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Scanner Admin</title>
+<style>
+:root{--bg:#f5f7fa;--card:#fff;--ink:#14213d;--mute:#5d6b82;--line:#e2e7ef;--brand:#0b5cad;--brand2:#e8f1fb;--ok:#0f7b3f;--okbg:#e7f6ee;--warn:#9a5b00;--warnbg:#fff4e0;--err:#b42318;--errbg:#fdecea;--r:10px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1520;--card:#172030;--ink:#e6ecf5;--mute:#9aa8bd;--line:#2a3547;--brand:#5aa2ef;--brand2:#1b2a40;--ok:#4cc38a;--okbg:#12291e;--warn:#f0b35a;--warnbg:#2c2212;--err:#f08a80;--errbg:#2e1615}}
+:root[data-theme="dark"]{--bg:#0f1520;--card:#172030;--ink:#e6ecf5;--mute:#9aa8bd;--line:#2a3547;--brand:#5aa2ef;--brand2:#1b2a40;--ok:#4cc38a;--okbg:#12291e;--warn:#f0b35a;--warnbg:#2c2212;--err:#f08a80;--errbg:#2e1615}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+a{color:var(--brand)}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding:16px}
+header.top{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+header.top .wrap{display:flex;align-items:center;gap:12px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+.brand{font-weight:700;font-size:16px;margin-right:auto}
+.brand small{display:block;font-weight:500;color:var(--mute);font-size:12px}
+.who{font-size:13px;color:var(--mute)}
+.who b{color:var(--ink)}
+nav.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:14px 0 12px;border-bottom:1px solid var(--line)}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{border:0;background:none;padding:9px 12px;border-bottom:2px solid transparent;color:var(--mute);cursor:pointer;white-space:nowrap;font-weight:600}
+nav.tabs button[aria-selected="true"]{color:var(--brand);border-color:var(--brand)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:14px}
+.card h2{font-size:16px;margin:0 0 4px}
+.card h3{font-size:14px;margin:14px 0 6px}
+.card p.sub{color:var(--mute);margin:0 0 12px;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.kpi{border:1px solid var(--line);border-radius:8px;padding:12px}
+.kpi .k{font-size:12px;color:var(--mute)}
+.kpi .v{font-size:18px;font-weight:700;margin-top:2px}
+.kpi .s{font-size:12px;color:var(--mute)}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--brand);background:var(--brand);color:#fff;border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:600}
+.btn.sec{background:transparent;color:var(--brand)}
+.btn.danger{background:var(--err);border-color:var(--err)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn.sm{padding:5px 10px;font-size:13px}
+label.f{display:block;font-size:13px;font-weight:600;margin:10px 0 4px}
+input.i,select.i,textarea.i{width:100%;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:9px 10px}
+input.i:focus,select.i:focus{outline:2px solid var(--brand2);border-color:var(--brand)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+.row>*{flex:1 1 180px}
+.msg{border-radius:8px;padding:10px 12px;margin:10px 0;font-size:14px}
+.msg.ok{background:var(--okbg);color:var(--ok)}
+.msg.err{background:var(--errbg);color:var(--err)}
+.msg.warn{background:var(--warnbg);color:var(--warn)}
+.msg.info{background:var(--brand2);color:var(--ink)}
+.kinds{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-bottom:12px}
+.kind{border:1px solid var(--line);border-radius:8px;padding:10px 12px;cursor:pointer;background:var(--card);text-align:left}
+.kind b{display:block;font-size:14px}
+.kind span{font-size:12px;color:var(--mute)}
+.kind[aria-pressed="true"]{border-color:var(--brand);box-shadow:0 0 0 2px var(--brand2)}
+.drop{border:2px dashed var(--line);border-radius:10px;padding:26px 14px;text-align:center;color:var(--mute);cursor:pointer}
+.drop.over{border-color:var(--brand);background:var(--brand2)}
+.drop b{color:var(--ink)}
+.files{margin:10px 0;padding:0;list-style:none}
+.files li{display:flex;gap:8px;align-items:flex-start;border-bottom:1px solid var(--line);padding:8px 0;font-size:14px;flex-wrap:wrap}
+.files li .nm{font-weight:600;word-break:break-all;flex:1 1 200px}
+.files li .st{font-size:13px;flex:2 1 260px}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th,.tbl td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{font-size:12px;color:var(--mute);font-weight:600}
+.tblwrap{overflow-x:auto}
+.pill{display:inline-block;border-radius:20px;padding:1px 8px;font-size:12px;font-weight:600;background:var(--brand2);color:var(--brand)}
+.pill.ok{background:var(--okbg);color:var(--ok)}.pill.warn{background:var(--warnbg);color:var(--warn)}.pill.err{background:var(--errbg);color:var(--err)}
+.mute{color:var(--mute)}
+.login{max-width:420px;margin:8vh auto}
+.hidden{display:none!important}
+code{background:var(--brand2);padding:1px 5px;border-radius:4px;font-size:13px}
+.steps{font-size:13px;color:var(--mute);margin:6px 0 0;padding-left:18px}
+.actions .a{display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding:10px 0;flex-wrap:wrap}
+.actions .a div{flex:1 1 260px}
+.actions .a span{font-size:13px;color:var(--mute);display:block}
+@media (max-width:640px){
+ .tbl.stack thead{display:none}
+ .tbl.stack tr{display:block;border-bottom:1px solid var(--line);padding:8px 0}
+ .tbl.stack td{display:flex;justify-content:space-between;gap:10px;border:0;padding:3px 0}
+ .tbl.stack td[data-l]::before{content:attr(data-l);color:var(--mute);font-size:12px}
+ .tbl.stack td.full{display:block}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brand">MNCL Stock Scanner<small>Data console</small></div>
+  <div class="who hidden" id="who"></div>
+  <button class="btn sec sm hidden" id="logout" type="button">Sign out</button>
+</div></header>
+
+<main class="wrap">
+  <!-- Sign in -->
+  <section id="v-login" class="login">
+    <div class="card">
+      <h2>Sign in</h2>
+      <p class="sub">For MNCL admins and analysts.</p>
+      <form id="f-login">
+        <label class="f" for="l-email">Email</label><input class="i" id="l-email" type="email" autocomplete="username" required>
+        <label class="f" for="l-pw">Password</label><input class="i" id="l-pw" type="password" autocomplete="current-password" required>
+        <div id="l-msg"></div>
+        <p style="margin:14px 0 0"><button class="btn" type="submit" id="l-btn">Sign in</button></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Must change password -->
+  <section id="v-pw" class="login hidden">
+    <div class="card">
+      <h2>Choose a new password</h2>
+      <p class="sub">At least 10 characters, with letters and a number.</p>
+      <form id="f-pw">
+        <label class="f" for="p-old">Current (temporary) password</label><input class="i" id="p-old" type="password" autocomplete="current-password" required>
+        <label class="f" for="p-new">New password</label><input class="i" id="p-new" type="password" autocomplete="new-password" required minlength="10">
+        <label class="f" for="p-new2">Repeat new password</label><input class="i" id="p-new2" type="password" autocomplete="new-password" required minlength="10">
+        <div id="p-msg"></div>
+        <p style="margin:14px 0 0"><button class="btn" type="submit">Save password</button></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- App -->
+  <section id="v-app" class="hidden">
+    <nav class="tabs" role="tablist" id="tabs">
+      <button role="tab" data-t="overview" aria-selected="true">Overview</button>
+      <button role="tab" data-t="upload" aria-selected="false">Upload data</button>
+      <button role="tab" data-t="symbols" aria-selected="false" class="adm">Symbols</button>
+      <button role="tab" data-t="etfs" aria-selected="false" class="adm">ETF categories</button>
+      <button role="tab" data-t="holidays" aria-selected="false" class="adm">Holidays</button>
+      <button role="tab" data-t="actions" aria-selected="false" class="adm">Actions</button>
+      <button role="tab" data-t="users" aria-selected="false" class="adm">Users</button>
+      <button role="tab" data-t="audit" aria-selected="false" class="adm">Activity log</button>
+      <button role="tab" data-t="account" aria-selected="false">My account</button>
+    </nav>
+
+    <div id="t-overview" class="tab">
+      <div id="ov"></div>
+    </div>
+
+    <div id="t-upload" class="tab hidden">
+      <div class="card">
+        <h2>Upload data</h2>
+        <p class="sub">Download the file from NSE and drop it here. You can add several files at once; Bhavcopies are processed one date at a time, oldest first.</p>
+        <div class="kinds" id="kinds"></div>
+        <div id="kind-help" class="msg info"></div>
+        <div class="drop" id="drop" tabindex="0" role="button" aria-label="Choose files to upload"><b>Drop CSV files here</b><br>or tap to choose<input type="file" id="file" accept=".csv,text/csv" multiple hidden></div>
+        <ul class="files" id="files"></ul>
+      </div>
+      <div class="card"><h2>My recent uploads</h2><div id="my-up" class="mute">Loading&#8230;</div></div>
+    </div>
+
+    <div id="t-symbols" class="tab hidden">
+      <div class="card">
+        <h2>Symbol master</h2>
+        <p class="sub">Company name, industry and sector for each stock (the SYMBOLS sheet). Changes apply from the next evening run.</p>
+        <div class="row">
+          <div><label class="f" for="sym-q">Search</label><input class="i" id="sym-q" placeholder="Symbol, company, industry or sector"></div>
+          <div style="flex:0 0 auto"><button class="btn sec" id="sym-unknown" type="button">Show incomplete</button></div>
+        </div>
+        <div id="sym-list" style="margin-top:12px"></div>
+        <datalist id="dl-sec"></datalist><datalist id="dl-ind"></datalist>
+      </div>
+    </div>
+
+    <div id="t-etfs" class="tab hidden">
+      <div class="card">
+        <h2>ETF categories</h2>
+        <p class="sub">ETFs are grouped automatically from their name. Change a category here if it is wrong, or mark a symbol as "Not an ETF". Applies from the next evening run.</p>
+        <div class="row">
+          <div><label class="f" for="etf-q">Filter</label><input class="i" id="etf-q" placeholder="Symbol or name"></div>
+          <div><label class="f" for="etf-add">Add a symbol</label><input class="i" id="etf-add" placeholder="e.g. GOLDIETF"></div>
+        </div>
+        <div id="etf-list" style="margin-top:12px"></div>
+      </div>
+    </div>
+
+    <div id="t-holidays" class="tab hidden">
+      <div class="card">
+        <h2>Market holidays</h2>
+        <p class="sub">Weekdays when NSE is closed (or a Muhurat session). Weekends are handled automatically.</p>
+        <form class="row" id="f-hol">
+          <div><label class="f" for="h-d">Date</label><input class="i" id="h-d" type="date" required></div>
+          <div><label class="f" for="h-st">Status</label><select class="i" id="h-st"><option value="CLOSED">Closed</option><option value="MAHURAT">Muhurat session</option><option value="OPEN">Open (override)</option></select></div>
+          <div><label class="f" for="h-n">Note</label><input class="i" id="h-n" placeholder="e.g. Diwali Balipratipada"></div>
+          <div style="flex:0 0 auto"><button class="btn" type="submit">Save</button></div>
+        </form>
+        <div id="hol-list" style="margin-top:12px"></div>
+      </div>
+    </div>
+
+    <div id="t-actions" class="tab hidden">
+      <div class="card actions">
+        <h2>Pipeline actions</h2>
+        <p class="sub">Each action runs in the background within a minute. Progress shows on the Overview tab and in the activity log.</p>
+        <div id="act-list"></div>
+      </div>
+    </div>
+
+    <div id="t-users" class="tab hidden">
+      <div class="card">
+        <h2>Add or change a user</h2>
+        <p class="sub">Analysts can upload data and see the status. Admins can do everything. New users get a temporary password that they change at first sign-in.</p>
+        <form class="row" id="f-user">
+          <div><label class="f" for="u-email">Email</label><input class="i" id="u-email" type="email" required></div>
+          <div><label class="f" for="u-name">Name</label><input class="i" id="u-name"></div>
+          <div><label class="f" for="u-role">Role</label><select class="i" id="u-role"><option value="analyst">Analyst</option><option value="admin">Admin</option></select></div>
+          <div style="flex:0 0 auto"><button class="btn" type="submit">Save user</button></div>
+        </form>
+        <div id="u-msg"></div>
+      </div>
+      <div class="card"><h2>Users</h2><div id="u-list"></div></div>
+    </div>
+
+    <div id="t-audit" class="tab hidden">
+      <div class="card"><h2>Activity log</h2><p class="sub">Last 300 sign-ins, uploads, edits and actions.</p><div id="audit-list"></div></div>
+    </div>
+
+    <div id="t-account" class="tab hidden">
+      <div class="card" style="max-width:520px">
+        <h2>Change password</h2>
+        <form id="f-pw2">
+          <label class="f" for="a-old">Current password</label><input class="i" id="a-old" type="password" autocomplete="current-password" required>
+          <label class="f" for="a-new">New password</label><input class="i" id="a-new" type="password" autocomplete="new-password" required minlength="10">
+          <div id="a-msg"></div>
+          <p style="margin:14px 0 0"><button class="btn" type="submit">Save password</button></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  'use strict';
+  // ══════════════════════════════════════════════════════════════
+  //  SETTING: the Apps Script web-app URL (same one the dashboard uses)
+  // ══════════════════════════════════════════════════════════════
+  var API = 'https://script.google.com/macros/s/AKfycbwLYHwAzXEXlR8e0sbaQFeDQ9npowB9bQdNWQe9i9Ms0dYNztHG0OK-Spibov7JcQNC/exec';
+  if (window.SCANNER_ADMIN_API) API = window.SCANNER_ADMIN_API;   // used by tests
+
+  var $ = function(id){ return document.getElementById(id); };
+  var token = '', me = null, tab = 'overview', status = null;
+  function ss(k, v){ try { if (v === undefined) return sessionStorage.getItem(k) || ''; if (v === null) sessionStorage.removeItem(k); else sessionStorage.setItem(k, v); } catch (e) { return ''; } }
+  function h(s){ return String(s === undefined || s === null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function msg(el, type, text){ el.innerHTML = text ? '<div class="msg ' + type + '">' + text + '</div>' : ''; }
+  function when(t){ if (!t) return '–'; var d = new Date(t); return d.toLocaleString('en-IN', { day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit' }); }
+  function fmtIso(iso){ if (!iso) return '–'; var p = iso.split('-'); return parseInt(p[2],10) + ' ' + ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(p[1],10)-1] + ' ' + p[0]; }
+
+  function api(fn, args){
+    return fetch(API, { method: 'POST', body: JSON.stringify({ fn: fn, token: token, args: args || {} }), headers: { 'Content-Type': 'text/plain;charset=utf-8' } })
+      .then(function(r){ if (!r.ok) throw new Error('Server error ' + r.status); return r.json(); })
+      .then(function(d){
+        if (d && d.auth === false) { signedOut(d.error); throw new Error(d.error); }
+        if (d && d.error) throw new Error(d.error);
+        return d;
+      });
+  }
+
+  // ── sign in / out ───────────────────────────────────────────
+  function show(view){ ['v-login','v-pw','v-app'].forEach(function(v){ $(v).classList.toggle('hidden', v !== view); }); }
+  function signedOut(why){
+    token = ''; me = null; ss('scanner_admin_token', null);
+    $('who').classList.add('hidden'); $('logout').classList.add('hidden');
+    show('v-login'); if (why) msg($('l-msg'), 'warn', h(why));
+  }
+  function signedIn(user){
+    me = user;
+    $('who').innerHTML = '<b>' + h(user.name || user.email) + '</b> · ' + (user.role === 'admin' ? 'Admin' : 'Analyst');
+    $('who').classList.remove('hidden'); $('logout').classList.remove('hidden');
+    if (user.must_change) { show('v-pw'); return; }
+    show('v-app');
+    Array.prototype.forEach.call(document.querySelectorAll('#tabs .adm'), function(b){ b.classList.toggle('hidden', user.role !== 'admin'); });
+    var t = (location.hash || '').replace('#', '');
+    go(document.querySelector('#tabs [data-t="' + t + '"]:not(.hidden)') ? t : 'overview');
+  }
+  $('f-login').addEventListener('submit', function(e){
+    e.preventDefault();
+    var b = $('l-btn'); b.disabled = true; msg($('l-msg'), 'info', 'Signing in&#8230;');
+    api('login', { email: $('l-email').value, password: $('l-pw').value }).then(function(d){
+      token = d.token; ss('scanner_admin_token', token); $('l-pw').value = ''; msg($('l-msg'), '', ''); signedIn(d.user);
+    }).catch(function(err){ msg($('l-msg'), 'err', h(err.message)); }).then(function(){ b.disabled = false; });
+  });
+  $('f-pw').addEventListener('submit', function(e){
+    e.preventDefault();
+    if ($('p-new').value !== $('p-new2').value) { msg($('p-msg'), 'err', 'The two new passwords do not match.'); return; }
+    api('changePassword', { oldPassword: $('p-old').value, newPassword: $('p-new').value }).then(function(){
+      me.must_change = false; ['p-old','p-new','p-new2'].forEach(function(i){ $(i).value = ''; }); signedIn(me);
+    }).catch(function(err){ msg($('p-msg'), 'err', h(err.message)); });
+  });
+  $('f-pw2').addEventListener('submit', function(e){
+    e.preventDefault();
+    api('changePassword', { oldPassword: $('a-old').value, newPassword: $('a-new').value }).then(function(){
+      $('a-old').value = ''; $('a-new').value = ''; msg($('a-msg'), 'ok', 'Password changed.');
+    }).catch(function(err){ msg($('a-msg'), 'err', h(err.message)); });
+  });
+  $('logout').addEventListener('click', function(){ api('logout').catch(function(){}).then(function(){ signedOut(''); }); });
+
+  // ── tabs ─────────────────────────────────────────────────────
+  $('tabs').addEventListener('click', function(e){ var b = e.target.closest('[data-t]'); if (b) go(b.getAttribute('data-t')); });
+  function go(t){
+    tab = t;
+    Array.prototype.forEach.call(document.querySelectorAll('#tabs [data-t]'), function(b){ b.setAttribute('aria-selected', b.getAttribute('data-t') === t); });
+    Array.prototype.forEach.call(document.querySelectorAll('.tab'), function(p){ p.classList.toggle('hidden', p.id !== 't-' + t); });
+    try { history.replaceState(null, '', '#' + t); } catch (e) {}
+    ({ overview: loadStatus, upload: loadUpload, symbols: loadSymbols, etfs: loadEtfs, holidays: loadHolidays, actions: renderActions, users: loadUsers, audit: loadAudit }[t] || function(){})();
+  }
+
+  // ── overview ─────────────────────────────────────────────────
+  var STATUS_LABEL = { queued: ['Queued','warn'], loaded: ['Processing','warn'], done: ['Done','ok'], check: ['Check','err'] };
+  function loadStatus(){
+    var box = $('ov'); if (!status) box.innerHTML = '<div class="card mute">Loading status&#8230;</div>';
+    return api('status').then(function(d){ status = d; renderStatus(); }).catch(function(err){ box.innerHTML = '<div class="msg err">' + h(err.message) + '</div>'; });
+  }
+  function renderStatus(){
+    var d = status, s = d.session || {};
+    var steps = Object.keys(s.steps || {}).map(function(k){ var v = String(s.steps[k]); return '<tr><td data-l="Step">' + h(k) + '</td><td class="full">' + (/^ERROR/.test(v) ? '<span class="pill err">Error</span> ' : '') + h(v) + '</td></tr>'; }).join('');
+    var q = (d.queue || []).map(function(x){
+      var L = STATUS_LABEL[x.status] || [x.status, ''];
+      return '<tr><td data-l="Session"><b>' + h(fmtIso(x.date)) + '</b></td><td data-l="Status"><span class="pill ' + L[1] + '">' + L[0] + '</span></td><td data-l="Uploaded by">' + h(x.by || '') + '</td><td data-l="When">' + when(x.at) + '</td><td data-l="Rows">' + (x.rows || '–') + (x.delivery === false ? ' <span class="mute">(no delivery %)</span>' : '') + (x.note ? '<br><span class="mute">' + h(x.note) + '</span>' : '') + '</td></tr>';
+    }).join('');
+    $('ov').innerHTML =
+      '<div class="card"><h2>Latest published session</h2><p class="sub">What the public dashboard is showing.</p><div class="grid">' +
+        kpi('Session', fmtIso(s.date_iso), s.source || '') +
+        kpi('Last run', s.generated_at || '–', s.ok === false ? 'Finished with errors' : 'OK') +
+        kpi('Stocks scanned', s.stocks || '–', '') +
+        kpi('Pipeline now', d.busy ? 'Running' : 'Idle', d.busy || 'Nothing in progress') +
+      '</div>' + (d.busy ? '<div class="msg warn">' + h(d.busy) + '. New uploads wait until it finishes.</div>' : '') + '</div>' +
+      '<div class="card"><h2>Other data</h2><div class="grid">' +
+        kpi('All-time high / low', (d.ath.known || 0) + ' stocks', d.ath.updated ? 'Updated ' + fmtIso(d.ath.updated) + (d.ath.gf_readable ? ', ' + d.ath.gf_readable + ' from Google Finance' : ', Google Finance values not readable yet') : 'Not set up yet') +
+        kpi('Index values', d.indices.date_iso ? fmtIso(d.indices.date_iso) : 'None uploaded', d.indices.sessions ? d.indices.sessions + ' sessions stored' : 'Upload ind_close_all to show indices') +
+        kpi('Bulk / block deals', d.deals.date_iso ? fmtIso(d.deals.date_iso) : 'None uploaded', d.deals.rows ? d.deals.rows + ' deals (45 days)' : '') +
+        kpi('Script version', d.version, '') +
+      '</div></div>' +
+      '<div class="card"><h2>Bhavcopy uploads</h2>' + (q ? '<div class="tblwrap"><table class="tbl stack"><thead><tr><th>Session</th><th>Status</th><th>Uploaded by</th><th>When</th><th>Rows</th></tr></thead><tbody>' + q + '</tbody></table></div>' : '<p class="mute">No uploads yet.</p>') +
+      '<p style="margin:10px 0 0"><button class="btn sec sm" type="button" id="ov-refresh">Refresh</button></p></div>' +
+      (steps ? '<div class="card"><h2>Steps of the last run</h2><div class="tblwrap"><table class="tbl stack"><tbody>' + steps + '</tbody></table></div></div>' : '');
+    $('ov-refresh').addEventListener('click', loadStatus);
+  }
+  function kpi(k, v, s){ return '<div class="kpi"><div class="k">' + h(k) + '</div><div class="v">' + h(v) + '</div>' + (s ? '<div class="s">' + h(s) + '</div>' : '') + '</div>'; }
+
+  // ── upload ───────────────────────────────────────────────────
+  var KINDS = [
+    { id: 'bhav', label: 'NSE Bhavcopy', note: 'Daily. Required.', help: 'File: <b>sec_bhavdata_full_DDMMYYYY.csv</b> ("Full Bhavcopy and Security Deliverable data" on nseindia.com &gt; Market data &gt; All reports). The newer <b>BhavCopy_NSE_CM_…csv</b> also works but has no delivery %.', guess: /bhavdata|bhavcopy|sec_bhav/i },
+    { id: 'indices', label: 'Index closing values', note: 'Daily. Optional.', help: 'File: <b>ind_close_all_DDMMYYYY.csv</b> (NSE &gt; All reports &gt; Indices). Shows Nifty, Bank Nifty, sector and thematic indices on the dashboard.', guess: /ind_close|index/i },
+    { id: 'bulk', label: 'Bulk deals', note: 'Daily. Optional.', help: 'File: <b>bulk.csv</b> from NSE &gt; Market data &gt; Large deals &gt; Bulk deals (download CSV). Several days in one file are fine.', guess: /bulk/i },
+    { id: 'block', label: 'Block deals', note: 'Daily. Optional.', help: 'File: <b>block.csv</b> from NSE &gt; Market data &gt; Large deals &gt; Block deals (download CSV).', guess: /block/i },
+    { id: 'ath', label: 'All-time high / low', note: 'Occasional. Optional.', help: 'Any CSV with columns <b>Symbol, All-time high, All-time low</b>. Use it if the Google Finance all-time formulas cannot be read by the script.', guess: /ath|all.?time/i },
+    { id: 'symbols', label: 'Symbol master', note: 'Admins only.', help: 'CSV with <b>Symbol</b> and any of <b>Industry, Sector, Company name</b>. Updates the SYMBOLS sheet for the symbols listed.', guess: /symbol|master/i, admin: true }
+  ];
+  var kind = 'bhav';
+  function loadUpload(){
+    $('kinds').innerHTML = KINDS.filter(function(k){ return !k.admin || me.role === 'admin'; }).map(function(k){
+      return '<button type="button" class="kind" data-kind="' + k.id + '" aria-pressed="' + (k.id === kind) + '"><b>' + k.label + '</b><span>' + k.note + '</span></button>';
+    }).join('');
+    $('kind-help').innerHTML = KINDS.filter(function(k){ return k.id === kind; })[0].help;
+    refreshMine();
+  }
+  function refreshMine(){
+    api('myUploads').then(function(d){
+      $('my-up').innerHTML = d.rows.length ? '<div class="tblwrap"><table class="tbl stack"><thead><tr><th>When</th><th>Result</th></tr></thead><tbody>' + d.rows.map(function(r){ return '<tr><td data-l="When">' + when(r.t) + '</td><td class="full">' + h(r.d) + '</td></tr>'; }).join('') + '</tbody></table></div>' : 'No uploads yet.';
+    }).catch(function(err){ $('my-up').textContent = err.message; });
+  }
+  $('kinds').addEventListener('click', function(e){ var b = e.target.closest('[data-kind]'); if (!b) return; kind = b.getAttribute('data-kind'); loadUpload(); });
+  var drop = $('drop');
+  drop.addEventListener('click', function(){ $('file').click(); });
+  drop.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('file').click(); } });
+  drop.addEventListener('dragover', function(e){ e.preventDefault(); drop.classList.add('over'); });
+  drop.addEventListener('dragleave', function(){ drop.classList.remove('over'); });
+  drop.addEventListener('drop', function(e){ e.preventDefault(); drop.classList.remove('over'); handleFiles(e.dataTransfer.files); });
+  $('file').addEventListener('change', function(){ handleFiles(this.files); this.value = ''; });
+
+  var uploading = Promise.resolve();
+  function handleFiles(list){
+    Array.prototype.forEach.call(list, function(f){
+      var k = kind;
+      // pick the right type automatically when the NSE file name makes it obvious
+      if (/bhavdata|bhavcopy|sec_bhav/i.test(f.name)) k = 'bhav';
+      else if (/ind_close/i.test(f.name)) k = 'indices';
+      else if (/bulk/i.test(f.name)) k = 'bulk';
+      else if (/block/i.test(f.name)) k = 'block';
+      var li = document.createElement('li');
+      li.innerHTML = '<span class="nm">' + h(f.name) + '</span><span class="st"><span class="pill">' + h(KINDS.filter(function(x){ return x.id === k; })[0].label) + '</span> Waiting&#8230;</span>';
+      $('files').insertBefore(li, $('files').firstChild);
+      var st = li.querySelector('.st');
+      uploading = uploading.then(function(){
+        if (!/\.csv$/i.test(f.name)) { st.innerHTML = '<span class="pill err">Skipped</span> Only .csv files can be uploaded. If NSE gave you a .zip, unzip it first.'; return; }
+        if (f.size > 14e6) { st.innerHTML = '<span class="pill err">Too large</span>'; return; }
+        st.innerHTML = '<span class="pill">' + h(k) + '</span> Reading&#8230;';
+        return f.text().then(function(text){
+          var pre = k === 'bhav' ? previewBhav(text) : '';
+          st.innerHTML = '<span class="pill">' + h(k) + '</span> Uploading' + (pre ? ' (' + h(pre) + ')' : '') + '&#8230;';
+          return api('upload', { kind: k, name: f.name, text: text });
+        }).then(function(d){ if (d) { st.innerHTML = '<span class="pill ok">Saved</span> ' + h(d.message); status = null; refreshMine(); } })
+          .catch(function(err){ st.innerHTML = '<span class="pill err">Not saved</span> ' + h(err.message); });
+      });
+    });
+  }
+  function previewBhav(text){
+    var lines = text.split(/\r?\n/).filter(function(l){ return l.trim(); });
+    var m = text.match(/\b(\d{1,2}-[A-Za-z]{3}-\d{4}|\d{4}-\d{2}-\d{2})\b/);
+    return (lines.length - 1) + ' rows' + (m ? ', session ' + m[1] : '');
+  }
+
+  // ── symbols (admin) ──────────────────────────────────────────
+  var symTimer = null;
+  function loadSymbols(unknownOnly){
+    var box = $('sym-list'); box.innerHTML = '<p class="mute">Loading&#8230;</p>';
+    api('symbols', { q: $('sym-q').value, unknownOnly: unknownOnly === true }).then(function(d){
+      $('dl-sec').innerHTML = d.sectors.map(function(x){ return '<option value="' + h(x) + '">'; }).join('');
+      $('dl-ind').innerHTML = d.industries.map(function(x){ return '<option value="' + h(x) + '">'; }).join('');
+      if (!d.rows.length) { box.innerHTML = '<p class="mute">No matching symbols.</p>'; return; }
+      box.innerHTML = '<p class="mute" style="font-size:13px">' + d.rows.length + (d.rows.length === 100 ? '+' : '') + ' of ' + d.total + ' symbols. Edit a field and press Save on that row.</p><div class="tblwrap"><table class="tbl stack"><thead><tr><th>Symbol</th><th>Company name</th><th>Industry</th><th>Sector</th><th></th></tr></thead><tbody>' +
+        d.rows.map(function(r){
+          return '<tr data-sym="' + h(r.s) + '"><td data-l="Symbol"><b>' + h(r.s) + '</b></td>' +
+            '<td class="full"><input class="i" data-k="n" value="' + h(r.n) + '" aria-label="Company name for ' + h(r.s) + '"></td>' +
+            '<td class="full"><input class="i" data-k="ind" list="dl-ind" value="' + h(r.ind) + '" aria-label="Industry for ' + h(r.s) + '"></td>' +
+            '<td class="full"><input class="i" data-k="sec" list="dl-sec" value="' + h(r.sec) + '" aria-label="Sector for ' + h(r.s) + '"></td>' +
+            '<td class="full"><button class="btn sm" type="button" data-save-sym>Save</button> <span class="mute" data-res></span></td></tr>';
+        }).join('') + '</tbody></table></div>';
+    }).catch(function(err){ box.innerHTML = '<div class="msg err">' + h(err.message) + '</div>'; });
+  }
+  $('sym-q').addEventListener('input', function(){ clearTimeout(symTimer); symTimer = setTimeout(loadSymbols, 400); });
+  $('sym-unknown').addEventListener('click', function(){ $('sym-q').value = ''; loadSymbols(true); });
+  $('sym-list').addEventListener('click', function(e){
+    var b = e.target.closest('[data-save-sym]'); if (!b) return;
+    var tr = b.closest('tr'), v = {}; Array.prototype.forEach.call(tr.querySelectorAll('[data-k]'), function(i){ v[i.getAttribute('data-k')] = i.value.trim(); });
+    v.s = tr.getAttribute('data-sym'); var res = tr.querySelector('[data-res]'); res.textContent = 'Saving…';
+    api('saveSymbol', v).then(function(){ res.textContent = 'Saved'; }).catch(function(err){ res.textContent = err.message; });
+  });
+
+  // ── ETFs (admin) ─────────────────────────────────────────────
+  var etfData = null;
+  function loadEtfs(){
+    $('etf-list').innerHTML = '<p class="mute">Loading&#8230;</p>';
+    api('etfs').then(function(d){ etfData = d; renderEtfs(); }).catch(function(err){ $('etf-list').innerHTML = '<div class="msg err">' + h(err.message) + '</div>'; });
+  }
+  function catSelect(sym, cur){
+    return '<select class="i" data-etf="' + h(sym) + '" aria-label="Category for ' + h(sym) + '"><option value="">Automatic</option>' +
+      etfData.categories.map(function(c){ return '<option value="' + c.id + '"' + (cur === c.id ? ' selected' : '') + '>' + h(c.label) + '</option>'; }).join('') +
+      '<option value="none"' + (cur === 'none' ? ' selected' : '') + '>Not an ETF</option></select>';
+  }
+  function renderEtfs(){
+    var q = $('etf-q').value.trim().toUpperCase(), lab = {};
+    etfData.categories.forEach(function(c){ lab[c.id] = c.label; });
+    var rows = etfData.rows.filter(function(r){ return !q || (r.s + ' ' + r.n).toUpperCase().indexOf(q) !== -1; });
+    $('etf-list').innerHTML = rows.length ? '<div class="tblwrap"><table class="tbl stack"><thead><tr><th>ETF</th><th>Detected</th><th>Category</th><th></th></tr></thead><tbody>' +
+      rows.map(function(r){ return '<tr><td data-l="ETF"><b>' + h(r.s) + '</b><br><span class="mute" style="font-size:12px">' + h(r.n) + '</span></td><td data-l="Detected">' + h(lab[r.e] || r.e) + '</td><td class="full">' + catSelect(r.s, r.o) + '</td><td data-l=""><span class="mute" data-res="' + h(r.s) + '"></span></td></tr>'; }).join('') +
+      '</tbody></table></div>' : '<p class="mute">No ETFs in the latest data yet (they appear after the first v10.7 evening run).</p>';
+  }
+  $('etf-q').addEventListener('input', function(){ if (etfData) renderEtfs(); });
+  $('etf-add').addEventListener('keydown', function(e){
+    if (e.key !== 'Enter') return; e.preventDefault();
+    var s = this.value.trim().toUpperCase(); if (!s || !etfData) return;
+    if (!etfData.rows.some(function(r){ return r.s === s; })) etfData.rows.unshift({ s: s, n: '(added by hand)', e: '', o: '' });
+    this.value = ''; $('etf-q').value = s; renderEtfs();
+  });
+  $('etf-list').addEventListener('change', function(e){
+    var sel = e.target.closest('[data-etf]'); if (!sel) return;
+    var sym = sel.getAttribute('data-etf'), res = document.querySelector('[data-res="' + sym + '"]');
+    res.textContent = 'Saving…';
+    api('saveEtf', { s: sym, cat: sel.value }).then(function(){ res.textContent = 'Saved'; etfData.rows.forEach(function(r){ if (r.s === sym) r.o = sel.value; }); }).catch(function(err){ res.textContent = err.message; });
+  });
+
+  // ── holidays (admin) ─────────────────────────────────────────
+  function loadHolidays(){
+    $('hol-list').innerHTML = '<p class="mute">Loading&#8230;</p>';
+    api('holidays').then(function(d){
+      $('hol-list').innerHTML = d.rows.length ? '<div class="tblwrap"><table class="tbl stack"><thead><tr><th>Date</th><th>Status</th><th>Note</th><th></th></tr></thead><tbody>' +
+        d.rows.map(function(r){ return '<tr><td data-l="Date"><b>' + h(fmtIso(r.d)) + '</b></td><td data-l="Status">' + h(r.st) + '</td><td data-l="Note">' + h(r.note || '') + '</td><td data-l=""><button class="btn sec sm" type="button" data-del-hol="' + r.d + '">Remove</button></td></tr>'; }).join('') +
+        '</tbody></table></div>' : '<p class="mute">No weekday holidays saved for this year.</p>';
+    }).catch(function(err){ $('hol-list').innerHTML = '<div class="msg err">' + h(err.message) + '</div>'; });
+  }
+  $('f-hol').addEventListener('submit', function(e){
+    e.preventDefault();
+    api('saveHoliday', { d: $('h-d').value, st: $('h-st').value, note: $('h-n').value }).then(function(){ $('h-n').value = ''; loadHolidays(); }).catch(function(err){ alert(err.message); });
+  });
+  $('hol-list').addEventListener('click', function(e){
+    var b = e.target.closest('[data-del-hol]'); if (!b) return;
+    if (!confirm('Remove ' + fmtIso(b.getAttribute('data-del-hol')) + ' from the holiday list?')) return;
+    api('saveHoliday', { d: b.getAttribute('data-del-hol'), st: 'DELETE' }).then(loadHolidays).catch(function(err){ alert(err.message); });
+  });
+
+  // ── actions (admin) ──────────────────────────────────────────
+  var ACTIONS = [
+    ['publish', 'Publish to GitHub now', 'Sends the current data to the public dashboard. Use after edits if you do not want to wait for the evening run.'],
+    ['post', 'Rebuild setups, screens and publish', 'Recalculates screens, setups, market breadth and the stock list for the latest session, then publishes (5-10 minutes).'],
+    ['rerun', 'Re-run the full pipeline for a date', 'Snapshot, pattern detection and everything after it, for one session. Takes 20-40 minutes.', true],
+    ['queue', 'Process the Bhavcopy upload queue', 'Starts the next queued Bhavcopy if the pipeline is idle (normally automatic).'],
+    ['dedupe', 'Remove duplicate rows', 'Removes duplicate rows from SNAPSHOT, HISTORY and PATTERNS, then republishes.'],
+    ['syncSymbols', 'Add new symbols from the latest Bhavcopy', 'Adds newly listed stocks to SYMBOLS and FORMULAS (normally automatic).'],
+    ['athColumns', 'Add all-time high/low formulas (one time)', 'Adds the Google Finance all-time high and low formulas to the FORMULAS sheet. Run once; takes a few minutes.'],
+    ['clearCache', 'Clear the web-app cache', 'Forces the Apps Script data API to rebuild its answers.'],
+    ['repairStore', 'Repair the Drive data store', 'Merges duplicate copies of the data files in Google Drive.']
+  ];
+  function renderActions(){
+    $('act-list').innerHTML = ACTIONS.map(function(a){
+      return '<div class="a"><div><b>' + a[1] + '</b><span>' + a[2] + '</span></div>' + (a[3] ? '<input class="i" type="date" data-date="' + a[0] + '" style="flex:0 0 170px" aria-label="Session date">' : '') +
+        '<button class="btn sm" type="button" data-act="' + a[0] + '">Run</button></div>';
+    }).join('') + '<div id="act-msg"></div>';
+  }
+  $('act-list').addEventListener('click', function(e){
+    var b = e.target.closest('[data-act]'); if (!b) return;
+    var a = b.getAttribute('data-act'), dt = document.querySelector('[data-date="' + a + '"]');
+    if (dt && !dt.value) { msg($('act-msg'), 'err', 'Choose a date first.'); return; }
+    if (!confirm('Run "' + b.closest('.a').querySelector('b').textContent + '"' + (dt ? ' for ' + dt.value : '') + '?')) return;
+    b.disabled = true;
+    api('runAction', { action: a, date: dt ? dt.value : '' }).then(function(d){ msg($('act-msg'), 'ok', h(d.message)); })
+      .catch(function(err){ msg($('act-msg'), 'err', h(err.message)); }).then(function(){ b.disabled = false; });
+  });
+
+  // ── users (admin) ────────────────────────────────────────────
+  function loadUsers(){
+    $('u-list').innerHTML = '<p class="mute">Loading&#8230;</p>';
+    api('users').then(function(d){
+      $('u-list').innerHTML = '<div class="tblwrap"><table class="tbl stack"><thead><tr><th>User</th><th>Role</th><th>Status</th><th>Last sign-in</th><th></th></tr></thead><tbody>' +
+        d.users.map(function(u){
+          var self = u.email === me.email;
+          return '<tr data-email="' + h(u.email) + '"><td class="full"><b>' + h(u.name || '') + '</b><br><span class="mute" style="font-size:13px">' + h(u.email) + '</span></td>' +
+            '<td data-l="Role">' + (u.role === 'admin' ? 'Admin' : 'Analyst') + '</td>' +
+            '<td data-l="Status">' + (u.active ? (u.must_change ? '<span class="pill warn">Password not set</span>' : '<span class="pill ok">Active</span>') : '<span class="pill err">Disabled</span>') + '</td>' +
+            '<td data-l="Last sign-in">' + when(u.last_login) + '</td>' +
+            '<td class="full">' + (self ? '<span class="mute">You</span>' :
+              '<button class="btn sec sm" type="button" data-u="edit">Edit</button> <button class="btn sec sm" type="button" data-u="reset">Reset password</button> <button class="btn sec sm" type="button" data-u="toggle" data-active="' + u.active + '">' + (u.active ? 'Disable' : 'Enable') + '</button> <button class="btn danger sm" type="button" data-u="delete">Delete</button>') + '</td></tr>';
+        }).join('') + '</tbody></table></div>';
+      $('u-list')._users = d.users;
+    }).catch(function(err){ $('u-list').innerHTML = '<div class="msg err">' + h(err.message) + '</div>'; });
+  }
+  $('f-user').addEventListener('submit', function(e){
+    e.preventDefault();
+    api('saveUser', { email: $('u-email').value, name: $('u-name').value, role: $('u-role').value }).then(function(d){
+      msg($('u-msg'), 'ok', d.temp_password ? 'User created. Temporary password: <code>' + h(d.temp_password) + '</code> &mdash; share it privately; they choose their own at first sign-in.' : 'User updated.');
+      $('u-email').value = ''; $('u-name').value = ''; loadUsers();
+    }).catch(function(err){ msg($('u-msg'), 'err', h(err.message)); });
+  });
+  $('u-list').addEventListener('click', function(e){
+    var b = e.target.closest('[data-u]'); if (!b) return;
+    var email = b.closest('tr').getAttribute('data-email'), act = b.getAttribute('data-u');
+    var u = ($('u-list')._users || []).filter(function(x){ return x.email === email; })[0] || {};
+    if (act === 'edit') { $('u-email').value = u.email; $('u-name').value = u.name || ''; $('u-role').value = u.role; $('u-email').focus(); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    if (act === 'reset') { if (!confirm('Give ' + email + ' a new temporary password?')) return; api('resetPassword', { email: email }).then(function(d){ msg($('u-msg'), 'ok', 'New temporary password for ' + h(email) + ': <code>' + h(d.temp_password) + '</code>'); loadUsers(); }).catch(function(err){ msg($('u-msg'), 'err', h(err.message)); }); return; }
+    if (act === 'toggle') { api('saveUser', { email: email, name: u.name, role: u.role, active: b.getAttribute('data-active') !== 'true' }).then(loadUsers).catch(function(err){ msg($('u-msg'), 'err', h(err.message)); }); return; }
+    if (act === 'delete') { if (!confirm('Delete ' + email + '? This cannot be undone.')) return; api('deleteUser', { email: email }).then(loadUsers).catch(function(err){ msg($('u-msg'), 'err', h(err.message)); }); }
+  });
+
+  // ── audit (admin) ────────────────────────────────────────────
+  function loadAudit(){
+    $('audit-list').innerHTML = '<p class="mute">Loading&#8230;</p>';
+    api('audit').then(function(d){
+      $('audit-list').innerHTML = '<div class="tblwrap"><table class="tbl stack"><thead><tr><th>When</th><th>User</th><th>Action</th><th>Details</th></tr></thead><tbody>' +
+        d.rows.map(function(r){ return '<tr><td data-l="When">' + when(r.t) + '</td><td data-l="User">' + h(r.u) + '</td><td data-l="Action">' + h(String(r.a).replace(/_/g, ' ')) + '</td><td class="full mute">' + h(r.d) + '</td></tr>'; }).join('') +
+        '</tbody></table></div>';
+    }).catch(function(err){ $('audit-list').innerHTML = '<div class="msg err">' + h(err.message) + '</div>'; });
+  }
+
+  // ── start ────────────────────────────────────────────────────
+  token = ss('scanner_admin_token');
+  if (token) api('me').then(function(d){ signedIn(d.user); }).catch(function(){ signedOut(''); });
+  else show('v-login');
+})();
+</script>
+</body>
+</html>
