@@ -249,12 +249,31 @@ code{background:var(--brand2);padding:1px 5px;border-radius:4px;font-size:13px}
 
   function api(fn, args){
     return fetch(API, { method: 'POST', body: JSON.stringify({ fn: fn, token: token, args: args || {} }), headers: { 'Content-Type': 'text/plain;charset=utf-8' } })
-      .then(function(r){ if (!r.ok) throw new Error('Server error ' + r.status); return r.json(); })
+      .catch(function(){ return diagnose().then(function(why){ var e = new Error(why); e.diag = true; throw e; }); })
+      .then(function(r){ if (!r.ok) throw new Error('Server error ' + r.status); return r.text(); })
+      .then(function(t){
+        try { return JSON.parse(t); }
+        catch (e) { throw new Error(/doPost/.test(t) ? 'The web app has no admin support yet. In Apps Script: Deploy > Manage deployments > pencil icon > Version: New version > Deploy.' : 'The web app sent an unexpected reply. Re-deploy it as a new version and try again.'); }
+      })
       .then(function(d){
         if (d && d.auth === false) { signedOut(d.error); throw new Error(d.error); }
         if (d && d.error) throw new Error(d.error);
         return d;
       });
+  }
+
+  // When a request cannot reach the web app at all ("Failed to fetch"), find out why.
+  // A plain GET still works with an old deployment, so it tells us which version is live.
+  function diagnose(){
+    var fix = 'In Apps Script: Deploy &gt; Manage deployments &gt; pencil icon &gt; Version: <b>New version</b> &gt; Deploy. Keep "Execute as: Me" and "Who has access: Anyone".';
+    return fetch(API + '?action=ping&t=' + Date.now()).then(function(r){ return r.json(); }).then(function(d){
+      if (!d || !d.version) return 'Could not reach the admin service. ' + fix;
+      var vn = function(v){ var m = String(v).match(/(\d+)\.(\d+)/); return m ? +m[1] * 1000 + +m[2] : 0; };
+      if (vn(d.version) < vn('v10.7')) return 'The live web app is still version ' + d.version + ', which has no admin sign-in. ' + fix;
+      return 'The web app (' + d.version + ') is reachable but rejected the sign-in request. Check that "Who has access" is set to <b>Anyone</b> (not "Anyone with a Google account" or "Only people in MNCL"), then deploy a new version.';
+    }).catch(function(){
+      return 'Could not reach the web app at all. Check that the address in admin.html (API = ...) is the same /exec address the dashboard uses, and that the deployment is active.';
+    });
   }
 
   // ── sign in / out ───────────────────────────────────────────
@@ -279,7 +298,7 @@ code{background:var(--brand2);padding:1px 5px;border-radius:4px;font-size:13px}
     var b = $('l-btn'); b.disabled = true; msg($('l-msg'), 'info', 'Signing in&#8230;');
     api('login', { email: $('l-email').value, password: $('l-pw').value }).then(function(d){
       token = d.token; ss('scanner_admin_token', token); $('l-pw').value = ''; msg($('l-msg'), '', ''); signedIn(d.user);
-    }).catch(function(err){ msg($('l-msg'), 'err', h(err.message)); }).then(function(){ b.disabled = false; });
+    }).catch(function(err){ msg($('l-msg'), 'err', err.diag ? err.message : h(err.message)); }).then(function(){ b.disabled = false; });
   });
   $('f-pw').addEventListener('submit', function(e){
     e.preventDefault();
@@ -327,7 +346,7 @@ code{background:var(--brand2);padding:1px 5px;border-radius:4px;font-size:13px}
         kpi('Pipeline now', d.busy ? 'Running' : 'Idle', d.busy || 'Nothing in progress') +
       '</div>' + (d.busy ? '<div class="msg warn">' + h(d.busy) + '. New uploads wait until it finishes.</div>' : '') + '</div>' +
       '<div class="card"><h2>Other data</h2><div class="grid">' +
-        kpi('All-time high / low', (d.ath.known || 0) + ' stocks', d.ath.updated ? 'Updated ' + fmtIso(d.ath.updated) + (d.ath.gf_readable ? ', ' + d.ath.gf_readable + ' from Google Finance' : ', Google Finance values not readable yet') : 'Not set up yet') +
+        kpi('All-time high / low', (d.ath.known || 0) + ' stocks', !d.ath.helper ? 'Helper not set up yet (Actions tab)' : d.ath.helper_at ? 'Helper read ' + d.ath.helper_at + (d.ath.gf_readable ? ', ' + d.ath.gf_readable + ' values' : ', no values readable: upload a CSV instead') : 'Helper set up; first read at 7:30 AM') +
         kpi('Index values', d.indices.date_iso ? fmtIso(d.indices.date_iso) : 'None uploaded', d.indices.sessions ? d.indices.sessions + ' sessions stored' : 'Upload ind_close_all to show indices') +
         kpi('Bulk / block deals', d.deals.date_iso ? fmtIso(d.deals.date_iso) : 'None uploaded', d.deals.rows ? d.deals.rows + ' deals (45 days)' : '') +
         kpi('Script version', d.version, '') +
@@ -489,7 +508,8 @@ code{background:var(--brand2);padding:1px 5px;border-radius:4px;font-size:13px}
     ['queue', 'Process the Bhavcopy upload queue', 'Starts the next queued Bhavcopy if the pipeline is idle (normally automatic).'],
     ['dedupe', 'Remove duplicate rows', 'Removes duplicate rows from SNAPSHOT, HISTORY and PATTERNS, then republishes.'],
     ['syncSymbols', 'Add new symbols from the latest Bhavcopy', 'Adds newly listed stocks to SYMBOLS and FORMULAS (normally automatic).'],
-    ['athColumns', 'Add all-time high/low formulas (one time)', 'Adds the Google Finance all-time high and low formulas to the FORMULAS sheet. Run once; takes a few minutes.'],
+    ['athColumns', 'Set up the all-time high/low helper (one time)', 'Creates a separate helper spreadsheet with the Google Finance all-time high and low formulas (kept out of the main sheet so the evening run stays fast) and reads it every morning at 7:30 AM.'],
+    ['athRefresh', 'Read all-time high/low values now', 'Reads the helper spreadsheet now instead of waiting for 7:30 AM. Wait 15 minutes after setting up the helper.'],
     ['clearCache', 'Clear the web-app cache', 'Forces the Apps Script data API to rebuild its answers.'],
     ['repairStore', 'Repair the Drive data store', 'Merges duplicate copies of the data files in Google Drive.']
   ];
