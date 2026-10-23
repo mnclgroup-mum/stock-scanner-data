@@ -31,7 +31,7 @@ td a{color:var(--ink);font-weight:700;text-decoration:none}td a:hover{text-decor
   function size(){ try { parent.postMessage({ type: 'mncl-embed-height', screen: m.slug, h: document.documentElement.scrollHeight }, '*'); } catch (e) {} }
   var link = SCREENER_URL + '#' + m.slug;
   // [v11.13] the widget shows data only inside mnclgroup.com pages (or opened directly)
-  function okHost(u){ var hn = ''; try { hn = new URL(u).hostname.toLowerCase(); } catch (x) { return false; } if (/^file:/i.test(u)) return true; return hn === 'mnclgroup.com' || /\.mnclgroup\.com$/.test(hn) || ['mnclgroup-mum.github.io', 'localhost', '127.0.0.1', '192.168.112.254'].indexOf(hn) !== -1; }
+  function okHost(u){ if (/^file:/i.test(u)) return true; var hn = ''; try { hn = new URL(u).hostname.toLowerCase(); } catch (x) { return false; } return ['localhost', '127.0.0.1', '192.168.112.254', 'mnclgroup.com', '.mnclgroup.com', 'mnclgroup-mum.github.io', '.mohit-jain.workers.dev'].some(function(x){ return x.charAt(0) === '.' ? hn.slice(-x.length) === x : hn === x; }); }
   var framed = false; try { framed = window.self !== window.top; } catch (x) { framed = true; }
   if (framed) {
     var anc = ''; try { anc = (location.ancestorOrigins && location.ancestorOrigins.length) ? location.ancestorOrigins[location.ancestorOrigins.length - 1] : document.referrer; } catch (x) {}
