@@ -1,5 +1,5 @@
 <!-- ═══════════════════════════════════════════════════════════════════
-  MNCL NSE STOCK SCANNER -- page fragment v11.16
+  MNCL NSE STOCK SCANNER -- page fragment v11.18
   CMS SETTINGS (set these in the CMS page fields if it has them):
     Page title  : Free Stock Screener & Scanner for NSE India | MNCL
     URL         : keep /candlestick-patterns (or move to /stock-scanner with a 301 redirect)
@@ -334,6 +334,18 @@
 .cx .cx-line .dot{fill:#0f3460}
 .cx .k50{color:#2563eb;font-weight:600}.cx .k200{color:#b35f00;font-weight:600}
 .cx .cx-prem{font-weight:700;color:#9a5b00}
+/* [v11.17] smart money */
+.cx .cx-smc-ctl{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 4px}
+.cx .cx-smc-ctl .cx-seg{margin:0;flex-wrap:wrap;overflow:visible;white-space:normal}
+.cx .cx-smc-ctl .cx-seg button{white-space:normal;text-align:left}
+.cx .cx-smc-guide{margin:8px 0 0;border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:#fafbfd}
+.cx .cx-smc-guide summary{cursor:pointer;font-weight:600;color:var(--brand)}
+.cx .cx-smc-guide h4{font-size:14px;margin:12px 0 4px}
+.cx .cx-smc-guide p{font-size:13.5px;margin:0 0 8px;max-width:75ch}
+.cx .cx-smc-ote{display:inline-block;font-size:11px;font-weight:700;color:#a16207;background:#fef3c7;border-radius:4px;padding:0 5px}
+.cx .cx-smc-lg{font-size:12px;color:var(--ink2)}
+.cx .cx-smc-chk{display:flex;gap:8px;align-items:center;font-size:13px;margin:6px 0}
+.cx .cx-csh{grid-column:1/-1;margin:14px 0 2px;font-size:13px;color:var(--brand)}
 /* [v11.7] share + market link */
 .cx .cx-fresh-a{margin-left:auto;display:inline-flex;gap:8px;align-items:center}
 .cx .cx-mlink{font-weight:600;color:var(--brand);text-decoration:none;font-size:12.5px}
@@ -415,6 +427,50 @@
 .cx-modal .cx-modal-box.cx-full{width:100vw!important;height:100vh!important;max-width:none;border-radius:0}
 .cx-modal:has(.cx-full){padding:0}
 @media (max-width:560px){.cx .cx-ctb-g button{padding:4px 6px}.cx .cx-legend{font-size:10.5px}.cx .cx-indpanel{top:84px}}
+/* [v11.18] taller chart window that scrolls; chips; global sessions */
+.cx-modal .cx-modal-box{width:min(1240px,100%);height:min(1040px,96vh);overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain}
+.cx-modal .cx-modal-h{position:sticky;top:0;z-index:70;background:#fff}
+.cx-modal .cx-own{flex:0 0 auto;min-height:0}
+.cx-modal .cx-adv{flex:0 0 auto}
+.cx-modal .cx-lwc{flex:0 0 auto;height:clamp(380px,calc(96vh - 260px),780px);min-height:0}
+.cx-modal .cx-own-plot{flex:0 0 auto;min-height:440px}
+.cx-modal .cx-tv{flex:0 0 auto;height:clamp(420px,calc(96vh - 170px),860px)}
+.cx-modal .cx-nse{flex:0 0 auto;min-height:420px}
+.cx-modal .cx-modal-ca{max-height:none;overflow:visible;padding-bottom:6px}
+.cx-modal .cx-modal-box.cx-full .cx-lwc{height:max(380px,calc(100vh - 240px))}
+.cx .cx-ctb-tf button{min-width:58px}
+.cx .cx-ctb-tg[aria-pressed="true"]{background:#0f3460;border-color:#0f3460;color:#fff}
+.cx .cx-smcbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 8px;font-size:12px}
+.cx .cx-smcbar-l{font-weight:700;color:var(--ink2);margin-right:2px;white-space:nowrap}
+.cx .cx-chip{height:28px;padding:0 11px;border:1px solid var(--line);border-radius:999px;font-size:12px;font-weight:600;color:var(--ink2);background:#fff;white-space:nowrap;flex:0 0 auto}
+.cx .cx-chip:hover{border-color:var(--brand)}
+.cx .cx-chip[aria-pressed="true"]{background:#13805c;border-color:#13805c;color:#fff}
+.cx .cx-chip-x{border-style:dashed;color:var(--ink)}
+.cx .cx-smcbar-help{font-size:12px;font-weight:600;color:var(--brand2);margin-left:4px;white-space:nowrap}
+.cx .cx-sess{border:1px solid var(--line);border-radius:10px;padding:8px 10px 6px;margin:0 0 8px;background:#fbfcfe;font-size:12px}
+.cx .cx-sess[hidden]{display:none}
+.cx .cx-sess-h{margin:0 0 6px;color:var(--ink)}
+.cx .cx-sess-r{display:grid;grid-template-columns:92px 1fr 140px;gap:10px;align-items:center;height:19px}
+.cx .cx-sess-n{font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:6px}
+.cx .cx-sess-d{width:7px;height:7px;border-radius:50%;background:#b7c0cc;flex:0 0 auto}
+.cx .cx-sess-d.open{background:#13805c;box-shadow:0 0 0 3px rgba(19,128,92,.18)}
+.cx .cx-sess-d.lunch{background:#ca8a04}
+.cx .cx-sess-t{position:relative;height:10px;background:#eef1f6;border-radius:3px}
+.cx .cx-sess-b{position:absolute;top:0;bottom:0;background:#9db4d6;border-radius:3px}
+.cx .cx-sess-r.in .cx-sess-b{background:#5fb39a}
+.cx .cx-sess-b.live,.cx .cx-sess-r.in .cx-sess-b.live{background:#13805c}
+.cx .cx-sess-now{position:absolute;top:-5px;bottom:-5px;width:2px;margin-left:-1px;background:#c23b32;border-radius:1px;z-index:1}
+.cx .cx-sess-s{color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11.5px}
+.cx .cx-sess-s.open{color:#13805c;font-weight:700}
+.cx .cx-sess-s.lunch{color:#a16207;font-weight:600}
+.cx .cx-sess-ax{height:16px}
+.cx .cx-sess-ax .cx-sess-t{background:none;height:14px}
+.cx .cx-sess-ax .cx-sess-t span{position:absolute;top:0;transform:translateX(-50%);font-size:10.5px;color:var(--mute)}
+.cx .cx-sess-ax .cx-sess-t span:first-child{transform:none}
+.cx .cx-sess-ax .cx-sess-t span:last-child{transform:translateX(-100%)}
+.cx .cx-sess-f{margin:6px 0 0;font-size:11px;color:var(--mute);line-height:1.4}
+@media (max-width:720px){.cx-modal .cx-modal-box{width:100%;height:100%;border-radius:0}.cx-modal .cx-lwc{height:clamp(320px,calc(100vh - 290px),620px)}.cx-modal .cx-tv{height:calc(100vh - 150px)}}
+@media (max-width:560px){.cx .cx-smcbar{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.cx .cx-smcbar::-webkit-scrollbar{display:none}.cx .cx-sess-r{grid-template-columns:80px 1fr 92px;gap:6px}.cx .cx-sess-s{font-size:10.5px}.cx .cx-sess-ax .cx-sess-t span:nth-child(even){display:none}}
 </style><!--/MNCL-CSS-->
 <div class="newpage-left"><div id="mncl-gnd-root"> <h1 style="text-align:center;">Stock Screener &amp; Scanner for NSE: Daily Technical Screens, Chart &amp; Candlestick Patterns</h1> <div class="cp-wrap"> <p class="sx-lede">A free, end‑of‑day <b>stock screener for NSE</b> stocks built on the official NSE Bhavcopy: <b>52‑week highs</b>, <b>volume shockers</b>, <b>breakout stocks</b>, <b>high delivery</b>, <b>RSI</b>, 45+ <b>candlestick patterns</b>, <b>chart patterns</b>, the <b>advance‑decline ratio</b> and <b>sector strength</b> for about 2,500 stocks, updated every trading evening.</p> <div class="sx-carhead" id="sx-car-host"><h2 id="sx-car-h">What the scanner covers</h2></div> <div class="sx-rail" id="sx-track" data-navhost="sx-car-host" role="region" aria-roledescription="carousel" aria-labelledby="sx-car-h" tabindex="0"> <div class="sx-card" role="group" aria-roledescription="slide" aria-label="1 of 11"><p class="k"><i aria-hidden="true">🔎</i>28 daily stock screens</p><p>Top gainers and losers, 52‑week and all-time highs, volume shockers, golden crossovers, breakouts, high delivery, momentum leaders, bulk and block deals and more.</p><a href="#stock-screens">How screens work</a></div> <div class="sx-card" role="group" aria-roledescription="slide" aria-label="2 of 11"><p class="k"><i aria-hidden="true">🧪</i>Build your own screen</p><p>Combine price, returns, volume, delivery, RSI, moving averages, momentum score, sector and pattern filters, then save or share the link.</p><a href="#custom-screener">Custom screener</a></div> <div class="sx-card" role="group" aria-roledescription="slide" aria-label="3 of 11"><p class="k"><i aria-hidden="true">🥇</i>ETFs by asset class</p><p>Gold, silver, debt, international, factor, sector and broad-market ETFs grouped and compared side by side.</p><a href="#etf-screener">ETF groups</a></div> <div class="sx-card" role="group" aria-roledescription="slide" aria-label="4 of 11"><p class="k"><i aria-hidden="true">🕯️</i>45+ candlestick patterns</p><p>Hammer, Engulfing, Harami, Stars, Soldiers and Crows, each checked against the trend that came before it.</p><a href="#candlestick-patterns">Pattern guide</a></div> <div class="sx-card" role="group" aria-roledescription="slide" aria-label="5 of 11"><p class="k"><i aria-hidden="true">📐</i>Chart patterns &amp; breakouts</p><p>Double top and bottom, head and shoulders, and 20‑day breakouts, reported on the day the level is crossed.</p><a href="#chart-patterns">Definitions</a></div> <div class="sx-card" role="group" aria-roledescription="slide" aria-label="6 of 11"><p class="k"><i aria-hidden="true">🧭</i>Rule-based setups</p><p>Swing, positional, next‑session and delivery-spike screens with trigger, invalidation and reference levels.</p><a href="#setups">How setups are built</a></div> <div class="sx-card" role="group" aria-roledescription="slide" aria-label="7 of 11"><p class="k"><i aria-hidden="true">📊</i>Market breadth</p><p>Advance‑decline ratio, share of stocks above their 50- and 200‑day averages, and 52‑week highs versus lows.</p><a href="#market-breadth">Advance‑decline ratio</a></div> <div class="sx-card" role="group" aria-roledescription="slide" aria-label="8 of 11"><p class="k"><i aria-hidden="true">🏭</i>Sectors, industries &amp; indices</p><p>Sector rotation against Nifty, sector-wise and industry-wise stock lists, and NSE broad, sectoral and thematic indices.</p><a href="#sector-strength">Sector rotation</a></div> <div class="sx-card" role="group" aria-roledescription="slide" aria-label="9 of 11"><p class="k"><i aria-hidden="true">⭐</i>Your watchlist</p><p>Star any stock or ETF to follow its close, trend, pattern and setups in one list, saved across your devices.</p><a href="#watchlist">How the watchlist works</a></div> <div class="sx-card" role="group" aria-roledescription="slide" aria-label="10 of 11"><p class="k"><i aria-hidden="true">✅</i>Transparent track record</p><p>Every setup is tracked after costs, including ones that never triggered. Hit rates show the sample size.</p><a href="#track-record">Methodology</a></div> <div class="sx-card note" role="group" aria-roledescription="slide" aria-label="11 of 11"><p class="k"><i aria-hidden="true">⚠️</i>End of day, educational</p><p>Built on the official NSE Bhavcopy after the close. Not live data and not investment advice.</p><a href="#disclaimer">Read the disclaimer</a></div> </div> <!--MNCL-APP--><!-- ═══════════ SCANNER APP v10.0 (trade ideas, market pulse, responsive lists) ═══════════ --> <style>
 .cx{--ink:#0f3460;--ink2:#46546b;--mute:#7a8699;--line:#e2e7ee;--line2:#eef1f5;--bg:#f5f7fa;--card:#fff;
@@ -681,6 +737,269 @@
 @media (prefers-reduced-motion:reduce){.cx *{animation:none!important;transition:none!important}}
 </style> <div class="cx" id="cx-app"> <div class="cx-pulse" id="cx-pulse" aria-live="polite"> <div class="cx-regime" id="cx-regime"> <p class="cx-regime-k">Market breadth (latest session)</p> <p class="cx-regime-v cx-sk" style="height:28px;width:130px">&nbsp;</p> <p class="cx-regime-a">Loading market breadth&#8230;</p> </div> <div class="cx-stats" id="cx-stats"> <div class="cx-stat"><p class="cx-stat-k">Advances / declines</p><p class="cx-stat-v cx-sk" style="height:22px;width:80px">&nbsp;</p></div> <div class="cx-stat"><p class="cx-stat-k">Stocks above 50‑day average</p><p class="cx-stat-v cx-sk" style="height:22px;width:60px">&nbsp;</p></div> <div class="cx-stat"><p class="cx-stat-k">52‑week highs / lows</p><p class="cx-stat-v cx-sk" style="height:22px;width:60px">&nbsp;</p></div> <div class="cx-stat"><p class="cx-stat-k">Nifty (NIFTYBEES)</p><p class="cx-stat-v cx-sk" style="height:22px;width:70px">&nbsp;</p></div> </div> </div> <div class="cx-fresh" id="cx-fresh"><span><span class="cx-dot warn"></span>Loading the latest session&#8230;</span></div> <div class="cx-nav" role="tablist" aria-label="Scanner sections"> <button role="tab" id="cx-tab-screens" aria-controls="cx-p-screens" aria-selected="true" data-tab="screens">Stock screens<span class="cx-count" id="cx-n-screens">&#8211;</span></button> <button role="tab" id="cx-tab-custom" aria-controls="cx-p-custom" aria-selected="false" data-tab="custom">Build a screen</button> <button role="tab" id="cx-tab-ideas" aria-controls="cx-p-ideas" aria-selected="false" data-tab="ideas">Setups<span class="cx-count" id="cx-n-ideas">&#8211;</span></button> <button role="tab" id="cx-tab-patterns" aria-controls="cx-p-patterns" aria-selected="false" data-tab="patterns">Patterns<span class="cx-count" id="cx-n-patterns">&#8211;</span></button> <button role="tab" id="cx-tab-etf" aria-controls="cx-p-etf" aria-selected="false" data-tab="etf">ETFs<span class="cx-count" id="cx-n-etf">&#8211;</span></button> <button role="tab" id="cx-tab-market" aria-controls="cx-p-market" aria-selected="false" data-tab="market">Market &amp; sectors</button> <button role="tab" id="cx-tab-watch" aria-controls="cx-p-watch" aria-selected="false" data-tab="watch">Watchlist<span class="cx-count" id="cx-n-watch">&#8211;</span></button> <button role="tab" id="cx-tab-track" aria-controls="cx-p-track" aria-selected="false" data-tab="track">Track record</button> <button role="tab" id="cx-tab-hitrate" aria-controls="cx-p-hitrate" aria-selected="false" data-tab="hitrate">Pattern hit rate</button> </div> <!-- Stock screens --> <section id="cx-p-screens" role="tabpanel" aria-labelledby="cx-tab-screens"> <div class="cx-filters"> <div class="cx-seg cx-groups" id="cx-scr-groups" role="group" aria-label="Screen group"></div> <div class="cx-seg" id="cx-scr-types" role="group" aria-label="Screen"></div> <div class="cx-toolbar"> <div class="grow"><input class="cx-input" id="cx-scr-q" type="search" placeholder="Filter by symbol, company or sector" aria-label="Filter screen results"></div> </div> </div> <div id="cx-scr-intro"></div> <div id="cx-scr-body"><div class="cx-sk" style="height:220px;border-radius:10px"></div></div> </section> <!-- Custom screener --> <section id="cx-p-custom" role="tabpanel" aria-labelledby="cx-tab-custom" hidden> <div id="cx-cs-body"><div class="cx-sk" style="height:220px;border-radius:10px"></div></div> </section> <!-- Rule-based setups --> <section id="cx-p-ideas" role="tabpanel" aria-labelledby="cx-tab-ideas" hidden> <div class="cx-filters"> <div class="cx-seg" id="cx-idea-types" role="group" aria-label="Setup type"></div> <div class="cx-toolbar"> <div class="grow"><input class="cx-input" id="cx-idea-q" type="search" placeholder="Filter by symbol, company or sector" aria-label="Filter setups"></div> <select class="cx-select" id="cx-idea-sort" aria-label="Sort setups"> <option value="score">Sort: highest score</option> <option value="rr">Sort: best reward to risk</option> <option value="vr">Sort: highest volume</option> <option value="symbol">Sort: symbol A&#8211;Z</option> </select> </div> </div> <div id="cx-idea-intro"></div> <div class="cx-grid" id="cx-idea-grid"> <div class="cx-sk cx-sk-card"></div><div class="cx-sk cx-sk-card"></div><div class="cx-sk cx-sk-card"></div> </div> </section> <!-- Patterns --> <section id="cx-p-patterns" role="tabpanel" aria-labelledby="cx-tab-patterns" hidden> <div class="cx-kpis" id="cx-kpis"></div> <details class="cx-mix" id="cx-mix"><summary>Pattern mix today (tap a pattern to filter)</summary><div class="cx-mix-body" id="cx-mix-body"></div></details> <div class="cx-filters"> <div class="cx-toolbar"> <div class="grow"><input class="cx-input" id="cx-pat-q" type="search" placeholder="Search symbol or company" aria-label="Search patterns"></div> <select class="cx-select" id="cx-pat-sector" aria-label="Sector"><option value="">All sectors</option></select> <select class="cx-select" id="cx-pat-sort" aria-label="Sort"> <option value="turnover">Sort: turnover</option> <option value="chg">Sort: change %</option> <option value="vol_ratio">Sort: volume &#215;</option> <option value="confluence_score">Sort: confluence</option> <option value="symbol">Sort: symbol A&#8211;Z</option> </select> </div> <div class="cx-seg" id="cx-pat-flags" role="group" aria-label="Filters"> <button class="cx-chip" aria-pressed="false" data-flag="strong">Volume 1.5&#215;+</button> <button class="cx-chip" aria-pressed="false" data-flag="aligned">Trend-aligned (S2 bullish / S4 bearish)</button> <button class="cx-chip" aria-pressed="false" data-flag="support">Near support</button> <button class="cx-chip" aria-pressed="false" data-flag="chart">Chart patterns</button> <button class="cx-chip" aria-pressed="false" data-flag="confirmed">Confirmed next day</button> </div> <div id="cx-pat-active"></div> </div> <div class="cx-list" id="cx-pat-list"> <div class="cx-lh" role="row"> <button data-sort="symbol">Stock</button><span>Pattern</span><button class="num" data-sort="chg">Close / chg</button> <button class="num" data-sort="vol_ratio">Vol</button><span>Trend</span><span class="c-52">52‑week range</span><span>Signal</span><span></span> </div> <div id="cx-pat-rows"><div style="padding:14px"><div class="cx-sk" style="height:18px;margin:8px 0"></div><div class="cx-sk" style="height:18px;margin:8px 0;width:80%"></div><div class="cx-sk" style="height:18px;margin:8px 0;width:90%"></div></div></div> </div> <div class="cx-more-wrap" id="cx-pat-more"></div> </section> <!-- ETFs --> <section id="cx-p-etf" role="tabpanel" aria-labelledby="cx-tab-etf" hidden> <div id="cx-etf-body"><div class="cx-sk" style="height:220px;border-radius:10px"></div></div> </section> <!-- Watchlist --> <section id="cx-p-watch" role="tabpanel" aria-labelledby="cx-tab-watch" hidden> <div id="cx-watch-body"></div> </section> <!-- Market & sectors --> <section id="cx-p-market" role="tabpanel" aria-labelledby="cx-tab-market" hidden> <div id="cx-market-body"><div class="cx-empty">Loading market breadth&#8230;</div></div> </section> <!-- Track record --> <section id="cx-p-track" role="tabpanel" aria-labelledby="cx-tab-track" hidden> <div id="cx-track-body"><div class="cx-empty">Loading track record&#8230;</div></div> </section> <!-- Hit rate --> <section id="cx-p-hitrate" role="tabpanel" aria-labelledby="cx-tab-hitrate" hidden> <p class="cx-method">Share of past signals where the price closed in the expected direction after the chosen number of sessions (any size move). Patterns with fewer than 30 signals are faded because the percentage is not yet reliable. 50% is a coin toss, marked by the line in each bar.</p> <div class="cx-filters"> <div class="cx-seg" id="cx-hr-h" role="group" aria-label="Holding period"> <button aria-pressed="true" data-h="1d">After 1 day</button><button aria-pressed="false" data-h="3d">3 days</button><button aria-pressed="false" data-h="5d">5 days</button><button aria-pressed="false" data-h="10d">10 days</button> </div> <div class="cx-seg" id="cx-hr-c" role="group" aria-label="Pattern type"> <button aria-pressed="true" data-c="">All</button><button aria-pressed="false" data-c="Bullish">Bullish</button><button aria-pressed="false" data-c="Bearish">Bearish</button><button aria-pressed="false" data-c="Neutral">Neutral</button> </div> </div> <div id="cx-hr-body"><div class="cx-empty">Loading hit rates&#8230;</div></div> </section> <div class="cx-modal" id="cx-modal" hidden role="dialog" aria-modal="true" aria-labelledby="cx-modal-sym"> <div class="cx-modal-box"> <div class="cx-modal-h"><b id="cx-modal-sym"></b><span id="cx-modal-name"></span><span id="cx-modal-star"></span><a id="cx-modal-nse" href="#" target="_blank" rel="noopener noreferrer">NSE quote</a><button class="cx-modal-x" id="cx-modal-x" aria-label="Close chart">&#10005;</button></div> <div class="cx-chtabs" role="group" aria-label="Chart source"> <button type="button" aria-pressed="true" data-chsrc="own">Chart</button><button type="button" aria-pressed="false" data-chsrc="tv">TradingView (BSE)</button> </div> <div class="cx-own" id="cx-own"></div> <div class="cx-tv" id="cx-tv" hidden></div> <div class="cx-nse" id="cx-nse" hidden></div> <div class="cx-modal-ca" id="cx-modal-ca"></div> <div class="cx-modal-f" id="cx-modal-f"></div> </div> </div> </div> <p class="sx-under">Rule-based screen output from end‑of‑day data. Not a recommendation to buy, sell or hold any security. Charts open on the BSE listing because the free TradingView widget does not carry NSE data.</p> <!--/MNCL-APP--> <nav class="sx-toc" aria-label="On this page"> <a href="#what-is">What is a stock screener</a><a href="#stock-screens">Stock screens</a><a href="#market-breadth">Market breadth</a><a href="#sector-strength">Sector strength</a><a href="#setups">Setups</a><a href="#candlestick-patterns">Candlestick patterns</a><a href="#chart-patterns">Chart patterns</a><a href="#trend-stage">Trend stage</a><a href="#track-record">Track record</a><a href="#how-to-use">How to use</a><a href="#glossary">Glossary</a><a href="#faq">FAQ</a> </nav> <h2 class="sub-title" id="what-is">What is a stock screener (stock scanner)?</h2> <div class="sx-answer"><p>A <strong>stock screener</strong>, also called a <strong>stock scanner</strong>, applies fixed technical rules to every listed stock and shows only the stocks that match. This scanner reads the official NSE Bhavcopy after each session and runs <strong>28 daily screens</strong>, a <strong>custom screener</strong>, <strong>45+ candlestick patterns</strong>, <strong>chart-pattern and breakout checks</strong>, <strong>market breadth</strong>, <strong>sector strength</strong> and an <strong>ETF screener</strong> across about 2,500 EQ‑series stocks and ETFs, so you can review the whole market in minutes instead of scrolling through charts one by one.</p></div> <table class="sx-table"> <thead><tr><th scope="col">Tool</th><th scope="col">What it finds</th><th scope="col">Based on</th></tr></thead> <tbody> <tr><td><strong>Stock screens</strong></td><td>52‑week highs and lows, volume shockers, high delivery, 20‑day breakouts and breakdowns, uptrend and downtrend, NR7, inside bar, RSI extremes, gap up and gap down</td><td>All stocks with daily turnover of ₹1 crore or more</td></tr> <tr><td><strong>Candlestick patterns</strong></td><td>45+ single and multi-candle patterns with trend stage, support, volume and confirmation</td><td>Stocks with daily turnover of ₹5 lakh or more</td></tr> <tr><td><strong>Chart patterns</strong></td><td>Double top, double bottom, head and shoulders (and inverse), 20‑day breakouts</td><td>Up to 30 sessions of price history</td></tr> <tr><td><strong>Setups</strong></td><td>Next‑session, swing, positional, delivery-spike, reversal and weak-trend screens, each with reference levels</td><td>Liquidity, trend, relative strength, volume and delivery filters</td></tr> <tr><td><strong>Market breadth</strong></td><td>Advance‑decline ratio, % of stocks above 20/50/200‑day averages, 52‑week highs vs lows, 10‑session history</td><td>All liquid stocks</td></tr> <tr><td><strong>Sector strength</strong></td><td>Each sector’s return relative to Nifty over 20 and 5 sessions</td><td>Sectors with at least 3 stocks</td></tr> <tr><td><strong>Track record and hit rate</strong></td><td>How past setups and patterns actually behaved, with sample sizes</td><td>Every published signal since tracking began</td></tr> </tbody> </table> <h2 class="sub-title" id="stock-screens">Daily stock screens explained</h2> <p>Every screen runs on all NSE EQ‑series stocks with daily turnover of at least ₹1 crore and a price of at least ₹10, so thinly traded stocks do not crowd the lists. Each list shows up to 60 stocks, with the total number of matches.</p> <div class="sx-rail sx-tiles"> <div class="sx-tile"><h3>52‑week high stocks</h3><p>The session’s high reached the 52‑week high and the close was within 3% of it. Sorted by volume ratio.</p><a class="sx-more" href="#52-week-high-stocks">See today’s 52‑week high stocks</a></div> <div class="sx-tile"><h3>Stocks near the 52‑week low</h3><p>The session’s low reached the 52‑week low and the close was within 3% of it.</p><a class="sx-more" href="#52-week-low-stocks">See stocks at a 52‑week low</a></div> <div class="sx-tile"><h3>Volume shockers</h3><p>Volume at least 2.5 times the average of the previous 10 sessions, measured from Bhavcopy data.</p><a class="sx-more" href="#volume-shockers">See today’s volume shockers</a></div> <div class="sx-tile"><h3>High delivery stocks</h3><p>Delivery of 60% or more of traded quantity and at least 25% above the stock’s own 20‑session average.</p><a class="sx-more" href="#high-delivery-stocks">See high delivery stocks</a></div> <div class="sx-tile"><h3>Breakout stocks today</h3><p>First close above the previous 20‑session high on at least 1.2 times average volume. Breakdowns are the mirror image.</p><a class="sx-more" href="#breakout-stocks-today">See breakout stocks today</a></div> <div class="sx-tile"><h3>Stocks in an uptrend</h3><p>Stage 2: price above the 20- and 50‑day averages, 50‑day above the 200‑day, and outperforming Nifty over 20 sessions.</p><a class="sx-more" href="#stocks-in-uptrend">See stocks in an uptrend</a></div> <div class="sx-tile"><h3>NR7 and inside bar stocks</h3><p>NR7 is the narrowest range of the last seven sessions; an inside bar trades entirely within the previous session’s range.</p><a class="sx-more" href="#nr7-stocks">See NR7 stocks</a></div> <div class="sx-tile"><h3>RSI oversold and overbought</h3><p>14‑session RSI of 30 or below (oversold) or 70 or above (overbought). These describe momentum, not value.</p><a class="sx-more" href="#rsi-oversold-stocks">See RSI oversold stocks</a></div> <div class="sx-tile"><h3>Gap up and gap down</h3><p>Opened at least 1.5% beyond the previous close and stayed beyond the previous session’s high (or low) all day.</p><a class="sx-more" href="#gap-up-stocks">See gap up stocks</a></div> <div class="sx-tile"><h3>Top gainers and losers today</h3><p>The 60 liquid stocks that rose or fell the most in the session, from the official closing price.</p><a class="sx-more" href="#top-gainers-today">See today’s top gainers</a> · <a class="sx-more" href="#top-losers-today">top losers</a></div> <div class="sx-tile"><h3>All-time high stocks</h3><p>The session’s high reached the highest price on record and the close was within 3% of it.</p><a class="sx-more" href="#all-time-high-stocks">See stocks at an all-time high</a></div> <div class="sx-tile"><h3>Golden crossover stocks</h3><p>The 50‑day average crossed above the 200‑day average in the session; a death cross is the reverse.</p><a class="sx-more" href="#golden-crossover-stocks">See golden crossover stocks</a></div> <div class="sx-tile"><h3>Stocks crossing the 200‑day average</h3><p>Closed above (or below) the 200‑day moving average after closing on the other side the session before.</p><a class="sx-more" href="#stocks-above-200-dma">See stocks crossing above the 200 DMA</a></div> <div class="sx-tile"><h3>Most active stocks</h3><p>The 60 stocks with the highest traded value in the session.</p><a class="sx-more" href="#most-active-stocks">See the most active stocks</a></div> <div class="sx-tile"><h3>Momentum stocks</h3><p>A momentum score of 80 or more out of 100, ranking recent returns, trend stage, closeness to the 52‑week high and volume.</p><a class="sx-more" href="#momentum-stocks">See momentum leaders</a></div> <div class="sx-tile"><h3>Up or down 3 sessions in a row</h3><p>Stocks that closed higher (or lower) than the previous close for three or more sessions running.</p><a class="sx-more" href="#stocks-up-3-days-in-a-row">See stocks up 3 days in a row</a></div> <div class="sx-tile"><h3>MACD and Supertrend signals</h3><p>Stocks where MACD (12, 26, 9) crossed its signal line or Supertrend (10, 3) flipped direction in the latest session.</p><a class="sx-more" href="#macd-bullish-crossover-stocks">See MACD bullish crossover stocks</a> · <a class="sx-more" href="#supertrend-buy-signal-stocks">Supertrend buy signals</a></div> <div class="sx-tile"><h3>Bollinger squeeze and breakouts</h3><p>Band width at a 6-month low (a volatility squeeze), or a close above the upper Bollinger Band.</p><a class="sx-more" href="#bollinger-band-squeeze-stocks">See Bollinger squeeze stocks</a></div> <div class="sx-tile"><h3>5-year high and 55‑day breakouts</h3><p>Stocks at their highest price in five years, and first closes above the previous 55‑session high on volume.</p><a class="sx-more" href="#5-year-high-stocks">See 5-year high stocks</a> · <a class="sx-more" href="#55-day-breakout-stocks">55‑day breakouts</a></div> <div class="sx-tile"><h3>Bulk and block deals</h3><p>Large trades disclosed by NSE: who bought or sold, how many shares and at what price.</p><a class="sx-more" href="#bulk-deals-today">See today’s bulk deals</a> · <a class="sx-more" href="#block-deals-today">block deals</a></div> </div> <h2 class="sub-title" id="custom-screener">Build your own stock screen</h2> <div class="sx-answer"><p>The <strong>custom stock screener</strong> applies any combination of filters to every liquid NSE stock at once: price, change today, 5- and 20‑session return, volume against the 10‑day average, delivery percentage, RSI, position against the 50- and 200‑day averages, distance from the 52‑week and all-time high, momentum score, relative strength against Nifty, sector, industry, trend stage, candlestick pattern and moving-average crossovers.</p></div> <p>Start from one of the ready-made combinations, such as “near 52‑week high on volume” or “pullback in an uptrend”, and adjust it. The address bar records every filter, so a screen can be bookmarked or sent as a link, and up to 20 screens can be saved in your browser. <a class="sx-more" href="#custom-stock-screener">Open the custom stock screener</a></p> <p>The <strong>momentum score</strong> (0–100) ranks each stock against all liquid NSE stocks: 30% weight on the 20‑session return, 15% on the 5‑session return, 25% on the trend stage, 20% on closeness to the 52‑week high and 10% on volume against its 10‑day average. It describes recent relative strength; it is not a rating or a forecast.</p> <h2 class="sub-title" id="etf-screener">ETFs grouped by asset class</h2> <div class="sx-answer"><p>The ETF section groups every exchange-traded fund in the NSE Bhavcopy by what it holds: <strong>gold, silver, debt and liquid, international, smart beta and factor, banking, PSU and CPSE, IT, sectoral, thematic, midcap and smallcap, and broad Nifty or Sensex</strong> funds.</p></div> <p>Within a group, funds that track the same thing (for example several gold ETFs) can be compared on return, volume and turnover; differences come mainly from expense ratio, tracking error and the gap between market price and NAV. An asset-class strip compares gold, silver, Nifty, midcap, international and debt ETFs over 20 sessions. ETFs are excluded from the stock screens and market breadth so they do not distort them. <a class="sx-more" href="#etf-screener">Open the ETF screener</a> or go straight to <a class="sx-more" href="#gold-etf">gold ETFs</a>, <a class="sx-more" href="#silver-etf">silver ETFs</a> and <a class="sx-more" href="#international-etf">international ETFs</a>.</p> <h2 class="sub-title" id="market-breadth">Market breadth and the advance‑decline ratio</h2> <div class="sx-answer"><p>The <strong>advance‑decline ratio</strong> is the number of stocks that closed higher divided by the number that closed lower. A reading above 1 means more stocks rose than fell. Breadth matters because an index can rise on a handful of large stocks while most shares fall.</p></div> <p>The breadth strip at the top of the scanner combines four measures: advances versus declines, the share of liquid stocks above their 50‑day and 200‑day averages, new 52‑week highs versus lows, and Nifty’s own position (tracked through NIFTYBEES) against its 50- and 200‑day averages and its 20‑session return. These are combined into a simple <strong>Bullish, Mixed or Bearish</strong> reading, with the reasons listed in the Market &amp; sectors tab and a 10‑session history of advances and declines. <a class="sx-more" href="#nse-market-breadth">See today’s advance‑decline ratio and breadth</a></p> <h2 class="sub-title" id="sector-strength">Sector strength and sector rotation</h2> <p>Each sector’s average 20‑session and 5‑session return is compared with Nifty’s return over the same periods. Sectors are grouped into four quadrants, a common way to follow <strong>sector rotation</strong>:</p> <dl class="sx-dl"> <dt>Leading</dt><dd>Ahead of Nifty over 20 sessions and still gaining over the last 5.</dd> <dt>Improving</dt><dd>Behind Nifty over 20 sessions but ahead over the last 5.</dd> <dt>Weakening</dt><dd>Ahead over 20 sessions but losing ground over the last 5.</dd> <dt>Lagging</dt><dd>Behind Nifty on both time frames.</dd> </dl> <p><a class="sx-more" href="#sector-strength-today">See today’s sector strength vs Nifty</a></p> <p>Below the sector groups, <strong>sector-wise stocks</strong> lists every liquid stock by sector and then by industry, with the average move today and over 20 sessions and the number of stocks rising and falling, so a sector move can be traced to the industries and stocks behind it. <a class="sx-more" href="#sector-wise-stocks">Browse sector-wise and industry-wise stocks</a></p> <p>When the NSE index closing file is loaded, the same tab shows <strong>NSE indices</strong>: Nifty 50, Nifty Next 50, Bank Nifty, midcap and smallcap indices and India VIX, and tables of sectoral, thematic and strategy indices with their 5- and 20‑session change, P/E and P/B. <a class="sx-more" href="#nse-indices-today">See NSE sectoral indices today</a></p> <h2 class="sub-title" id="setups">Rule-based setups: how they are built</h2> <p>Setups combine several conditions at once, which a single screen cannot. Each one lists a <strong>trigger</strong> (the price that must trade for the setup to count), an <strong>invalidation level</strong> (where the technical premise no longer holds) and a <strong>reference target</strong>, together with a 0–100 score that ranks setups by how many quality checks they pass. The score is a ranking aid, not a probability.</p> <dl class="sx-dl"> <dt>Next‑session watchlist</dt><dd>Liquid stocks (turnover ₹10 crore or more) whose range contracted (NR7, inside bar) or that closed near the day’s extreme on heavy volume, in line with their short-term trend. Tracked for one session. <a class="sx-more" href="#next-session-watchlist">View the next‑session watchlist</a></dd> <dt>Swing setups</dt><dd>Bullish candlestick or chart patterns in stocks already in Stage 2 or a Stage 2 pullback and not lagging Nifty. Tracked for up to 10 sessions. <a class="sx-more" href="#swing-trading-setups">View swing trading setups</a></dd> <dt>Positional setups</dt><dd>Established uptrends showing a 52‑week high on volume, a breakout from a tight 20‑day base, a fresh turn into Stage 2, or a bounce at the 50‑day average. Tracked for up to 20 sessions. <a class="sx-more" href="#positional-setups">View positional setups</a></dd> <dt>Delivery spikes</dt><dd>An up day with above-normal volume and delivery percentage at least 1.5 times the stock’s 20‑session average. <a class="sx-more" href="#delivery-spike-stocks">View delivery spike stocks</a></dd> <dt>Reversal setups</dt><dd>Bullish patterns after a decline, near support, the 52‑week low or a low RSI. These run against the prevailing trend. <a class="sx-more" href="#reversal-setups">View reversal setups</a></dd> <dt>Weak trend</dt><dd>Bearish patterns in stocks already in Stage 3 or 4 and lagging Nifty. <a class="sx-more" href="#weak-trend-stocks">View weak-trend stocks</a></dd> </dl> <p>Stocks at their circuit limit, stocks with a fresh split or bonus, and stocks below the liquidity and price floors are excluded from every list.</p> <h2 class="sub-title" id="candlestick-patterns">Candlestick patterns</h2> <p>A candlestick shows one session’s open, high, low and close. The body covers the open-to-close range and the wicks show the full high-to-low range. When candles form recognisable shapes, alone or across two to five sessions, they are called candlestick patterns. The scanner checks 45+ of them every session. <a class="sx-more" href="#candlestick-patterns-today">See today’s candlestick patterns</a>, or jump to <a class="sx-more" href="#bullish-candlestick-patterns">bullish</a> and <a class="sx-more" href="#bearish-candlestick-patterns">bearish candlestick patterns</a>.</p> <div class="neww-exhibit-neew mb40"> <h2 class="goldiam-main-heading p-2 text-white">How the scanner keeps patterns meaningful</h2> <p>A reversal pattern only means something if there was a trend to reverse. The scanner measures the trend <em>before</em> the pattern started, using the first candle’s close against its own 20‑session average and the 5‑session slope, and reports a Hammer only after a decline and a Shooting Star only after an advance. Indecision candles such as Doji and Spinning Top are reported only when the stock is at least 3% away from its 20‑day average, where indecision is more informative.</p> </div> <h2 class="sub-title">Complete NSE Candlestick Pattern Index &#8212; All Patterns</h2> <p>Tap any pattern to open its guide: how it forms, what it usually signals, and where it tends to fail. Swipe sideways to see every pattern in a group.</p> <div id="cp-pat-index"> <div class="cp-loading" style="min-height:280px;display:flex;align-items:center;justify-content:center;">Loading pattern index&#8230;</div> </div> <h2 class="sub-title" id="chart-patterns">Chart patterns and breakouts</h2> <p>Chart patterns are found from swing highs and lows over up to 30 sessions, with the swing size scaled to each stock’s own volatility (average true range). A pattern is reported only on the session its neckline or range is crossed, so the list shows new events rather than old ones.</p> <dl class="sx-dl"> <dt>Double top</dt><dd>Two similar peaks after an advance, with a close below the low between them.</dd> <dt>Double bottom</dt><dd>Two similar troughs after a decline, with a close above the high between them.</dd> <dt>Head and shoulders</dt><dd>Three peaks with the middle one highest and a close below the neckline. The inverse version is the mirror image.</dd> <dt>20‑day breakout / breakdown</dt><dd>First close beyond the previous 20‑session high or low, on at least 1.1 times average volume.</dd> </dl> <h2 class="sub-title" id="trend-stage">Trend stage (S1–S4): Weinstein-style stage analysis</h2> <p>Stan Weinstein’s stage analysis divides a stock’s cycle into four stages. The original method uses a 30‑week moving average; this scanner uses an end‑of‑day version built from the 20-, 50- and 200‑day averages.</p> <div class="sx-rail sx-tiles"> <div class="sx-tile sx-stage" style="border-left-color:#f0a500"><h3>S1: Base</h3><p>The 50‑day average is at or below the 200‑day, and price has recovered above the 50‑day. Often a basing phase after a decline.</p></div> <div class="sx-tile sx-stage" style="border-left-color:#13805c"><h3>S2: Uptrend</h3><p>Price above the 20- and 50‑day averages, with the 50‑day above the 200‑day. S2 pullback: price has dipped below the 20‑day but the structure is intact.</p></div> <div class="sx-tile sx-stage" style="border-left-color:#e67c00"><h3>S3: Top</h3><p>The 20‑day average has turned below the 50‑day while price is still above the 200‑day. Momentum is fading.</p></div> <div class="sx-tile sx-stage" style="border-left-color:#c23b32"><h3>S4: Downtrend</h3><p>Price below both the 50- and 200‑day averages.</p></div> </div> <p>Historically, bullish patterns in S2 and bearish patterns in S4 have tended to be more consistent than patterns that run against the stage. Newly listed stocks without enough history are shown as unclear rather than given a stage.</p> <h2 class="sub-title" id="near-support">Near support</h2> <p>The <strong>Near support</strong> badge appears when the close is between 0.5% below and 2% above the 50‑day average, the 200‑day average or the 52‑week low. A level that price is trading below acts as resistance, so it does not count. Support is a technical reference, not a guaranteed floor.</p> <h2 class="sub-title" id="charts">Interactive charts with indicators</h2> <p>Tap any symbol to open an interactive daily chart built on up to five years of official NSE Bhavcopy prices, adjusted for splits and bonuses. Choose 1 month to all history, candles, Heikin Ashi, bars, line or area, drag to pan and pinch or scroll to zoom. Add moving averages (SMA, EMA, WMA), Bollinger Bands, Supertrend, Donchian channels and Parabolic SAR on the price, and volume, RSI, MACD, Stochastic, ADX, ATR, OBV, CCI and rate of change in panes below. You can also write your own indicator as a formula, for example <code>ema(close,20) - ema(close,50)</code>; settings are remembered in your browser. When the stock has a pattern or a setup, the chart marks the pattern and draws the trigger, invalidation and reference levels.</p> <h2 class="sub-title" id="watchlist">Your watchlist</h2> <p>Tap the star next to any stock or ETF, in a screen, the custom screener, the sector lists or the chart, to add it to your <strong>watchlist</strong>. The watchlist tab shows each stock’s close, 5- and 20‑session return, RSI, distance from the 52‑week high, momentum score, trend stage, and any candlestick pattern, setup or crossover it showed in the latest session. The first time, you are asked for your name, email and WhatsApp number so the list is saved with MNCL and stays with you on every device; “Share list” creates a link that opens the same stocks for someone else. <a class="sx-more" href="#my-stock-watchlist">Open my watchlist</a></p> <h2 class="sub-title" id="track-record">Track record, hit rate and methodology</h2> <ul class="common-list"> <li><span class="txtbold">Track record:</span> every setup is tracked hypothetically. It counts only if its trigger traded within the allowed window. If the invalidation level and the reference target were touched on the same day, the invalidation is assumed to have come first. Gaps fill at the open, estimated costs are deducted (about 0.25% per round trip, 0.06% for one-session setups), and setups spanning a split or bonus are cancelled. Setups whose trigger never traded are counted separately. <a class="sx-more" href="#setup-track-record">See the track record</a></li> <li><span class="txtbold">Pattern hit rate:</span> the share of past signals where the close moved in the pattern’s direction after 1, 3, 5 or 10 sessions. Patterns with fewer than 30 signals are faded, because the percentage is not yet reliable. <a class="sx-more" href="#candlestick-pattern-hit-rate">See candlestick pattern hit rates</a></li> <li><span class="txtbold">Data:</span> prices, volume and delivery come from the official NSE Bhavcopy, published after market hours. Moving averages and 52‑week high and low come from Google Finance. If the Bhavcopy is not yet available, data is marked provisional.</li> <li><span class="txtbold">Timing:</span> updated every trading evening, usually between 6:30 PM and 8:00 PM IST. This is not a live or intraday feed.</li> <li><span class="txtbold">Corporate actions:</span> splits and bonuses are detected from the Bhavcopy’s adjusted previous close, older prices are adjusted, and affected stocks are kept out of setups for a few sessions.</li> </ul> <h2 class="sub-title" id="how-to-use">How to use the NSE stock scanner</h2> <ol class="common-list"> <li><span class="txtbold">Check market breadth:</span> Start with the market breadth strip: advances versus declines, the share of stocks above their 50‑day average, and 52‑week highs versus lows describe the backdrop for every screen.</li> <li><span class="txtbold">Choose a stock screen:</span> Open the Stock screens tab and pick a screen such as 52‑week high, Volume shockers, 20‑day breakout or High delivery. Filter the list by symbol, company or sector.</li> <li><span class="txtbold">Review trend and volume:</span> For each stock, review its trend stage (S1 to S4), its position versus the 50- and 200‑day averages, its volume compared with the 10‑day average and its delivery percentage.</li> <li><span class="txtbold">Open the daily chart:</span> Tap the stock symbol to open a daily chart and check the price structure yourself.</li> <li><span class="txtbold">Review the evidence:</span> Use the Pattern hit rate and Track record tabs to see how similar signals have behaved historically, including how many signals each figure is based on.</li> </ol> <h2 class="sub-title" id="glossary">Glossary</h2> <dl class="sx-dl"> <dt>Advance‑decline ratio</dt><dd>Stocks that closed higher divided by stocks that closed lower in the same session.</dd> <dt>Market breadth</dt><dd>How widely a market move is shared across stocks, measured here by advances versus declines, the share of stocks above their 50- and 200‑day averages, and new 52‑week highs versus lows.</dd> <dt>Volume ratio (Vol ×)</dt><dd>Today’s traded volume divided by the average of the previous 10 sessions.</dd> <dt>Delivery percentage</dt><dd>The share of traded quantity settled by delivery rather than squared off intraday.</dd> <dt>NR7</dt><dd>A session whose high‑low range is the smallest of the last seven sessions.</dd> <dt>Inside bar</dt><dd>A session whose high and low are both within the previous session’s range.</dd> <dt>RSI (14)</dt><dd>Relative Strength Index over 14 sessions; 30 or below is called oversold, 70 or above overbought.</dd> <dt>Trend stage (S1–S4)</dt><dd>A Weinstein-style classification from the 20-, 50- and 200‑day averages: S1 base, S2 uptrend, S3 top, S4 downtrend.</dd> <dt>Relative strength vs Nifty</dt><dd>A stock’s 20‑session return minus the 20‑session return of NIFTYBEES, in percentage points.</dd> <dt>Momentum score</dt><dd>A 0–100 ranking of recent strength against all liquid NSE stocks, from returns, trend stage, closeness to the 52‑week high and volume.</dd> <dt>Golden cross</dt><dd>The session in which the 50‑day moving average rises above the 200‑day moving average; the opposite is a death cross.</dd> <dt>All-time high</dt><dd>The highest price a stock has traded at since listing, adjusted for splits and bonuses.</dd> <dt>Bulk deal</dt><dd>A trade by one client of more than 0.5% of a company’s listed shares in one session, disclosed by NSE.</dd> <dt>Trigger</dt><dd>The price that must trade for a setup to count as active in the track record.</dd> <dt>Invalidation level</dt><dd>The price at which the setup’s technical premise no longer holds; used as the stop level in the track record.</dd> <dt>Reference target</dt><dd>A technical reference level, usually 2 to 2.5 times the trigger-to-invalidation distance, or a nearby swing level when one exists.</dd> </dl> <h2 class="sub-title" id="faq">Frequently asked questions</h2> <div class="sx-faq"> <details><summary><h3>What is a stock screener (stock scanner)?</h3></summary><p>A stock screener, also called a stock scanner, applies fixed rules to every listed stock and returns only the ones that match, for example stocks at a 52‑week high, stocks trading on unusually high volume, or stocks that formed a candlestick pattern. MNCL’s screener for NSE stocks runs these screens on official end‑of‑day data for about 2,500 EQ‑series stocks after every trading session.</p></details> <details><summary><h3>Is this stock screener free, and is it live?</h3></summary><p>It is free to use. It is an end‑of‑day scanner, not a live one: it is updated each trading evening after NSE publishes the Bhavcopy, usually between 6:30 PM and 8:00 PM IST, and shows the most recently completed session.</p></details> <details><summary><h3>How is the advance‑decline ratio calculated?</h3></summary><p>The advance‑decline ratio is the number of stocks that closed higher divided by the number that closed lower in the same session. The scanner counts liquid NSE stocks (daily turnover of at least ₹5 lakh). A ratio above 1 means more stocks rose than fell; below 1 means more fell than rose.</p></details> <details><summary><h3>How are 52‑week high stocks screened?</h3></summary><p>A stock appears in the 52‑week high screen when its high for the session reached its 52‑week high and it closed within 3% of that level. Only stocks with daily turnover of at least ₹1 crore are included.</p></details> <details><summary><h3>What are volume shockers?</h3></summary><p>Volume shockers are stocks whose traded volume in the latest session was at least 2.5 times their average daily volume over the previous 10 sessions, measured from NSE Bhavcopy data. A volume spike shows unusual activity; it does not show whether that activity was buying or selling.</p></details> <details><summary><h3>What does a high delivery percentage mean?</h3></summary><p>Delivery percentage is the share of traded quantity that was settled by delivery into demat accounts rather than squared off within the day. The high delivery screen lists stocks with delivery of 60% or more that is also at least 25% above the stock’s own 20‑session average.</p></details> <details><summary><h3>What is an NR7 stock?</h3></summary><p>NR7 means narrow range 7: the stock’s high‑low range in the latest session was smaller than in each of the previous six sessions. It marks a contraction in volatility, which traders watch because ranges tend to expand afterwards, in either direction.</p></details> <details><summary><h3>What does RSI oversold mean?</h3></summary><p>RSI, the Relative Strength Index, measures the speed of recent price changes on a 0 to 100 scale. The scanner uses a 14‑session RSI and lists stocks at 30 or below as oversold and 70 or above as overbought. These readings describe momentum, not value, and strong trends can stay oversold or overbought for long periods.</p></details> <details><summary><h3>Which candlestick and chart patterns does the scanner detect?</h3></summary><p>It checks 45+ candlestick patterns, including Hammer, Engulfing, Harami, Morning and Evening Star, Three White Soldiers, Doji and Marubozu, and chart patterns including Double Top, Double Bottom, Head and Shoulders, Inverse Head and Shoulders and 20‑day breakouts and breakdowns. Reversal patterns are only reported when the trend before the pattern matches the pattern’s definition.</p></details> <details><summary><h3>How are breakout stocks identified?</h3></summary><p>A 20‑day breakout is the first close above the highest high of the previous 20 sessions, on at least 1.2 times average volume in the screen and 1.1 times in the pattern list. A breakdown is the first close below the lowest low of the previous 20 sessions. Only the first day of the move is shown, so the list contains fresh breakouts rather than stocks that broke out earlier.</p></details> <details><summary><h3>How are all-time high stocks identified?</h3></summary><p>A stock appears in the all-time high screen when its high for the session reached the highest price on record and it closed within 3% of that level. All-time values come from Google Finance price history since 2000 and are raised or lowered every session from the official NSE Bhavcopy, adjusted for splits and bonuses.</p></details> <details><summary><h3>What is a golden crossover?</h3></summary><p>A golden crossover (golden cross) is the session in which a stock’s 50‑day moving average rises above its 200‑day moving average. A death cross is the opposite. Both are lagging signals: they confirm a trend change that has already happened in price, and are often followed by sideways trade.</p></details> <details><summary><h3>What is the momentum score?</h3></summary><p>The momentum score ranks every liquid NSE stock from 0 to 100 using five inputs: the 20‑session return (30% weight), the 5‑session return (15%), the trend stage (25%), how close the price is to its 52‑week high (20%) and volume against the 10‑day average (10%). A high score means strong recent relative performance. It is a ranking, not a rating or a forecast.</p></details> <details><summary><h3>Can I build my own stock screen?</h3></summary><p>Yes. The Build a screen tab combines filters on price, change, 5- and 20‑session return, volume, delivery percentage, RSI, 50- and 200‑day averages, distance from the 52‑week and all-time high, momentum score, relative strength against Nifty, sector, industry, trend stage, candlestick pattern and moving-average crossovers. Every filter is kept in the page address, so a screen can be bookmarked or shared, and screens can be saved in your browser.</p></details> <details><summary><h3>How are ETFs grouped?</h3></summary><p>ETFs are recognised from their name and grouped by what they hold: gold, silver, debt and liquid, international, smart beta and factor, banking and financial, PSU and CPSE, IT, sectoral, thematic, midcap and smallcap, and broad Nifty or Sensex funds. They are shown in their own ETF section and excluded from stock screens and market breadth. ETF prices on the exchange can differ from the fund’s NAV.</p></details> <details><summary><h3>What are bulk deals and block deals?</h3></summary><p>A bulk deal is a trade in which one client buys or sells more than 0.5% of a company’s listed shares in a single session. A block deal is a single large trade of at least ₹10 crore done in the exchange’s separate block-deal window. NSE discloses both after the session, with the client name, quantity and price. The scanner lists the last 45 days.</p></details> <details><summary><h3>What is a MACD crossover and a Supertrend signal?</h3></summary><p>MACD is the difference between the 12- and 26‑session exponential moving averages; a bullish crossover is the session in which it rises above its own 9‑session average (the signal line). Supertrend (10, 3) is a trailing line three average true ranges away from the price; it flips up when the close moves above it and down when the close falls below it. Both describe changes in momentum that have already happened and give many false signals in sideways markets.</p></details> <details><summary><h3>Can I add my own indicator to the chart?</h3></summary><p>Yes. Besides the built-in indicators, the chart accepts a formula using open, high, low, close and volume with functions such as sma, ema, rsi, atr, highest, lowest and stdev, for example ema(close,20) - ema(close,50). The formula is drawn on the price or in its own pane and is saved in your browser.</p></details> <details><summary><h3>Are the setups recommendations to buy or sell?</h3></summary><p>No. Setups are the output of automated technical rules applied to end‑of‑day data. They are not recommendations to buy, sell or hold any security, and the trigger, invalidation and reference levels are technical reference points only. Please consult a SEBI-registered investment adviser or research analyst before making investment decisions.</p></details> <details><summary><h3>How is the track record calculated?</h3></summary><p>Every setup is tracked hypothetically. It counts only if its trigger level actually traded within the allowed window. If the invalidation level and the reference target were both touched on the same day, the invalidation is assumed to have come first. Gaps fill at the opening price, estimated costs are deducted, and setups that span a split or bonus are cancelled. Past outcomes do not indicate future results.</p></details> <details><summary><h3>What is an ex-dividend date and who gets the dividend?</h3></summary><p>The ex-dividend date is the first session in which a share trades without the right to the declared dividend. With India’s T+1 settlement the record date is usually the same day, so only investors holding the shares at the close of the session before the ex-date receive the dividend. The share price usually opens lower by about the dividend amount on the ex-date. The Corporate actions screens list upcoming and recent ex-dates from NSE’s corporate actions list.</p></details> <details><summary><h3>How do a stock split and a bonus issue affect the share price?</h3></summary><p>Both increase the number of shares and reduce the price in the same proportion on the ex-date, so the value of a holding does not change. A 1:1 bonus doubles the shares and roughly halves the price; a split from ₹10 to ₹1 face value gives ten shares for each one at about a tenth of the price. Charts, moving averages and 52‑week highs on this page are adjusted for splits and bonuses so the change does not look like a fall.</p></details> <details><summary><h3>What is dividend yield?</h3></summary><p>Dividend yield is the dividend per share paid over the last 12 months divided by the current share price. A 2% yield means ₹2 of dividends a year for every ₹100 of share price. It is based on past dividends: a high yield can come from a one-off special dividend or a fall in the share price, and future dividends are not assured.</p></details> <details><summary><h3>Where does the data come from?</h3></summary><p>Prices, volume and delivery percentage come from the official NSE Bhavcopy (the full Bhavcopy with delivery data). Index values come from NSE’s daily index closing file and bulk and block deals from NSE’s daily deal disclosures. Moving averages, 52‑week and all-time highs and lows come from Google Finance history and are updated from the Bhavcopy. On days when the Bhavcopy is not yet available, prices are marked provisional until it is loaded.</p></details> </div> <section class="sx-disc" id="disclaimer" aria-labelledby="disc-h"> <h2 id="disc-h">&#9888; Important disclaimer</h2> <p>This scanner is a technical analysis tool for <strong>educational and informational purposes only</strong>. Its screens, patterns and setups are produced automatically by fixed rules applied to end‑of‑day data. They do not constitute investment advice, a research report, or a recommendation or solicitation to buy, sell or hold any security.</p> <ul> <li>Technical patterns and indicators are probabilistic. Historical hit rates and tracked outcomes do not guarantee future results.</li> <li>Trigger, invalidation and reference levels are technical reference points, not price targets or advice.</li> <li>Investment decisions should be based on your own analysis, financial situation and risk tolerance. Please consult a SEBI-registered investment adviser or research analyst.</li> <li>Investments in securities market are subject to market risks. Read all the related documents carefully before investing.</li> <li>Monarch Networth Capital Limited, SEBI Registration No. INZ000008037. For grievances: <a href="https://scores.sebi.gov.in" target="_blank" rel="noopener" style="color:#7a5c00;">SEBI SCORES portal</a>.</li> </ul> </section> <div style="text-align:center;margin:28px 0 12px;"> <a class="common-btn wd-auto mt-0 ht-auto" href="https://ekyc.mnclgroup.com/">Open a Demat Account with MNCL</a> </div> </div></div></div> 
 <!--MNCL-APP--><script>
+// ===============================================================
+//  [NEW-v11.17] SMART MONEY CONCEPTS: shared detection (server + chart)
+//  The same code runs in Apps Script (nightly screens) and in the browser
+//  (chart overlay), so a chart always shows what the screen found.
+//  Bars: ascending [{time:'YYYY-MM-DD', open, high, low, close, volume}].
+//  Timeframes: D (daily), W (weekly, Monday-Friday), M (calendar month).
+//  Rules (stated on the education pages):
+//   swing high / low  fractal: higher (lower) than N bars each side (D 3, W 2, M 2)
+//   BOS               close beyond the last unbroken swing in the trend's direction
+//   CHoCH             first close beyond the last swing AGAINST the prevailing trend
+//   FVG               3-bar gap: bar 3's low above bar 1's high (bullish), or the
+//                     reverse; at least 0.25 x ATR(14); open until price fills it
+//   order block       last opposite-colour candle before the move that broke
+//                     structure; open until price returns into it (mitigated)
+//                     or closes through it (invalid)
+//   liquidity pool    two or more swing highs (lows) within 0.25 x ATR of each
+//                     other that price has not traded through yet (EQH / EQL)
+//   sweep             the bar trades through a recent swing high (low) but
+//                     closes back inside: stops taken, no acceptance
+//   premium/discount  position of the close in the latest swing range;
+//                     OTE = 62-79% retracement of that leg
+// ===============================================================
+var SMC = (function() {
+  var SW = { D: 3, W: 2, M: 2 }, RECENT = { D: 3, W: 2, M: 2 };
+  function wkKey(t) {
+    var d = new Date(t + 'T00:00:00Z'), dow = (d.getUTCDay() + 6) % 7;
+    return new Date(d.getTime() - dow * 86400000).toISOString().slice(0, 10);
+  }
+  function agg(bars, tf) {
+    if (tf === 'D' || !tf) return bars.slice();
+    var out = [], cur = null, key = '';
+    for (var i = 0; i < bars.length; i++) {
+      var b = bars[i], k = tf === 'M' ? b.time.slice(0, 7) : wkKey(b.time);
+      if (!cur || k !== key) { if (cur) out.push(cur); key = k; cur = { time: b.time, open: b.open, high: b.high, low: b.low, close: b.close, volume: b.volume || 0, last: b.time }; }
+      else { if (b.high > cur.high) cur.high = b.high; if (b.low < cur.low) cur.low = b.low; cur.close = b.close; cur.volume += b.volume || 0; cur.last = b.time; }
+    }
+    if (cur) out.push(cur);
+    return out;
+  }
+  function atr(bars, n) {
+    var out = [], prev = null, s = 0;
+    for (var i = 0; i < bars.length; i++) {
+      var b = bars[i], tr = i ? Math.max(b.high - b.low, Math.abs(b.high - bars[i - 1].close), Math.abs(b.low - bars[i - 1].close)) : b.high - b.low;
+      if (i < n) { s += tr; out.push(i === n - 1 ? (prev = s / n) : null); }
+      else { prev = (prev * (n - 1) + tr) / n; out.push(prev); }
+    }
+    return out;
+  }
+  function ema(a, n) { var k = 2 / (n + 1), o = [], p = null; for (var i = 0; i < a.length; i++) { var v = a[i]; if (v === null) { o.push(null); continue; } p = p === null ? v : v * k + p * (1 - k); o.push(i >= n - 1 ? p : null); } return o; }
+  function sma(a, n) { var o = [], s = 0; for (var i = 0; i < a.length; i++) { s += a[i]; if (i >= n) s -= a[i - n]; o.push(i >= n - 1 ? s / n : null); } return o; }
+  function rsi(c, n) {
+    var o = [], g = 0, l = 0;
+    for (var i = 0; i < c.length; i++) {
+      if (!i) { o.push(null); continue; }
+      var d = c[i] - c[i - 1], up = d > 0 ? d : 0, dn = d < 0 ? -d : 0;
+      if (i <= n) { g += up; l += dn; if (i < n) { o.push(null); continue; } g /= n; l /= n; }
+      else { g = (g * (n - 1) + up) / n; l = (l * (n - 1) + dn) / n; }
+      o.push(l === 0 ? 100 : 100 - 100 / (1 + g / l));
+    }
+    return o;
+  }
+  function swings(bars, n) {
+    var hs = [], ls = [];
+    for (var i = n; i < bars.length - n; i++) {
+      var h = bars[i].high, l = bars[i].low, isH = true, isL = true;
+      for (var k = 1; k <= n; k++) {
+        if (bars[i - k].high >= h || bars[i + k].high > h) isH = false;
+        if (bars[i - k].low <= l || bars[i + k].low < l) isL = false;
+      }
+      if (isH) hs.push({ i: i, p: h, c: i + n });   // c = bar on which it is confirmed
+      if (isL) ls.push({ i: i, p: l, c: i + n });
+    }
+    return { highs: hs, lows: ls };
+  }
+  function analyze(barsIn, tf) {
+    tf = tf || 'D';
+    var bars = agg(barsIn, tf), n = SW[tf] || 3, N = bars.length;
+    var res = { tf: tf, bars: bars, swings: { highs: [], lows: [] }, events: [], fvgs: [], obs: [], pools: [], sweeps: [], trend: 0, range: null };
+    if (N < 2 * n + 5) return res;
+    var A = atr(bars, 14), sw = swings(bars, n);
+    res.swings = sw;
+    // structure walk
+    var hi = 0, lo = 0, lastH = null, lastL = null, trend = 0;
+    for (var j = 0; j < N; j++) {
+      while (hi < sw.highs.length && sw.highs[hi].c <= j) { lastH = { i: sw.highs[hi].i, p: sw.highs[hi].p, broken: false }; hi++; }
+      while (lo < sw.lows.length && sw.lows[lo].c <= j) { lastL = { i: sw.lows[lo].i, p: sw.lows[lo].p, broken: false }; lo++; }
+      var b = bars[j];
+      if (lastH && !lastH.broken && b.close > lastH.p) {
+        lastH.broken = true;
+        var ev = { type: trend === -1 ? 'CHoCH' : 'BOS', dir: 1, level: lastH.p, from: lastH.i, at: j };
+        res.events.push(ev); trend = 1;
+        var ob = findOb(bars, lastH.i, j, 1); if (ob) res.obs.push(ob);
+      }
+      if (lastL && !lastL.broken && b.close < lastL.p) {
+        lastL.broken = true;
+        var ev2 = { type: trend === 1 ? 'CHoCH' : 'BOS', dir: -1, level: lastL.p, from: lastL.i, at: j };
+        res.events.push(ev2); trend = -1;
+        var ob2 = findOb(bars, lastL.i, j, -1); if (ob2) res.obs.push(ob2);
+      }
+    }
+    res.trend = trend;
+    // fair value gaps
+    for (var i = 2; i < N; i++) {
+      var a = A[i] || (bars[i].high - bars[i].low), min = 0.25 * a;
+      if (bars[i].low > bars[i - 2].high && bars[i].low - bars[i - 2].high >= min) res.fvgs.push({ dir: 1, at: i, lo: bars[i - 2].high, hi: bars[i].low, top: bars[i].low, filled: -1, touched: -1 });
+      if (bars[i].high < bars[i - 2].low && bars[i - 2].low - bars[i].high >= min) res.fvgs.push({ dir: -1, at: i, lo: bars[i].high, hi: bars[i - 2].low, bot: bars[i].high, filled: -1, touched: -1 });
+    }
+    res.fvgs.forEach(function(g) {
+      for (var k = g.at + 1; k < N && g.filled < 0; k++) {
+        var x = bars[k];
+        if (g.dir === 1) { if (x.low <= g.hi && g.touched < 0) g.touched = k; if (x.low <= g.lo) g.filled = k; }
+        else { if (x.high >= g.lo && g.touched < 0) g.touched = k; if (x.high >= g.hi) g.filled = k; }
+      }
+    });
+    // order block mitigation
+    res.obs.forEach(function(o) {
+      for (var k = o.from + 1; k < N; k++) {
+        if (k <= o.br) continue;
+        var x = bars[k];
+        if (o.dir === 1) { if (o.touched < 0 && x.low <= o.hi) o.touched = k; if (x.close < o.lo) { o.invalid = k; break; } }
+        else { if (o.touched < 0 && x.high >= o.lo) o.touched = k; if (x.close > o.hi) { o.invalid = k; break; } }
+      }
+    });
+    // liquidity pools: equal highs / lows among recent swings
+    var look = tf === 'D' ? 120 : 60;
+    [['highs', 1], ['lows', -1]].forEach(function(pair) {
+      var list = sw[pair[0]].filter(function(s) { return s.i >= N - look; });
+      for (var u = 0; u < list.length; u++) for (var v = u + 1; v < list.length; v++) {
+        var s1 = list[u], s2 = list[v], tol = 0.25 * (A[s2.i] || A[N - 1] || Math.abs(s2.p) * 0.01);
+        if (Math.abs(s1.p - s2.p) > tol || s2.i - s1.i < 3) continue;
+        var lvl = pair[1] === 1 ? Math.max(s1.p, s2.p) : Math.min(s1.p, s2.p), taken = -1;
+        for (var k = s2.i + 1; k < N; k++) { if (pair[1] === 1 ? bars[k].high > lvl : bars[k].low < lvl) { taken = k; break; } }
+        res.pools.push({ dir: pair[1], level: lvl, a: s1.i, b: s2.i, taken: taken });
+      }
+    });
+    // sweeps: a bar trades through a recent unbroken swing but closes back inside
+    for (var q = 1; q < N; q++) {
+      var bq = bars[q];
+      var sh = lastBefore(sw.highs, q, n), sl = lastBefore(sw.lows, q, n);
+      if (sh && bq.high > sh.p && bq.close < sh.p && !brokenBetween(bars, sh, q, 1)) res.sweeps.push({ dir: -1, at: q, level: sh.p, from: sh.i });
+      if (sl && bq.low < sl.p && bq.close > sl.p && !brokenBetween(bars, sl, q, -1)) res.sweeps.push({ dir: 1, at: q, level: sl.p, from: sl.i });
+    }
+    // dealing range: latest confirmed swing high and low
+    var H = sw.highs.length ? sw.highs[sw.highs.length - 1] : null, L = sw.lows.length ? sw.lows[sw.lows.length - 1] : null;
+    if (H && L && H.p > L.p) {
+      var c = bars[N - 1].close, up = L.i < H.i;   // leg up: low then high
+      var pos = (c - L.p) / (H.p - L.p);
+      res.range = { hi: H.p, lo: L.p, hiAt: H.i, loAt: L.i, pos: pos, legUp: up,
+                    ote: up ? (c <= H.p - 0.62 * (H.p - L.p) && c >= H.p - 0.79 * (H.p - L.p)) : (c >= L.p + 0.62 * (H.p - L.p) && c <= L.p + 0.79 * (H.p - L.p)) };
+    }
+    return res;
+  }
+  function lastBefore(list, q, n) { var r = null; for (var i = 0; i < list.length; i++) { if (list[i].c < q && list[i].i < q) r = list[i]; else if (list[i].i >= q) break; } return r; }
+  function brokenBetween(bars, s, q, dir) { for (var k = s.i + 1; k < q; k++) { if (dir === 1 ? bars[k].close > s.p : bars[k].close < s.p) return true; } return false; }
+  function findOb(bars, swingIdx, brk, dir) {
+    var ext = swingIdx, k;
+    for (k = swingIdx; k <= brk; k++) if (dir === 1 ? bars[k].low < bars[ext].low : bars[k].high > bars[ext].high) ext = k;
+    for (k = ext; k >= Math.max(0, ext - 6); k--) {
+      var x = bars[k];
+      if (dir === 1 ? x.close < x.open : x.close > x.open) return { dir: dir, at: k, lo: x.low, hi: x.high, br: brk, from: k, touched: -1, invalid: -1 };
+    }
+    var e = bars[ext];
+    return { dir: dir, at: ext, lo: e.low, hi: e.high, br: brk, from: ext, touched: -1, invalid: -1 };
+  }
+  // classic indicators on the timeframe's bars
+  function classic(bars) {
+    var c = bars.map(function(b) { return b.close; }), N = c.length, out = {};
+    if (N < 3) return out;
+    var r = rsi(c, 14); out.rsi = r[N - 1] !== null ? Math.round(r[N - 1] * 10) / 10 : null;
+    var f = ema(c, 12), s = ema(c, 26), m = c.map(function(_, i) { return f[i] === null || s[i] === null ? null : f[i] - s[i]; });
+    var first = -1; for (var i = 0; i < N; i++) if (m[i] !== null) { first = i; break; }
+    if (first >= 0) {
+      var sg = m.slice(0, first).concat(ema(m.slice(first), 9));
+      var d1 = m[N - 1] !== null && sg[N - 1] !== null ? m[N - 1] - sg[N - 1] : null, d0 = N > 1 && m[N - 2] !== null && sg[N - 2] !== null ? m[N - 2] - sg[N - 2] : null;
+      if (d1 !== null) { out.mc = d1 > 0 ? 1 : -1; out.mx = d0 !== null && (d0 > 0) !== (d1 > 0) ? out.mc : 0; }
+    }
+    var A = atr(bars, 10), fu = null, fl = null, dir = 1, prevDir = 1;
+    for (var j = 0; j < N; j++) {
+      if (A[j] === null) continue;
+      var mid = (bars[j].high + bars[j].low) / 2, bu = mid + 3 * A[j], bl = mid - 3 * A[j], pc = j ? c[j - 1] : c[j];
+      fu = fu === null || bu < fu || pc > fu ? bu : fu; fl = fl === null || bl > fl || pc < fl ? bl : fl;
+      prevDir = dir;
+      if (dir === 1 && c[j] < fl) dir = -1; else if (dir === -1 && c[j] > fu) dir = 1;
+    }
+    if (fu !== null) { out.st = dir; out.sf = dir !== prevDir ? dir : 0; }
+    var s20 = sma(c, 20); if (s20[N - 1] !== null) out.a20 = c[N - 1] > s20[N - 1] ? 1 : 0;
+    var e9 = ema(c, 9), e21 = ema(c, 21); if (e9[N - 1] !== null && e21[N - 1] !== null) out.e9 = e9[N - 1] > e21[N - 1] ? 1 : 0;
+    return out;
+  }
+  // Compact per-stock answer for screens and filters.
+  function summary(res) {
+    var bars = res.bars, N = bars.length, rec = RECENT[res.tf] || 3, out = { tr: res.trend };
+    if (!N) return out;
+    var last = bars[N - 1], c = last.close, pct = function(x) { return Math.round((x / c - 1) * 1000) / 10; };
+    var ev = res.events.length ? res.events[res.events.length - 1] : null;
+    if (ev) out.ev = { t: ev.type === 'BOS' ? 'B' : 'C', d: ev.dir, lv: r2(ev.level), age: N - 1 - ev.at, on: bars[ev.at].time };
+    // structure label from the last two swing highs and lows
+    var H = res.swings.highs, L = res.swings.lows;
+    if (H.length >= 2 && L.length >= 2) {
+      var hh = H[H.length - 1].p > H[H.length - 2].p, hl = L[L.length - 1].p > L[L.length - 2].p;
+      out.ms = hh && hl ? 1 : !hh && !hl ? -1 : 0;
+    }
+    // fair value gap: new on the latest bar, or the latest bar traded into an open one
+    var g = null;
+    for (var i = res.fvgs.length - 1; i >= 0; i--) {
+      var f = res.fvgs[i];
+      if (f.at === N - 1) { g = { d: f.dir, st: 'new', lo: r2(f.lo), hi: r2(f.hi), on: bars[f.at].time }; break; }
+      if (f.filled < 0 && f.touched === N - 1) { g = { d: f.dir, st: 'tap', lo: r2(f.lo), hi: r2(f.hi), on: bars[f.at].time }; break; }
+    }
+    if (g) out.fvg = g;
+    var openF = res.fvgs.filter(function(f) { return f.filled < 0; });
+    out.nfu = openF.filter(function(f) { return f.dir === 1; }).length; out.nfd = openF.filter(function(f) { return f.dir === -1; }).length;
+    // order block: first return into an unmitigated block on the latest bar
+    for (var o = res.obs.length - 1; o >= 0; o--) {
+      var ob = res.obs[o];
+      if (ob.touched === N - 1 && (ob.invalid < 0 || ob.invalid >= N)) { out.ob = { d: ob.dir, lo: r2(ob.lo), hi: r2(ob.hi), on: bars[ob.at].time }; break; }
+    }
+    // nearest untaken liquidity pools
+    var eqh = null, eql = null;
+    res.pools.forEach(function(p) {
+      if (p.taken >= 0) return;
+      if (p.dir === 1 && p.level >= c && (!eqh || p.level < eqh.level)) eqh = p;
+      if (p.dir === -1 && p.level <= c && (!eql || p.level > eql.level)) eql = p;
+    });
+    if (eqh) out.eqh = { lv: r2(eqh.level), dist: pct(eqh.level) };
+    if (eql) out.eql = { lv: r2(eql.level), dist: pct(eql.level) };
+    var sw = res.sweeps.length ? res.sweeps[res.sweeps.length - 1] : null;
+    if (sw && sw.at >= N - rec) out.sw = { d: sw.dir, lv: r2(sw.level), age: N - 1 - sw.at };
+    if (res.range) { out.pd = Math.max(0, Math.min(100, Math.round(res.range.pos * 100))); out.ote = res.range.ote ? 1 : 0; out.rh = r2(res.range.hi); out.rl = r2(res.range.lo); }
+    var cl = classic(bars); for (var k in cl) out[k] = cl[k];
+    return out;
+  }
+  function r2(x) { return Math.round(x * 100) / 100; }
+  // Which concept screens a stock belongs to on one timeframe (with its detail).
+  var SCREENS = ['bos', 'choch', 'fvg', 'ob', 'sweep', 'liq', 'pd', 'ms'];
+  // Screen membership on one timeframe: [concept, direction, rank, detail...]
+  // (rank: smaller = more recent / closer; detail = the levels shown in the list).
+  function screens(s, tf) {
+    var rec = RECENT[tf] || 3, out = [];
+    if (s.ev && s.ev.t === 'B' && s.ev.age < rec) out.push(['bos', s.ev.d, s.ev.age, s.ev.lv, s.ev.age]);
+    if (s.ev && s.ev.t === 'C' && s.ev.age < rec) out.push(['choch', s.ev.d, s.ev.age, s.ev.lv, s.ev.age]);
+    if (s.fvg) out.push(['fvg', s.fvg.d, s.fvg.st === 'new' ? 0 : 1, s.fvg.lo, s.fvg.hi, s.fvg.st === 'new' ? 0 : 1]);
+    if (s.ob) out.push(['ob', s.ob.d, 0, s.ob.lo, s.ob.hi]);
+    if (s.sw) out.push(['sweep', s.sw.d, s.sw.age, s.sw.lv, s.sw.age]);
+    if (s.eqh && s.eqh.dist <= 5) out.push(['liq', 1, s.eqh.dist, s.eqh.lv, s.eqh.dist]);      // equal highs above the price (buy-side liquidity)
+    if (s.eql && s.eql.dist >= -5) out.push(['liq', -1, -s.eql.dist, s.eql.lv, s.eql.dist]);  // equal lows below the price (sell-side liquidity)
+    if (s.tr === 1 && s.pd !== undefined && s.pd < 50) out.push(['pd', 1, s.pd, s.pd, s.ote || 0]);
+    if (s.tr === -1 && s.pd !== undefined && s.pd > 50) out.push(['pd', -1, 100 - s.pd, s.pd, s.ote || 0]);
+    if (s.ms === 1 && s.tr === 1) out.push(['ms', 1, 0]);
+    if (s.ms === -1 && s.tr === -1) out.push(['ms', -1, 0]);
+    return out;
+  }
+  // Compact numbers per stock and timeframe for the custom screener (smcf.json).
+  var FIELDS = ['tr', 'ms', 'evt', 'evd', 'eva', 'fvd', 'fvs', 'obd', 'swd', 'eqh', 'eql', 'pd', 'ote', 'rsi', 'mc', 'mx', 'st', 'sf', 'a20', 'e9'];
+  function pack(s) {
+    var v = { tr: s.tr, ms: s.ms, evt: s.ev ? (s.ev.t === 'B' ? 1 : 2) : 0, evd: s.ev ? s.ev.d : 0, eva: s.ev ? s.ev.age : null, fvd: s.fvg ? s.fvg.d : 0, fvs: s.fvg ? (s.fvg.st === 'new' ? 0 : 1) : null,
+              obd: s.ob ? s.ob.d : 0, swd: s.sw ? s.sw.d : 0, eqh: s.eqh ? s.eqh.dist : null, eql: s.eql ? s.eql.dist : null, pd: s.pd, ote: s.ote, rsi: s.rsi, mc: s.mc, mx: s.mx, st: s.st, sf: s.sf, a20: s.a20, e9: s.e9 };
+    return FIELDS.map(function(k) { return v[k] === undefined ? null : v[k]; });
+  }
+  function unpack(a) { var o = {}; FIELDS.forEach(function(k, i) { o[k] = a ? a[i] : null; }); return o; }
+  return { agg: agg, analyze: analyze, summary: summary, screens: screens, SCREENS: SCREENS, FIELDS: FIELDS, pack: pack, unpack: unpack, wkKey: wkKey, classic: classic };
+})();
+
 
 (function(){
   var _noop = function(){};
@@ -720,9 +1039,9 @@
   var MNCL_PG = window.MNCL_PAGE || {}, PAGE_SLUG = MNCL_PG.app === 'screener' ? (MNCL_PG.slug || '') : '', LIVE_PAGES = MNCL_PG.live || [], SITE_URL = MNCL_PG.site || 'https://www.mnclgroup.com/';
   function livePage(slug){ return LIVE_PAGES.indexOf(slug) !== -1; }
 
-  var APP_VERSION = 'v11.16';
+  var APP_VERSION = 'v11.18';
   var CACHE_NS = 'cx10_';
-  var SEO_SLUGS = ["top-gainers-today", "top-losers-today", "52-week-high-stocks", "52-week-low-stocks", "5-year-high-stocks", "all-time-high-stocks", "all-time-low-stocks", "gap-up-stocks", "gap-down-stocks", "volume-shockers", "most-active-stocks", "high-delivery-stocks", "bulk-deals-today", "block-deals-today", "stocks-in-uptrend", "stocks-in-downtrend", "breakout-stocks-today", "breakdown-stocks-today", "golden-crossover-stocks", "death-cross-stocks", "stocks-above-200-dma", "stocks-below-200-dma", "momentum-stocks", "stocks-up-3-days-in-a-row", "stocks-down-3-days-in-a-row", "rsi-oversold-stocks", "rsi-overbought-stocks", "macd-bullish-crossover-stocks", "macd-bearish-crossover-stocks", "supertrend-buy-signal-stocks", "supertrend-sell-signal-stocks", "ema-crossover-stocks", "adx-strong-trend-stocks", "bollinger-band-squeeze-stocks", "bollinger-band-breakout-stocks", "stochastic-oversold-crossover-stocks", "55-day-breakout-stocks", "nr7-stocks", "inside-bar-stocks", "long-build-up-stocks", "short-build-up-stocks", "short-covering-stocks", "long-unwinding-stocks", "open-interest-gainers", "fno-ban-list-today", "upcoming-corporate-actions", "recent-corporate-actions", "high-dividend-yield-stocks", "stock-split-and-bonus-issues", "rights-issue-buyback-demerger", "intraday-screener-watchlist", "swing-trading-setups", "positional-setups", "delivery-spike-stocks", "reversal-setups", "weak-trend-stocks", "nse-market-breadth", "setup-track-record", "candlestick-pattern-hit-rate", "custom-stock-screener", "etf-screener", "my-stock-watchlist"];
+  var SEO_SLUGS = ["top-gainers-today", "top-losers-today", "52-week-high-stocks", "52-week-low-stocks", "5-year-high-stocks", "all-time-high-stocks", "all-time-low-stocks", "gap-up-stocks", "gap-down-stocks", "volume-shockers", "most-active-stocks", "high-delivery-stocks", "bulk-deals-today", "block-deals-today", "stocks-in-uptrend", "stocks-in-downtrend", "breakout-stocks-today", "breakdown-stocks-today", "golden-crossover-stocks", "death-cross-stocks", "stocks-above-200-dma", "stocks-below-200-dma", "momentum-stocks", "stocks-up-3-days-in-a-row", "stocks-down-3-days-in-a-row", "rsi-oversold-stocks", "rsi-overbought-stocks", "macd-bullish-crossover-stocks", "macd-bearish-crossover-stocks", "supertrend-buy-signal-stocks", "supertrend-sell-signal-stocks", "ema-crossover-stocks", "adx-strong-trend-stocks", "bollinger-band-squeeze-stocks", "bollinger-band-breakout-stocks", "stochastic-oversold-crossover-stocks", "55-day-breakout-stocks", "nr7-stocks", "inside-bar-stocks", "long-build-up-stocks", "short-build-up-stocks", "short-covering-stocks", "long-unwinding-stocks", "open-interest-gainers", "fno-ban-list-today", "upcoming-corporate-actions", "recent-corporate-actions", "high-dividend-yield-stocks", "stock-split-and-bonus-issues", "rights-issue-buyback-demerger", "smart-money-concepts", "market-structure-stocks", "break-of-structure-stocks", "change-of-character-stocks", "fair-value-gap-stocks", "order-block-stocks", "liquidity-sweep-stocks", "equal-highs-equal-lows-liquidity", "premium-discount-zone-stocks", "intraday-screener-watchlist", "swing-trading-setups", "positional-setups", "delivery-spike-stocks", "reversal-setups", "weak-trend-stocks", "nse-market-breadth", "setup-track-record", "candlestick-pattern-hit-rate", "custom-stock-screener", "etf-screener", "my-stock-watchlist"];
   if (DATA_BASE && DATA_BASE.slice(-1) !== '/') DATA_BASE += '/';
 
   var BULL = ['Hammer','Inverted Hammer','Dragonfly Doji','Bullish Marubozu','Bullish Engulfing','Morning Star','Morning Doji Star','Three White Soldiers','Bullish Harami','Bullish Harami Cross','Piercing Line','Three Inside Up','Tweezer Bottom','Three Outside Up','Kicking Bullish','Ladder Bottom','Unique Three River Bottom','Rising Three Methods','Separating Lines Bullish','Upside Tasuki Gap','Breakaway Bullish','Inverse Head and Shoulders','Double Bottom','20-Day Breakout','Abandoned Baby Bullish','Tri-Star Bullish','Concealing Baby Swallow','Stick Sandwich','Bull Flag','Ascending Triangle','Cup and Handle','Falling Wedge'];
@@ -992,21 +1311,26 @@
     { id:'fo', label:'F&O', items:['folbu','fosbu','foscov','folunw','fooi','foban'] },
     { id:'ca', label:'Corporate actions', items:['caup','carecent','cadiv','casplit','caother'] }
   ];
+  // [v11.17] smart money concepts: one screen per concept, with direction and timeframe buttons
+  var SMC_EDU = [{"id": "smchub", "key": "", "slug": "smart-money-concepts", "label": "Smart money concepts", "title": "Smart money concepts (SMC) explained", "short": "How market structure, breaks of structure, changes of character, fair value gaps, order blocks and liquidity fit together, with daily, weekly and monthly screens for NSE stocks.", "rule": "", "up": "", "dn": "", "sections": [["What smart money concepts are", "Smart money concepts (SMC) is a way of reading a price chart that assumes large participants such as institutions leave footprints: they need liquidity to fill big orders, they move price quickly when they commit, and they often return to the area where they started. SMC turns those ideas into a vocabulary for structure (trend), imbalances (fair value gaps), origin zones (order blocks) and liquidity (where stop orders cluster). It grew out of older price-action and supply-and-demand methods; most of its terms describe patterns that technical analysts have studied for decades under other names."], ["The building blocks", "Market structure tells you the trend from swing points: higher highs and higher lows in an uptrend, lower highs and lower lows in a downtrend. A break of structure (BOS) is a close beyond the last swing in the direction of the trend, a sign the trend is continuing. A change of character (CHoCH) is the first close beyond the last swing against the trend, an early sign the trend may be turning. A fair value gap (FVG) is a three-candle gap left by a fast move. An order block is the last opposite candle before a move that broke structure. Liquidity pools are clusters of equal highs or equal lows where stop orders are likely to sit, and a liquidity sweep is a quick run through one of those levels that closes back inside. Premium and discount split the latest swing range in half: the upper half is premium, the lower half discount."], ["How the screens on this page work", "Every evening, after NSE publishes the Bhavcopy, the screener runs the same fixed rules on every liquid NSE stock on daily, weekly and monthly candles. The rules are written out on each concept's page, and the chart uses exactly the same code, so what a screen lists is what the chart draws. Use the direction and timeframe buttons on each screen, and tap a stock to see the levels on its chart."], ["Reading SMC with care", "SMC labels are descriptions of what price has already done. Analysts usually look for agreement between timeframes (for example a weekly uptrend with a daily pullback into a discount zone), check volume and delivery data, and treat every level as a reference point rather than a promise. Smart money concepts describe price behaviour; they do not reveal who bought or sold. The labels come from fixed rules applied to end-of-day prices, so the same chart can be read differently by another analyst or another rule set. Gaps, splits and bonus issues are adjusted before detection, but results/events, circuit limits and thin trading can still create shapes that look meaningful and are not."]], "faq": [["Is smart money concepts trading reliable?", "No method is reliable on its own. SMC gives names to price behaviour; outcomes depend on the market, the timeframe and risk management. The screener's labels are educational and describe the past."], ["Which timeframe should I look at?", "Higher timeframes (weekly, monthly) describe the larger trend and change slowly; the daily timeframe shows the current swing. Many analysts read the higher timeframe first, then the lower one."], ["Where does the data come from?", "Official NSE end-of-day Bhavcopy prices, adjusted for splits and bonuses. Weekly and monthly candles are built from those daily prices."]]}, {"id": "smcms", "key": "ms", "slug": "market-structure-stocks", "label": "Market structure", "title": "Market structure: higher highs and lower lows", "short": "Stocks whose last two swing highs and lows are both rising (bullish structure) or both falling (bearish structure), on daily, weekly or monthly candles.", "rule": "A swing high is a candle whose high is above the highs of the 3 candles on each side (2 on weekly and monthly); a swing low is the mirror. The structure is bullish when the latest swing high is above the one before it and the latest swing low is above the one before it, and the last break of structure was upward. Bearish is the reverse.", "up": "Bullish structure (higher highs, higher lows)", "dn": "Bearish structure (lower highs, lower lows)", "sections": [["What market structure is", "Market structure is the trend described through swing points instead of averages. An uptrend makes higher highs and higher lows; a downtrend makes lower highs and lower lows; anything else is a range. Because it uses the actual turning points of price, structure is often the first thing an SMC analyst marks on a chart, and every other concept is read in its context."], ["How analysts read it", "In bullish structure, analysts often watch pullbacks towards the last higher low, because a close below it would break the pattern. In bearish structure the last lower high plays that role. A stock can be bullish on the weekly chart and bearish on the daily chart at the same time; that usually means a pullback inside a larger uptrend."], ["Daily, weekly and monthly", "Each screen runs on daily, weekly and monthly candles built from the official NSE Bhavcopy. Weekly candles run Monday to Friday and monthly candles cover the calendar month, so the current week or month is still forming until it closes. A reading on a higher timeframe covers more trading and changes less often; a daily reading reacts first and reverses more often."], ["Limits", "Swing points are only confirmed a few candles after they form, so structure always lags a little. Smart money concepts describe price behaviour; they do not reveal who bought or sold. The labels come from fixed rules applied to end-of-day prices, so the same chart can be read differently by another analyst or another rule set. Gaps, splits and bonus issues are adjusted before detection, but results/events, circuit limits and thin trading can still create shapes that look meaningful and are not."]], "faq": [["What is a higher high and a higher low?", "A higher high is a swing high above the previous swing high; a higher low is a swing low above the previous swing low. Both together describe an uptrend."], ["Why does a stock appear in neither list?", "When the highs and lows disagree (for example a higher high with a lower low) the structure is a range, and the stock is not listed."]]}, {"id": "smcbos", "key": "bos", "slug": "break-of-structure-stocks", "label": "Break of structure", "title": "Break of structure (BOS)", "short": "Stocks that closed beyond their last swing high (bullish BOS) or swing low (bearish BOS) in the direction of their existing trend, in the latest few candles.", "rule": "A break of structure is recorded when a candle closes above the last unbroken swing high while the structure is already bullish (or below the last unbroken swing low while it is bearish). Wicks alone do not count; the close must be beyond the level. The screen lists breaks in the last 3 daily candles or the last 2 weekly or monthly candles.", "up": "Bullish BOS (close above the last swing high)", "dn": "Bearish BOS (close below the last swing low)", "sections": [["What a break of structure is", "A break of structure (BOS) is a close beyond the most recent swing point in the direction of the trend. In an uptrend it is a close above the last swing high, which creates a new higher high; in a downtrend it is a close below the last swing low. It is how SMC confirms that a trend is continuing rather than stalling."], ["How analysts read it", "After a bullish BOS, SMC analysts often mark the swing low that led to the break and any fair value gap or order block left behind, as areas price may revisit. A break on strong volume and high delivery is usually given more weight than a break on thin trading. A break that is quickly reversed below the level can turn into a liquidity sweep instead."], ["BOS versus CHoCH", "A BOS goes with the trend; a change of character (CHoCH) goes against it. The first break against a trend is a CHoCH; further breaks in the new direction are BOS."], ["Daily, weekly and monthly", "Each screen runs on daily, weekly and monthly candles built from the official NSE Bhavcopy. Weekly candles run Monday to Friday and monthly candles cover the calendar month, so the current week or month is still forming until it closes. A reading on a higher timeframe covers more trading and changes less often; a daily reading reacts first and reverses more often."], ["Limits", "Smart money concepts describe price behaviour; they do not reveal who bought or sold. The labels come from fixed rules applied to end-of-day prices, so the same chart can be read differently by another analyst or another rule set. Gaps, splits and bonus issues are adjusted before detection, but results/events, circuit limits and thin trading can still create shapes that look meaningful and are not."]], "faq": [["Does a BOS mean the price will keep rising?", "No. It records that price closed beyond a swing level. What happens next is not known; many breaks are followed by pullbacks."], ["Why use the close instead of the high?", "A close beyond the level shows acceptance at the new price. A wick that pokes through and closes back is treated as a possible liquidity sweep."]]}, {"id": "smcchoch", "key": "choch", "slug": "change-of-character-stocks", "label": "Change of character", "title": "Change of character (CHoCH)", "short": "Stocks that made the first close against their prevailing trend: above the last swing high in a downtrend (bullish CHoCH) or below the last swing low in an uptrend (bearish CHoCH).", "rule": "A change of character is recorded when the structure is bearish and a candle closes above the last unbroken swing high (bullish CHoCH), or the structure is bullish and a candle closes below the last unbroken swing low (bearish CHoCH). The screen lists changes in the last 3 daily candles or the last 2 weekly or monthly candles.", "up": "Bullish CHoCH (downtrend broken upward)", "dn": "Bearish CHoCH (uptrend broken downward)", "sections": [["What a change of character is", "A change of character (CHoCH) is the first sign that a trend may be turning: in a downtrend, price closes above the last lower high; in an uptrend, it closes below the last higher low. It does not confirm a new trend on its own. A confirmed reversal in SMC terms usually needs a CHoCH followed by a break of structure in the new direction."], ["How analysts read it", "Analysts often look at where the CHoCH happened. A bullish CHoCH after price swept a pool of equal lows, or from a higher-timeframe discount zone, is read as more meaningful than one in the middle of a range. They also compare timeframes: a daily CHoCH against a strong weekly trend is often just a pullback."], ["Daily, weekly and monthly", "Each screen runs on daily, weekly and monthly candles built from the official NSE Bhavcopy. Weekly candles run Monday to Friday and monthly candles cover the calendar month, so the current week or month is still forming until it closes. A reading on a higher timeframe covers more trading and changes less often; a daily reading reacts first and reverses more often."], ["Limits", "Many CHoCHs fail and the old trend resumes. Smart money concepts describe price behaviour; they do not reveal who bought or sold. The labels come from fixed rules applied to end-of-day prices, so the same chart can be read differently by another analyst or another rule set. Gaps, splits and bonus issues are adjusted before detection, but results/events, circuit limits and thin trading can still create shapes that look meaningful and are not."]], "faq": [["What is the difference between CHoCH and BOS?", "CHoCH is the first break against the trend; BOS is a break with the trend. The same close can be a CHoCH on one timeframe and part of a BOS sequence on another."], ["Is a CHoCH a reversal signal?", "It is an early sign that the trend's character changed. Whether a reversal follows is unknown when the CHoCH prints."]]}, {"id": "smcfvg", "key": "fvg", "slug": "fair-value-gap-stocks", "label": "Fair value gap", "title": "Fair value gaps (FVG)", "short": "Stocks that left a new fair value gap on the latest candle, or traded back into an open gap, on daily, weekly or monthly candles.", "rule": "A bullish fair value gap is a three-candle pattern where the third candle's low is above the first candle's high, leaving a price range the middle candle crossed without overlap. The gap must be at least a quarter of the 14-period average true range. It stays open until a later candle trades through its bottom. A bearish gap is the mirror. The screen lists stocks whose latest candle created a gap ('New') or traded into an open gap ('Retest').", "up": "Bullish FVG (gap below price)", "dn": "Bearish FVG (gap above price)", "sections": [["What a fair value gap is", "A fair value gap (FVG), also called an imbalance, is the price range left by a fast move where buying and selling did not overlap: the third candle starts above where the first candle ended. SMC reads it as a sign that one side was much stronger, and as an area price often returns to before the move continues or fails."], ["How analysts read it", "Open gaps below price in an uptrend (bullish FVGs) are often watched as areas where a pullback might slow. When price trades back into a gap, analysts look at whether it holds the gap or closes through it; a close through the far side 'fills' the gap and removes it. Gaps that line up with a higher-timeframe order block or discount zone get more attention."], ["FVG versus an opening gap", "An opening gap is between one day's close and the next day's open. A fair value gap is measured across three candles using highs and lows, so it can exist even when every candle opened near the previous close."], ["Daily, weekly and monthly", "Each screen runs on daily, weekly and monthly candles built from the official NSE Bhavcopy. Weekly candles run Monday to Friday and monthly candles cover the calendar month, so the current week or month is still forming until it closes. A reading on a higher timeframe covers more trading and changes less often; a daily reading reacts first and reverses more often."], ["Limits", "Many gaps fill without any reaction, and fast markets can leave several overlapping gaps. Smart money concepts describe price behaviour; they do not reveal who bought or sold. The labels come from fixed rules applied to end-of-day prices, so the same chart can be read differently by another analyst or another rule set. Gaps, splits and bonus issues are adjusted before detection, but results/events, circuit limits and thin trading can still create shapes that look meaningful and are not."]], "faq": [["What does it mean when an FVG is filled?", "A later candle traded through the whole gap. The imbalance is considered resolved, and the gap is no longer drawn."], ["Why is there a minimum size?", "Tiny gaps appear on almost every chart. The quarter-ATR minimum keeps only gaps that are large relative to the stock's normal daily range."]]}, {"id": "smcob", "key": "ob", "slug": "order-block-stocks", "label": "Order block", "title": "Order blocks", "short": "Stocks whose latest candle returned for the first time to an order block: the last opposite candle before a move that broke structure.", "rule": "When a break of structure or change of character happens, the screener finds the lowest point of the move (for an upward break) and takes the last down candle at or just before it as the bullish order block (high to low). The block is 'mitigated' the first time price trades back into it and invalid once a candle closes below it. The screen lists stocks whose latest candle made that first return while the block was still valid. Bearish blocks are the mirror.", "up": "Bullish order block retest", "dn": "Bearish order block retest", "sections": [["What an order block is", "An order block is the last opposite-coloured candle before a strong move that broke market structure: the last down candle before a rally, or the last up candle before a drop. SMC reads it as the area where large orders were placed before the move, and expects price to react if it comes back there."], ["How analysts read it", "The first return to an untested block (mitigation) is the moment most SMC analysts watch. A block that lines up with a fair value gap or sits in a discount zone (for bullish blocks) is given more weight. A close through the far side of the block invalidates it."], ["Order blocks and supply and demand", "Order blocks are close cousins of the demand and supply zones used in classic price action. The difference is the rule: an order block must lead to a break of structure."], ["Daily, weekly and monthly", "Each screen runs on daily, weekly and monthly candles built from the official NSE Bhavcopy. Weekly candles run Monday to Friday and monthly candles cover the calendar month, so the current week or month is still forming until it closes. A reading on a higher timeframe covers more trading and changes less often; a daily reading reacts first and reverses more often."], ["Limits", "Different traders draw order blocks differently (candle body versus full range, last candle versus a group). This screener uses the full candle range of one candle. Smart money concepts describe price behaviour; they do not reveal who bought or sold. The labels come from fixed rules applied to end-of-day prices, so the same chart can be read differently by another analyst or another rule set. Gaps, splits and bonus issues are adjusted before detection, but results/events, circuit limits and thin trading can still create shapes that look meaningful and are not."]], "faq": [["What does mitigated mean?", "Price has traded back into the block after the break. The screen lists the session when that first happens."], ["Why only the first return?", "In SMC the first return is when unfilled orders are assumed to sit; later returns are read as weaker."]]}, {"id": "smcsweep", "key": "sweep", "slug": "liquidity-sweep-stocks", "label": "Liquidity sweep", "title": "Liquidity sweeps (stop hunts)", "short": "Stocks that traded through a recent swing high or swing low but closed back inside it: stops were taken and the breakout was not accepted.", "rule": "A bearish sweep is a candle whose high goes above the most recent confirmed swing high (one that no close has broken yet) but which closes back below it. A bullish sweep goes below the most recent swing low and closes back above it. The screen lists sweeps in the last 3 daily candles or the last 2 weekly or monthly candles.", "up": "Sweep of lows (closed back above)", "dn": "Sweep of highs (closed back below)", "sections": [["What a liquidity sweep is", "Stop orders tend to sit just beyond obvious highs and lows. A liquidity sweep, or stop hunt, is a quick move through such a level that triggers those orders and then closes back on the other side. SMC reads it as large participants using that liquidity to fill orders in the opposite direction."], ["How analysts read it", "A sweep of lows followed by a bullish change of character is a classic SMC sequence; so is a sweep of highs followed by a bearish CHoCH. Analysts check whether the sweep happened at an obvious level (equal lows, a prior day's or week's low) and whether volume rose on the sweep."], ["Sweep versus breakout", "A breakout closes beyond the level and holds; a sweep closes back inside. The same candle shape can be a sweep on the daily chart and part of a breakout on the weekly chart once the week closes."], ["Daily, weekly and monthly", "Each screen runs on daily, weekly and monthly candles built from the official NSE Bhavcopy. Weekly candles run Monday to Friday and monthly candles cover the calendar month, so the current week or month is still forming until it closes. A reading on a higher timeframe covers more trading and changes less often; a daily reading reacts first and reverses more often."], ["Limits", "Smart money concepts describe price behaviour; they do not reveal who bought or sold. The labels come from fixed rules applied to end-of-day prices, so the same chart can be read differently by another analyst or another rule set. Gaps, splits and bonus issues are adjusted before detection, but results/events, circuit limits and thin trading can still create shapes that look meaningful and are not."]], "faq": [["Is every wick through a high a stop hunt?", "No. The screener only counts a wick through a confirmed, unbroken swing level that closes back inside. Whether stops were actually hunted cannot be known from prices."], ["Why do sweeps matter in SMC?", "They show where liquidity was taken. Analysts look for the reaction after the sweep."]]}, {"id": "smcliq", "key": "liq", "slug": "equal-highs-equal-lows-liquidity", "label": "Equal highs / lows", "title": "Liquidity pools: equal highs and equal lows", "short": "Stocks with two or more swing highs (or lows) at almost the same price that have not been traded through yet, within 5% of the latest close.", "rule": "Two swing highs within a quarter of the 14-period average true range of each other, at least 3 candles apart, form an equal-highs pool (buy-side liquidity) at the higher of the two. Equal lows (sell-side liquidity) are the mirror. A pool is removed once price trades beyond it. The screen lists untaken pools within 5% of the latest close.", "up": "Equal highs above the price (buy-side liquidity)", "dn": "Equal lows below the price (sell-side liquidity)", "sections": [["What a liquidity pool is", "When a stock tops out twice at the same price, many traders place stop orders just above that double top, and breakout traders place buy orders there. That cluster of orders is buy-side liquidity. Equal lows collect sell-side liquidity in the same way. SMC expects price to be drawn towards these pools."], ["How analysts read it", "Equal highs above price are often treated as a magnet: a move up through them, followed by a close back below, is a liquidity sweep. Equal lows below price play the same role on the downside. The distance column shows how far the pool is from the latest close."], ["Equal highs and double tops", "Equal highs are the SMC name for what classic analysis calls a double top or resistance. The difference is the reading: classic analysis expects the level to hold; SMC expects it to be run."], ["Daily, weekly and monthly", "Each screen runs on daily, weekly and monthly candles built from the official NSE Bhavcopy. Weekly candles run Monday to Friday and monthly candles cover the calendar month, so the current week or month is still forming until it closes. A reading on a higher timeframe covers more trading and changes less often; a daily reading reacts first and reverses more often."], ["Limits", "Smart money concepts describe price behaviour; they do not reveal who bought or sold. The labels come from fixed rules applied to end-of-day prices, so the same chart can be read differently by another analyst or another rule set. Gaps, splits and bonus issues are adjusted before detection, but results/events, circuit limits and thin trading can still create shapes that look meaningful and are not."]], "faq": [["What is buy-side and sell-side liquidity?", "Buy-side liquidity sits above highs (buy stops and breakout orders); sell-side liquidity sits below lows (sell stops)."], ["Why within 5%?", "Pools far from the price matter less for the current swing. The chart shows every untaken pool."]]}, {"id": "smcpd", "key": "pd", "slug": "premium-discount-zone-stocks", "label": "Premium / discount", "title": "Premium and discount zones (with OTE)", "short": "Stocks in bullish structure trading in the lower half of their latest swing range (discount), or in bearish structure trading in the upper half (premium); OTE marks the 62-79% retracement.", "rule": "The dealing range runs from the latest confirmed swing low to the latest confirmed swing high. Its midpoint is equilibrium. The lower half is discount and the upper half premium. The optimal trade entry (OTE) band is a 62% to 79% retracement of that leg. The screen lists bullish-structure stocks in discount and bearish-structure stocks in premium, deepest first.", "up": "Discount in bullish structure", "dn": "Premium in bearish structure", "sections": [["What premium and discount are", "SMC divides the latest swing range at its midpoint (equilibrium). Prices in the upper half are 'premium' (expensive relative to the range) and prices in the lower half are 'discount'. The idea is that large buyers prefer to accumulate at a discount and large sellers to distribute at a premium."], ["Optimal trade entry (OTE)", "OTE is the band between a 62% and 79% retracement of the latest leg, built on Fibonacci ratios. SMC analysts use it to describe a deep but normal pullback. The 'OTE' column shows when the close is inside that band."], ["How analysts read it", "In bullish structure, a pullback into discount (and especially into OTE) is the area SMC analysts watch for signs of support, such as a bullish FVG or order block. In bearish structure the premium half plays that role."], ["Daily, weekly and monthly", "Each screen runs on daily, weekly and monthly candles built from the official NSE Bhavcopy. Weekly candles run Monday to Friday and monthly candles cover the calendar month, so the current week or month is still forming until it closes. A reading on a higher timeframe covers more trading and changes less often; a daily reading reacts first and reverses more often."], ["Limits", "The range changes every time a new swing is confirmed, so a stock can move between premium and discount without the price moving much. Smart money concepts describe price behaviour; they do not reveal who bought or sold. The labels come from fixed rules applied to end-of-day prices, so the same chart can be read differently by another analyst or another rule set. Gaps, splits and bonus issues are adjusted before detection, but results/events, circuit limits and thin trading can still create shapes that look meaningful and are not."]], "faq": [["What is equilibrium?", "The midpoint of the latest swing range: 50% between the swing low and the swing high."], ["Is a stock in discount cheap?", "Only relative to its recent swing range. It says nothing about valuation or fundamentals."]]}];
+  SMC_EDU.forEach(function(e){ if (e.key) SCR_META[e.id] = { label: e.label, title: e.title, desc: e.short, smc: e.key, up: e.up, dn: e.dn }; });
+  SCR_GROUPS.push({ id:'smc', label:'Smart money', items: SMC_EDU.filter(function(e){ return e.key; }).map(function(e){ return e.id; }) });
   var SCR_ORDER = []; SCR_GROUPS.forEach(function(g){ SCR_ORDER = SCR_ORDER.concat(g.items); });
   function scrGroupOf(id){ for (var i = 0; i < SCR_GROUPS.length; i++) if (SCR_GROUPS[i].items.indexOf(id) !== -1) return SCR_GROUPS[i]; return SCR_GROUPS[0]; }
-  function scrCount(id){ var S = state.screens; if (SCR_META[id].fo) return foRows(id).length; if (SCR_META[id].ca) return caRows(id).length; if (SCR_META[id].deals) { var D = dealRows(id); return D.length ? D.filter(function(r){ return r.d === D[0].d; }).length : 0; } return S && S.counts ? (S.counts[id] || 0) : 0; }
+  function scrCount(id){ var S = state.screens; if (SCR_META[id].smc) return smcCount(id); if (SCR_META[id].fo) return foRows(id).length; if (SCR_META[id].ca) return caRows(id).length; if (SCR_META[id].deals) { var D = dealRows(id); return D.length ? D.filter(function(r){ return r.d === D[0].d; }).length : 0; } return S && S.counts ? (S.counts[id] || 0) : 0; }
 
   function renderScreenTypes(){
     var S = state.screens, g = scrGroupOf(state.scrType), ready = S && !S.error;
     $('cx-scr-groups').innerHTML = SCR_GROUPS.map(function(x){ return '<button aria-pressed="' + (x.id === g.id) + '" data-sgroup="' + x.id + '">' + x.label + '</button>'; }).join('');
     $('cx-scr-types').innerHTML = g.items.map(function(id){
-      var c = SCR_META[id].fo ? (state.fo && state.fo.rows ? scrCount(id) : '') : SCR_META[id].ca ? (state.ca && state.ca.rows ? scrCount(id) : '') : SCR_META[id].deals ? (state.deals ? scrCount(id) : '') : (ready ? scrCount(id) : '');
+      var c = SCR_META[id].smc ? (state.smc && state.smc.counts ? scrCount(id) : '') : SCR_META[id].fo ? (state.fo && state.fo.rows ? scrCount(id) : '') : SCR_META[id].ca ? (state.ca && state.ca.rows ? scrCount(id) : '') : SCR_META[id].deals ? (state.deals ? scrCount(id) : '') : (ready ? scrCount(id) : '');
       return '<button aria-pressed="' + (state.scrType === id) + '" data-scr="' + id + '">' + SCR_META[id].label + ' <small>' + c + '</small></button>';
     }).join('');
     $('cx-n-screens').textContent = ready ? SCR_ORDER.length : '–';
   }
   function renderScreens(){
     renderScreenTypes();
+    if (SCR_META[state.scrType] && SCR_META[state.scrType].smc) { renderSmc(state.scrType, $('cx-scr-body')); return; }
     var S = state.screens, id = state.scrType, meta = SCR_META[id], box = $('cx-scr-body');
     var cnt = S && S.counts ? (S.counts[id] || 0) : 0;
     var topN = id === 'gainers' || id === 'losers' || id === 'active';
@@ -1904,20 +2228,21 @@
     if (f.mc && !tri(r.mc, f.mc)) return false;
     if (f.sp && !tri(r.sp, f.sp)) return false;
     if (f.sq && r.sq !== 1) return false;
+    if (!smcCsMatch(r)) return false;   // [v11.17] smart-money and weekly / monthly filters
     return true;
   }
   function csForm(){
     var secs = {}, inds = {};
     state.U.forEach(function(r){ if (r.e) return; secs[r.sec] = 1; if (!state.cs.sec || r.sec === state.cs.sec) inds[r.ind] = 1; });
     var opt = function(list, cur){ return list.map(function(o){ return '<option value="' + h(o[0]) + '"' + (String(cur || '') === o[0] ? ' selected' : '') + '>' + h(o[1]) + '</option>'; }).join(''); };
-    return CS_FIELDS.map(function(d){
-      var cur = state.cs[d.k] || '', ctl;
+    return CS_FIELDS.map(function(d, i){
+      var cur = state.cs[d.k] || '', ctl, head = d.smc && (i === 0 || !CS_FIELDS[i - 1].smc || CS_FIELDS[i - 1].smc !== d.smc) ? '<h4 class="cx-csh">' + (d.smc === 'D' ? 'Smart money, daily candles' : d.smc === 'W' ? 'Weekly candles: smart money and indicators' : 'Monthly candles: smart money and indicators') + '</h4>' : '';
       if (d.dyn) {
         var keys = Object.keys(d.dyn === 'sec' ? secs : inds).filter(function(x){ return x && x !== 'Unknown'; }).sort();
         ctl = '<select class="cx-select" data-cs="' + d.k + '">' + opt([['', 'Any']].concat(keys.map(function(x){ return [x, x]; })), cur) + '</select>';
       } else if (d.opts) ctl = '<select class="cx-select" data-cs="' + d.k + '">' + opt(d.opts, cur) + '</select>';
       else ctl = '<input class="cx-input" inputmode="decimal" data-cs="' + d.k + '" value="' + h(cur) + '" placeholder="Any">';
-      return '<label class="cx-csf' + (cur ? ' on' : '') + '"><span>' + h(d.label) + '</span>' + ctl + '</label>';
+      return head + '<label class="cx-csf' + (cur ? ' on' : '') + '"><span>' + h(d.label) + '</span>' + ctl + '</label>';
     }).join('');
   }
   function renderCustom(full){
@@ -1936,6 +2261,8 @@
         '<div class="cx-filters"><div class="cx-toolbar"><span class="cx-cs-count" id="cx-cs-count"></span><select class="cx-select" id="cx-cs-sort" aria-label="Sort results">' + CS_SORTS.map(function(s){ return '<option value="' + s[0] + '"' + (state.csSort === s[0] ? ' selected' : '') + '>Sort: ' + h(s[1]) + '</option>'; }).join('') + '</select></div></div>' +
         '<div id="cx-cs-res"></div>';
     }
+    if (smcCsActive() && !state.smcf) { ensureSmcf(); $('cx-cs-count').innerHTML = 'Loading the smart-money and weekly / monthly readings&#8230;'; $('cx-cs-res').innerHTML = '<div class="cx-sk" style="height:160px;border-radius:10px"></div>'; return; }
+    if (smcCsActive() && state.smcf && state.smcf.error) { $('cx-cs-count').innerHTML = ''; $('cx-cs-res').innerHTML = '<div class="cx-empty"><b>Smart-money readings are not published yet.</b>They are built after each evening update.</div>'; return; }
     var rows = state.U.filter(csMatch);
     var so = state.csSort, key = so === 'rsiAsc' ? 'rsi' : so;
     rows.sort(function(a, b){
@@ -1976,6 +2303,282 @@
     if (k === 'sec' || k === 'type') { renderCustom(); } else { var lab = document.querySelector('[data-cs="' + k + '"]'); if (lab) lab.parentNode.classList.toggle('on', !!v); renderCustom(false); }
     syncUrl(false);
   }
+
+  // ════════════════════════════════════════════════════════════════════
+  //  [v11.17] SMART MONEY CONCEPTS: screens (D / W / M), chart overlay, filters
+  // ════════════════════════════════════════════════════════════════════
+  var SMC_TF_LABEL = { D: 'Daily', W: 'Weekly', M: 'Monthly' };
+  state.smcTf = 'D'; state.smcDir = 1; state.smcHub = false;
+  function smcEdu(id){ return SMC_EDU.filter(function(e){ return e.id === id; })[0]; }
+  function loadDataFile(key, cb){
+    return manifestP.then(function(m){
+      if (!m || !m.files || m.files.indexOf(key) === -1 || !_dataBase) throw new Error('not published yet');
+      return getJSON(_dataBase + key + '.json?v=' + encodeURIComponent(m.version), 20000);
+    }).then(function(d){ cb(d && !d.error ? d : { error: 'unexpected file' }); }, function(e){ cb({ error: e.message }); });
+  }
+  function smcRows(id){
+    var S = state.smc, e = SCR_META[id];
+    if (!S || !S.lists) return [];
+    var L = S.lists[state.smcTf] || {};
+    return L[e.smc + (state.smcDir === 1 ? '_up' : '_dn')] || [];
+  }
+  function smcCount(id){ var S = state.smc, e = SCR_META[id]; if (!S || !S.counts) return 0; var c = S.counts[state.smcTf] || {}; return (c[e.smc + '_up'] || 0) + (c[e.smc + '_dn'] || 0); }
+  function smcAge(a){
+    a = +a || 0;
+    var w = state.smcTf === 'W' ? ['this week', 'last week', a + ' weeks ago'] : state.smcTf === 'M' ? ['this month', 'last month', a + ' months ago'] : ['latest session', 'previous session', a + ' sessions ago'];
+    return a === 0 ? w[0] : a === 1 ? w[1] : w[2];
+  }
+  function smcDetail(key, r){
+    switch (key) {
+      case 'bos': case 'choch': return 'Closed beyond <b>' + rs(r[1]) + '</b> · ' + smcAge(r[2]);
+      case 'fvg': return 'Gap <b>' + rs(r[1]) + '–' + rs(r[2]) + '</b> · ' + (r[3] ? 'retest' : 'new');
+      case 'ob': return 'Block <b>' + rs(r[1]) + '–' + rs(r[2]) + '</b> · first return';
+      case 'sweep': return 'Swept <b>' + rs(r[1]) + '</b> · ' + smcAge(r[2]);
+      case 'liq': return '<b>' + rs(r[1]) + '</b> · ' + (r[2] > 0 ? '+' : '') + n(r[2]).toFixed(1) + '% from close';
+      case 'pd': return '<b>' + Math.round(r[1]) + '%</b> of range' + (r[2] ? ' · <span class="cx-smc-ote">OTE</span>' : '');
+      case 'ms': return state.smcDir === 1 ? 'Higher highs, higher lows' : 'Lower highs, lower lows';
+    }
+    return '';
+  }
+  function smcGuide(id, open){
+    var e = smcEdu(id), hub = smcEdu('smchub');
+    if (!e) return '';
+    return '<details class="cx-smc-guide"' + (open ? ' open' : '') + '><summary>How to read ' + h(e.label.toLowerCase()) + '</summary>' +
+      (e.rule ? '<p><b>The rule used here:</b> ' + h(e.rule) + '</p>' : '') +
+      e.sections.map(function(s){ return '<h4>' + h(s[0]) + '</h4><p>' + h(s[1]) + '</p>'; }).join('') +
+      '<h4>Questions</h4>' + e.faq.map(function(q){ return '<p><b>' + h(q[0]) + '</b> ' + h(q[1]) + '</p>'; }).join('') +
+      '<p class="cx-note">Educational, rule-based screen output from end-of-day data. Not a recommendation to buy, sell or hold any security.</p>' +
+      (hub ? '<p><a href="#smart-money-concepts" data-smchub>' + h(hub.title) + '</a></p>' : '') + '</details>';
+  }
+  function renderSmc(id, box){
+    var meta = SCR_META[id], S = state.smc, hub = state.smcHub ? smcEdu('smchub') : null;
+    $('cx-scr-intro').innerHTML = '<div class="cx-intro">' +
+      (hub ? '<h3>' + h(hub.title) + ' ' + shareBtn(false) + '</h3><p>' + h(hub.short) + '</p>' + hub.sections.slice(0, 2).map(function(s){ return '<p><b>' + h(s[0]) + '.</b> ' + h(s[1]) + '</p>'; }).join('') + '<h3 style="margin-top:12px">' + meta.title + '</h3>'
+           : '<h3>' + meta.title + ' ' + shareBtn(false) + '</h3>') +
+      '<p>' + meta.desc + '</p>' +
+      '<div class="cx-smc-ctl"><div class="cx-seg" role="group" aria-label="Direction">' +
+        '<button type="button" data-smcdir="1" aria-pressed="' + (state.smcDir === 1) + '">' + h(meta.up) + '</button>' +
+        '<button type="button" data-smcdir="-1" aria-pressed="' + (state.smcDir === -1) + '">' + h(meta.dn) + '</button></div>' +
+        '<div class="cx-seg" role="group" aria-label="Timeframe">' + ['D', 'W', 'M'].map(function(t){ return '<button type="button" data-smctf="' + t + '" aria-pressed="' + (state.smcTf === t) + '">' + SMC_TF_LABEL[t] + '</button>'; }).join('') + '</div></div>' +
+      (S && S.date_iso ? '<p class="cx-track">' + SMC_TF_LABEL[state.smcTf] + ' candles up to the ' + h(fmtIso(S.date_iso)) + ' session' + (state.smcTf !== 'D' ? ' (the current ' + (state.smcTf === 'W' ? 'week' : 'month') + ' is still forming)' : '') + '. Tap a stock to see the levels on its chart.</p>' : '') +
+      smcGuide(id, false) + '</div>';
+    if (!S) { box.innerHTML = '<div class="cx-sk" style="height:220px;border-radius:10px"></div>'; return; }
+    if (S.error || !S.lists) { box.innerHTML = '<div class="cx-empty"><b>Smart-money screens are not published yet.</b>They are built after each evening update and appear here once the first run finishes.</div>'; return; }
+    var q = state.scrQ.toUpperCase(), key = meta.smc;
+    var rows = smcRows(id).map(function(r){ var u = state.UBY[r[0]] || { s: r[0] }; return { r: r, u: u }; })
+      .filter(function(x){ return !q || (x.u.s + ' ' + (x.u.n || '') + ' ' + (x.u.sec || '')).toUpperCase().indexOf(q) !== -1; });
+    if (!rows.length) { box.innerHTML = '<div class="cx-empty"><b>No stocks ' + (q ? 'match this filter' : 'in this list on the ' + SMC_TF_LABEL[state.smcTf].toLowerCase() + ' chart') + '.</b>' + (q ? 'Clear the filter to see all results.' : 'Try the other direction or another timeframe.') + '</div>'; return; }
+    var shown = rows.slice(0, state.smcShown || 100);
+    box.innerHTML = '<div class="cx-tblwrap"><table class="cx-tbl stack cx-scr"><thead><tr><th>Stock</th><th class="num">Close</th><th class="num">Change</th><th>' + h(meta.label) + ' (' + SMC_TF_LABEL[state.smcTf].toLowerCase() + ')</th><th class="num">RSI 14</th><th>Trend</th></tr></thead><tbody>' +
+      shown.map(function(x){
+        var u = x.u;
+        return '<tr data-smc="' + state.smcTf + '|' + key + '">' + stockCell(u) +
+          '<td class="num nl" data-l="Close"><b>' + rs(u.c) + '</b></td>' +
+          '<td class="num nl" data-l="Change"><b class="' + cls(u.chg) + '">' + pct(u.chg, 2) + '</b></td>' +
+          '<td data-l="' + h(meta.label) + '">' + smcDetail(key, x.r) + '</td>' +
+          '<td class="num" data-l="RSI 14">' + (u.rsi !== null && u.rsi !== undefined ? u.rsi : '–') + '</td>' +
+          '<td class="nl" data-l="Trend">' + (stageBadge(u.st) || '<span class="mute">–</span>') + '</td></tr>';
+      }).join('') + '</tbody></table></div>' + (rows.length > shown.length ? '<div class="cx-more-wrap"><button class="cx-btn" type="button" data-smcmore>Show more (' + (rows.length - shown.length) + ' left)</button></div>' : '');
+  }
+  // a stock opened from a smart-money screen shows its chart on that timeframe with the overlay on
+  var _smcCtx = null;
+  document.addEventListener('click', function(e){
+    var t = e.target.closest ? e.target.closest('[data-smc] [data-chart]') : null;
+    if (t) { var p = t.closest('[data-smc]').getAttribute('data-smc').split('|'); _smcCtx = { tf: p[0], key: p[1] }; }
+  }, true);
+  function smcClick(e){
+    var el;
+    if ((el = e.target.closest('[data-smcdir]'))) { state.smcDir = +el.getAttribute('data-smcdir'); state.smcShown = 100; renderScreens(); syncUrl(false); return true; }
+    if ((el = e.target.closest('[data-smctf]'))) { state.smcTf = el.getAttribute('data-smctf'); state.smcShown = 100; renderScreens(); syncUrl(false); return true; }
+    if ((el = e.target.closest('[data-smcmore]'))) { state.smcShown = (state.smcShown || 100) + 100; renderScreens(); return true; }
+    return false;
+  }
+
+  // ── chart overlay ──
+  var SMC_SHOW_DEF = { bos: 0, fvg: 0, ob: 0, liq: 0, pd: 0 };   // [v11.18] nothing drawn until the user picks
+  var SMC_CHIPS = [['bos', 'Structure (BOS / CHoCH)'], ['fvg', 'Fair value gaps'], ['ob', 'Order blocks'], ['liq', 'Liquidity'], ['pd', 'Premium / discount']];
+  function smcAny(cfg){ var s = cfg && cfg.smc && cfg.smc.show; return !!s && SMC_CHIPS.some(function(c){ return s[c[0]]; }); }
+  function smcBarHtml(cfg){
+    var s = (cfg.smc && cfg.smc.show) || {};
+    return '<div class="cx-smcbar" role="group" aria-label="Smart money concepts to show on the chart"><span class="cx-smcbar-l">Show on chart:</span>' +
+      SMC_CHIPS.map(function(c){ return '<button type="button" class="cx-chip" data-smcchip="' + c[0] + '" aria-pressed="' + !!s[c[0]] + '">' + h(c[1]) + '</button>'; }).join('') +
+      '<button type="button" class="cx-chip cx-chip-x" data-smcall>All</button><button type="button" class="cx-chip cx-chip-x" data-smcnone>None</button>' +
+      '<a href="#smart-money-concepts" class="cx-smcbar-help" data-smchub>What are these?</a></div>';
+  }
+  function smcBarSync(cfg){ var s = (cfg.smc && cfg.smc.show) || {}; Array.prototype.forEach.call(document.querySelectorAll('[data-smcchip]'), function(b){ b.setAttribute('aria-pressed', !!s[b.getAttribute('data-smcchip')]); }); }
+
+  // ── [v11.18] global market sessions, shown in IST ──
+  // [short name, exchange, IANA zone, open, close, lunch start, lunch end] in local exchange time
+  var MKTS = [
+    ['Tokyo', 'Japan (TSE)', 'Asia/Tokyo', '09:00', '15:30', '11:30', '12:30'],
+    ['Hong Kong', 'Hong Kong (HKEX)', 'Asia/Hong_Kong', '09:30', '16:00', '12:00', '13:00'],
+    ['Shanghai', 'China (SSE)', 'Asia/Shanghai', '09:30', '15:00', '11:30', '13:00'],
+    ['Singapore', 'Singapore (SGX)', 'Asia/Singapore', '09:00', '17:00'],
+    ['India NSE', 'India (NSE)', 'Asia/Kolkata', '09:15', '15:30'],
+    ['London', 'UK (LSE)', 'Europe/London', '08:00', '16:30'],
+    ['Frankfurt', 'Germany (Xetra)', 'Europe/Berlin', '09:00', '17:30'],
+    ['New York', 'US (NYSE, Nasdaq)', 'America/New_York', '09:30', '16:00']
+  ];
+  var IST_MS = 330 * 60000, DAY_MS = 864e5, _tzf = {}, _sessT = null;
+  function tzOff(tz, t){   // the zone's offset from UTC at instant t, daylight saving included
+    var f = _tzf[tz] || (_tzf[tz] = new Intl.DateTimeFormat('en-US', { timeZone: tz, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }));
+    var p = {}; f.formatToParts(new Date(t)).forEach(function(x){ p[x.type] = x.value; });
+    return Date.UTC(+p.year, +p.month - 1, +p.day, (+p.hour) % 24, +p.minute) - Math.floor(t / 60000) * 60000;
+  }
+  function tzAt(tz, y, m, d, hm){ var a = hm.split(':'), g = Date.UTC(y, m, d, +a[0], +a[1]), o = tzOff(tz, g), r = g - o, o2 = tzOff(tz, r); return o2 === o ? r : g - o2; }
+  function mktSessions(M, now){
+    var L = new Date(now + tzOff(M[2], now)), out = [];
+    for (var k = -2; k <= 9; k++) {
+      var dd = new Date(Date.UTC(L.getUTCFullYear(), L.getUTCMonth(), L.getUTCDate() + k)), wd = dd.getUTCDay();
+      if (wd === 0 || wd === 6) continue;   // weekends closed; exchange holidays are not known here
+      var y = dd.getUTCFullYear(), m = dd.getUTCMonth(), d = dd.getUTCDate();
+      out.push({ o: tzAt(M[2], y, m, d, M[3]), c: tzAt(M[2], y, m, d, M[4]), lo: M[5] ? tzAt(M[2], y, m, d, M[5]) : 0, lc: M[6] ? tzAt(M[2], y, m, d, M[6]) : 0 });
+    }
+    return out;
+  }
+  function istHm(t){ var d = new Date(t + IST_MS); return ('0' + d.getUTCHours()).slice(-2) + ':' + ('0' + d.getUTCMinutes()).slice(-2); }
+  function istDay(t){ return Math.floor((t + IST_MS) / DAY_MS); }
+  function istWd(t){ return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][new Date(t + IST_MS).getUTCDay()]; }
+  function sessHtml(now){
+    now = now || Date.now();
+    var W0 = istDay(now) * DAY_MS - IST_MS + 4 * 3600000; if (now < W0) W0 -= DAY_MS;   // 24 hours from 04:00 IST
+    var all = MKTS.map(function(M){ return mktSessions(M, now); }), shift = 0;
+    var any = function(a, b){ return all.some(function(ss){ return ss.some(function(x){ return x.c > a && x.o < b; }); }); };
+    while (shift < 4 && !any(W0, W0 + DAY_MS)) { W0 += DAY_MS; shift++; }   // weekend: show the next trading day
+    var W1 = W0 + DAY_MS, pc = function(t){ return Math.max(0, Math.min(100, (t - W0) / DAY_MS * 100)); }, nowX = pc(now).toFixed(2);
+    var rows = MKTS.map(function(M, mi){
+      var ss = all[mi], st = 'closed', txt = '', bars = '';
+      ss.forEach(function(x){
+        var segs = x.lo ? [[x.o, x.lo], [x.lc, x.c]] : [[x.o, x.c]];
+        segs.forEach(function(g){ var a = Math.max(g[0], W0), b = Math.min(g[1], W1); if (b > a) bars += '<i class="cx-sess-b' + (now >= g[0] && now < g[1] ? ' live' : '') + '" style="left:' + pc(a).toFixed(2) + '%;width:' + (pc(b) - pc(a)).toFixed(2) + '%" title="' + h(M[1]) + ': ' + istHm(g[0]) + ' to ' + istHm(g[1]) + ' IST"></i>'; });
+        if (now >= x.o && now < x.c) { if (x.lo && now >= x.lo && now < x.lc) { st = 'lunch'; txt = 'Lunch, resumes ' + istHm(x.lc); } else { st = 'open'; txt = 'Open till ' + istHm(x.c) + (istDay(x.c) !== istDay(now) ? ' ' + istWd(x.c) : ''); } }
+      });
+      if (st === 'closed') { var nx = ss.filter(function(x){ return x.o > now; })[0]; txt = nx ? 'Opens ' + istHm(nx.o) + (istDay(nx.o) !== istDay(now) ? ' ' + istWd(nx.o) : '') : 'Closed'; }
+      return '<div class="cx-sess-r' + (M[2] === 'Asia/Kolkata' ? ' in' : '') + '"><span class="cx-sess-n" title="' + h(M[1]) + ', ' + M[3] + ' to ' + M[4] + ' local time"><i class="cx-sess-d ' + st + '"></i>' + h(M[0]) + '</span>' +
+        '<span class="cx-sess-t">' + bars + (shift ? '' : '<i class="cx-sess-now" style="left:' + nowX + '%"></i>') + '</span><span class="cx-sess-s ' + st + '">' + h(txt) + '</span></div>';
+    }).join('');
+    var ticks = [0, 4, 8, 12, 16, 20, 24].map(function(k){ return '<span style="left:' + (k / 24 * 100) + '%">' + istHm(W0 + k * 3600000) + '</span>'; }).join('');
+    return '<div class="cx-sess-h"><b>Global market sessions</b> <span class="mute">times in IST · now ' + istHm(now) + ' IST, ' + istWd(now) + (shift ? '; markets closed, showing the next trading day (' + istWd(W0 + 6 * 3600000) + ')' : '') + '</span></div>' + rows +
+      '<div class="cx-sess-r cx-sess-ax"><span class="cx-sess-n"></span><span class="cx-sess-t">' + ticks + '</span><span class="cx-sess-s"></span></div>' +
+      '<p class="cx-sess-f">Regular trading hours of each exchange, converted to IST with daylight saving applied. Weekends are shown closed; exchange holidays, pre-open and after-hours sessions are not shown. Educational reference only.</p>';
+  }
+  function renderSess(on){
+    var el = $('cx-sess'); if (!el) return;
+    if (_sessT) { clearInterval(_sessT); _sessT = null; }
+    if (!on) { el.hidden = true; el.innerHTML = ''; return; }
+    try { el.innerHTML = sessHtml(); } catch (e) { el.innerHTML = '<p class="mute" style="margin:4px 0;font-size:12px">Market sessions need a newer browser (time-zone support missing).</p>'; }
+    el.hidden = false;
+    _sessT = setInterval(function(){ var x = $('cx-sess'); if (!x || x.hidden || $('cx-modal').hidden) { clearInterval(_sessT); _sessT = null; return; } try { x.innerHTML = sessHtml(); } catch (e) {} }, 30000);
+  }
+  var SMC_SHOW_LABEL = [['bos', 'Structure: BOS and CHoCH'], ['fvg', 'Fair value gaps'], ['ob', 'Order blocks'], ['liq', 'Liquidity: equal highs/lows and sweeps'], ['pd', 'Premium / discount and OTE']];
+  function ZonesPrimitive(items){ this._items = items; this._views = [new ZonesView(this)]; }
+  ZonesPrimitive.prototype.attached = function(p){ this._chart = p.chart; this._series = p.series; };
+  ZonesPrimitive.prototype.detached = function(){ this._chart = null; };
+  ZonesPrimitive.prototype.updateAllViews = function(){};
+  ZonesPrimitive.prototype.paneViews = function(){ return this._views; };
+  function ZonesView(src){ this._src = src; }
+  ZonesView.prototype.zOrder = function(){ return 'bottom'; };
+  ZonesView.prototype.renderer = function(){
+    var src = this._src;
+    return { draw: function(target){
+      if (!src._chart) return;
+      var ts = src._chart.timeScale(), se = src._series;
+      target.useBitmapCoordinateSpace(function(sc){
+        var ctx = sc.context, hr = sc.horizontalPixelRatio, vr = sc.verticalPixelRatio, W = sc.bitmapSize.width;
+        src._items.forEach(function(z){
+          var x1 = ts.timeToCoordinate(z.t1), x2 = z.t2 === 'end' ? W / hr : ts.timeToCoordinate(z.t2);
+          if (x1 === null || x2 === null) return;
+          if (z.k === 'rect') {
+            var y1 = se.priceToCoordinate(z.hi), y2 = se.priceToCoordinate(z.lo); if (y1 === null || y2 === null) return;
+            ctx.fillStyle = z.fill; ctx.fillRect(Math.round(x1 * hr), Math.round(y1 * vr), Math.max(1, Math.round((x2 - x1) * hr)), Math.max(1, Math.round((y2 - y1) * vr)));
+            if (z.label) { ctx.fillStyle = z.ink; ctx.font = (10 * vr) + 'px -apple-system,Segoe UI,Roboto,sans-serif'; ctx.fillText(z.label, Math.round((x1 + 3) * hr), Math.round((y1 + 11) * vr)); }
+          } else {
+            var y = se.priceToCoordinate(z.p); if (y === null) return;
+            ctx.strokeStyle = z.color; ctx.lineWidth = Math.max(1, hr); ctx.setLineDash(z.dash ? [4 * hr, 3 * hr] : []);
+            ctx.beginPath(); ctx.moveTo(Math.round(x1 * hr), Math.round(y * vr) + 0.5); ctx.lineTo(Math.round(x2 * hr), Math.round(y * vr) + 0.5); ctx.stroke(); ctx.setLineDash([]);
+            if (z.label) { ctx.fillStyle = z.color; ctx.font = 'bold ' + (10 * vr) + 'px -apple-system,Segoe UI,Roboto,sans-serif'; var tx = z.labelAt === 'end' ? x2 - 4 : (x1 + x2) / 2; ctx.textAlign = z.labelAt === 'end' ? 'right' : 'center'; ctx.fillText(z.label, Math.round(tx * hr), Math.round((y + (z.below ? 12 : -4)) * vr)); ctx.textAlign = 'left'; }
+          }
+        });
+      });
+    } };
+  };
+  // Builds the drawings for the bars on screen (aggregated to the chart timeframe already).
+  function smcOverlay(bars, show, tf){
+    var res = SMC.analyze(bars, tf || 'D'), N = bars.length, items = [], marks = [], T = function(i){ return bars[Math.max(0, Math.min(N - 1, i))].time; };
+    if (N < 12) return { items: items, marks: marks, res: res };
+    var UPC = '#13805c', DNC = '#c23b32', c = bars[N - 1].close;
+    if (show.bos) res.events.slice(-8).forEach(function(ev){
+      items.push({ k: 'line', t1: T(ev.from), t2: T(ev.at), p: ev.level, color: ev.dir > 0 ? UPC : DNC, dash: ev.type === 'CHoCH', label: ev.type, below: ev.dir < 0 });
+    });
+    if (show.fvg) res.fvgs.filter(function(g){ return g.filled < 0; }).sort(function(a, b){ return Math.abs((a.lo + a.hi) / 2 - c) - Math.abs((b.lo + b.hi) / 2 - c); }).slice(0, 6).forEach(function(g){
+      items.push({ k: 'rect', t1: T(g.at - 2), t2: 'end', hi: g.hi, lo: g.lo, fill: g.dir > 0 ? 'rgba(19,128,92,.13)' : 'rgba(194,59,50,.13)', ink: g.dir > 0 ? UPC : DNC, label: 'FVG' });
+    });
+    if (show.ob) res.obs.filter(function(o){ return o.invalid < 0; }).slice(-4).forEach(function(o){
+      items.push({ k: 'rect', t1: T(o.at), t2: o.touched >= 0 ? T(o.touched) : 'end', hi: o.hi, lo: o.lo, fill: o.dir > 0 ? 'rgba(37,99,235,.14)' : 'rgba(234,88,12,.14)', ink: o.dir > 0 ? '#1d4ed8' : '#c2410c', label: o.dir > 0 ? 'Bull OB' : 'Bear OB' });
+    });
+    if (show.liq) {
+      res.pools.filter(function(p){ return p.taken < 0; }).slice(-4).forEach(function(p){
+        items.push({ k: 'line', t1: T(p.a), t2: 'end', p: p.level, color: '#7c3aed', dash: true, label: p.dir > 0 ? 'EQH' : 'EQL', labelAt: 'end', below: p.dir < 0 });
+      });
+      res.sweeps.slice(-5).forEach(function(s){ marks.push({ time: T(s.at), position: s.dir > 0 ? 'belowBar' : 'aboveBar', color: '#7c3aed', shape: s.dir > 0 ? 'arrowUp' : 'arrowDown', text: 'Sweep' }); });
+    }
+    if (show.pd && res.range) {
+      var r = res.range, mid = (r.hi + r.lo) / 2, t1 = T(Math.min(r.hiAt, r.loAt));
+      items.push({ k: 'rect', t1: t1, t2: 'end', hi: r.hi, lo: mid, fill: 'rgba(194,59,50,.06)', ink: DNC, label: 'Premium' });
+      items.push({ k: 'rect', t1: t1, t2: 'end', hi: mid, lo: r.lo, fill: 'rgba(19,128,92,.06)', ink: UPC, label: 'Discount' });
+      items.push({ k: 'line', t1: t1, t2: 'end', p: mid, color: '#7a8699', dash: true, label: 'EQ', labelAt: 'end' });
+      var a = r.legUp ? r.hi - 0.62 * (r.hi - r.lo) : r.lo + 0.62 * (r.hi - r.lo), b2 = r.legUp ? r.hi - 0.79 * (r.hi - r.lo) : r.lo + 0.79 * (r.hi - r.lo);
+      items.push({ k: 'rect', t1: t1, t2: 'end', hi: Math.max(a, b2), lo: Math.min(a, b2), fill: 'rgba(202,138,4,.12)', ink: '#a16207', label: 'OTE' });
+    }
+    return { items: items, marks: marks, res: res };
+  }
+
+  // ── custom screener: smart-money and weekly / monthly filters ──
+  var SMC_CS = [];
+  ['D', 'W', 'M'].forEach(function(t){
+    var L = SMC_TF_LABEL[t], p = t.toLowerCase();
+    SMC_CS.push({ k: p + 'tr', label: L + ': market structure', smc: t, f: 'tr', opts: ANY.concat([['1', 'Bullish'], ['-1', 'Bearish']]) });
+    SMC_CS.push({ k: p + 'ev', label: L + ': latest break', smc: t, f: 'ev', opts: ANY.concat([['B1', 'Bullish BOS'], ['B-1', 'Bearish BOS'], ['C1', 'Bullish CHoCH'], ['C-1', 'Bearish CHoCH']]) });
+    SMC_CS.push({ k: p + 'fv', label: L + ': fair value gap today', smc: t, f: 'fvd', opts: ANY.concat([['1', 'Bullish (new or retest)'], ['-1', 'Bearish (new or retest)']]) });
+    SMC_CS.push({ k: p + 'ob', label: L + ': order block retest', smc: t, f: 'obd', opts: ANY.concat([['1', 'Bullish'], ['-1', 'Bearish']]) });
+    SMC_CS.push({ k: p + 'sw', label: L + ': liquidity sweep', smc: t, f: 'swd', opts: ANY.concat([['1', 'Of lows (closed back above)'], ['-1', 'Of highs (closed back below)']]) });
+    SMC_CS.push({ k: p + 'pd', label: L + ': premium / discount', smc: t, f: 'pd', opts: ANY.concat([['d', 'Discount (below 50%)'], ['p', 'Premium (above 50%)'], ['o', 'In the OTE band']]) });
+    if (t !== 'D') {
+      SMC_CS.push({ k: p + 'rsi', label: L + ' RSI 14, at least', smc: t, f: 'rsi', op: 'min' });
+      SMC_CS.push({ k: p + 'rsix', label: L + ' RSI 14, at most', smc: t, f: 'rsi', op: 'max' });
+      SMC_CS.push({ k: p + 'mc', label: L + ' MACD', smc: t, f: 'mc', opts: ANY.concat([['up', 'Above signal'], ['dn', 'Below signal'], ['xu', 'Bullish cross this ' + (t === 'W' ? 'week' : 'month')], ['xd', 'Bearish cross this ' + (t === 'W' ? 'week' : 'month')]]) });
+      SMC_CS.push({ k: p + 'sp', label: L + ' Supertrend (10, 3)', smc: t, f: 'st', opts: ANY.concat([['up', 'Up'], ['dn', 'Down'], ['xu', 'Turned up'], ['xd', 'Turned down']]) });
+      SMC_CS.push({ k: p + 'a20', label: L + ': close vs 20-' + (t === 'W' ? 'week' : 'month') + ' average', smc: t, f: 'a20', opts: ANY.concat([['1', 'Above'], ['0', 'Below']]) });
+      SMC_CS.push({ k: p + 'e9', label: L + ': EMA 9 vs EMA 21', smc: t, f: 'e9', opts: ANY.concat([['1', 'EMA 9 above'], ['0', 'EMA 9 below']]) });
+    }
+  });
+  function smcCsActive(){ return SMC_CS.some(function(d){ return state.cs[d.k]; }); }
+  function smcCsMatch(r){
+    if (!smcCsActive()) return true;
+    var F = state.smcf; if (!F || !F.s) return false;
+    var arr = F.s[r.s]; if (!arr) return false;
+    var tfi = { D: 0, W: 1, M: 2 }, cache = {};
+    var get = function(t){ return cache[t] || (cache[t] = SMC.unpack(arr[tfi[t]])); };
+    for (var i = 0; i < SMC_CS.length; i++) {
+      var d = SMC_CS[i], v = state.cs[d.k]; if (!v) continue;
+      var x = get(d.smc);
+      if (d.f === 'ev') { var want = v.charAt(0) === 'B' ? 1 : 2, dir = +v.slice(1), lim = d.smc === 'D' ? 3 : 2; if (x.evt !== want || x.evd !== dir || !(x.eva < lim)) return false; continue; }
+      if (d.f === 'pd') { if (x.pd === null) return false; if (v === 'd' && !(x.pd < 50)) return false; if (v === 'p' && !(x.pd > 50)) return false; if (v === 'o' && x.ote !== 1) return false; continue; }
+      if (d.f === 'mc') { if (x.mc === null) return false; if (v === 'up' && x.mc !== 1) return false; if (v === 'dn' && x.mc !== -1) return false; if (v === 'xu' && x.mx !== 1) return false; if (v === 'xd' && x.mx !== -1) return false; continue; }
+      if (d.f === 'st') { if (x.st === null) return false; if (v === 'up' && x.st !== 1) return false; if (v === 'dn' && x.st !== -1) return false; if (v === 'xu' && x.sf !== 1) return false; if (v === 'xd' && x.sf !== -1) return false; continue; }
+      if (d.op) { var num = parseFloat(v); if (!isFinite(num)) continue; if (x[d.f] === null) return false; if (d.op === 'min' && x[d.f] < num) return false; if (d.op === 'max' && x[d.f] > num) return false; continue; }
+      if (String(x[d.f]) !== String(v)) return false;
+    }
+    return true;
+  }
+  function ensureSmcf(){
+    if (state.smcf || state._smcfLoading) return;
+    state._smcfLoading = true;
+    loadDataFile('smcf', function(d){ state.smcf = d; state._smcfLoading = false; if (state.tab === 'custom') renderCustom(false); });
+  }
+
+  SMC_CS.forEach(function(d){ CS_FIELDS.push(d); });
+  CS_PRESETS.push(['Weekly uptrend, daily pullback into discount', { wtr: '1', dpd: 'd' }], ['Daily bullish CHoCH in a weekly uptrend', { dev: 'C1', wtr: '1' }], ['Monthly bullish structure, weekly RSI under 40', { mtr: '1', wrsix: '40' }]);
 
   // ════════════════════════════════════════════════════════════════════
   //  [v10.7] ETFs: grouped by what they hold
@@ -2173,6 +2776,7 @@
   SCR_SLUG.folbu = 'long-build-up-stocks'; SCR_SLUG.fosbu = 'short-build-up-stocks'; SCR_SLUG.foscov = 'short-covering-stocks'; SCR_SLUG.folunw = 'long-unwinding-stocks'; SCR_SLUG.fooi = 'open-interest-gainers'; SCR_SLUG.foban = 'fno-ban-list-today';
   SCR_SLUG.caup = 'upcoming-corporate-actions'; SCR_SLUG.carecent = 'recent-corporate-actions'; SCR_SLUG.cadiv = 'high-dividend-yield-stocks'; SCR_SLUG.casplit = 'stock-split-and-bonus-issues'; SCR_SLUG.caother = 'rights-issue-buyback-demerger';
   SCR_SLUG.stochup = 'stochastic-oversold-crossover-stocks'; SCR_SLUG.don55 = '55-day-breakout-stocks'; SCR_SLUG.high5y = '5-year-high-stocks';
+  SMC_EDU.forEach(function(e){ if (e.key) SCR_SLUG[e.id] = e.slug; });
   var NEUTRAL_NAMES = ['Doji','Long-Legged Doji','Spinning Top','High-Wave Candle','Rickshaw Man','Four Price Doji'];
   function slugify(t){ return String(t).toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); }
   function invert(o){ var r = {}; Object.keys(o).forEach(function(k){ r[o[k]] = k; }); return r; }
@@ -2185,7 +2789,13 @@
     var t = state.tab, params = [];
     var add = function(k, v){ if (v) params.push(k + '=' + encodeURIComponent(v).replace(/%20/g, '+')); };
     var slug;
-    if (t === 'screens') { slug = SCR_SLUG[state.scrType]; add('q', state.scrQ); }
+    if (t === 'screens') {
+      slug = SCR_SLUG[state.scrType]; add('q', state.scrQ);
+      if (SCR_META[state.scrType] && SCR_META[state.scrType].smc) {   // [v11.17]
+        if (state.smcHub && state.scrType === 'smcms') slug = 'smart-money-concepts';
+        add('tf', state.smcTf !== 'D' ? state.smcTf.toLowerCase() : ''); add('dir', state.smcDir === -1 ? 'bear' : '');
+      }
+    }
     else if (t === 'ideas') { slug = IDEA_SLUG[state.ideaType]; add('q', state.ideaQ); }
     else if (t === 'patterns') {
       if (state.patName) slug = slugify(state.patName) + '-pattern-stocks';
@@ -2242,7 +2852,12 @@
     if (slug === 'stock') { if (stockReq) openChartReq(stockReq); return true; }
     (parts[1] || '').split('&').forEach(function(kv){ if (!kv) return; var i = kv.indexOf('='); q[kv.slice(0, i < 0 ? kv.length : i)] = i < 0 ? '' : kv.slice(i + 1).replace(/\+/g, ' '); });
     var tab = null, focusQuad = false, focusSel = '';
-    if (SCR_BY[slug]) { tab = 'screens'; state.scrType = SCR_BY[slug]; state.scrQ = q.q || ''; }
+    if (slug === 'smart-money-concepts') slug = 'market-structure-stocks', state._hubReq = true;   // [v11.17] the guide page opens market structure
+    if (SCR_BY[slug]) {
+      tab = 'screens'; state.scrType = SCR_BY[slug]; state.scrQ = q.q || '';
+      state.smcHub = !!state._hubReq; state._hubReq = false;
+      if (SCR_META[state.scrType].smc) { state.smcTf = /^[wm]$/.test(q.tf || '') ? q.tf.toUpperCase() : 'D'; state.smcDir = q.dir === 'bear' ? -1 : 1; }
+    }
     else if (IDEA_BY[slug]) { tab = 'ideas'; state.ideaType = IDEA_BY[slug]; state._typeChosen = true; state.ideaQ = q.q || ''; if (IDEA_SLUG[IDEA_BY[slug]] !== slug) setTimeout(function(){ syncUrl(false); }, 0); }   // [v11.13] old address -> new
     else if (CAT_BY[slug] !== undefined || PAT_BY[slug] || slug === 'strong-volume-candlestick-patterns') {
       tab = 'patterns';
@@ -2579,8 +3194,8 @@
     roc:   { name: 'Rate of change', pane: 1, p: { length: 12 } }
   };
   var PALETTE = ['#2962ff', '#e65100', '#7b1fa2', '#00897b', '#c2185b', '#5d4037', '#f9a825', '#455a64'];
-  var CHART_DEF = { type: 'candles', range: '1Y', inds: [{ t: 'vol', p: { ma: 20 } }, { t: 'sma', p: { length: 50, source: 'close' }, c: '#2962ff' }, { t: 'sma', p: { length: 200, source: 'close' }, c: '#e65100' }] };
-  function chartCfg(){ try { var c = JSON.parse(localStorage.getItem(CACHE_NS + 'chart') || 'null'); if (c && c.inds) return c; } catch (e) {} return JSON.parse(JSON.stringify(CHART_DEF)); }
+  var CHART_DEF = { v: 2, tf: 'D', sess: false, smc: { show: {} }, type: 'candles', range: '1Y', inds: [{ t: 'vol', p: { ma: 20 } }, { t: 'sma', p: { length: 50, source: 'close' }, c: '#2962ff' }, { t: 'sma', p: { length: 200, source: 'close' }, c: '#e65100' }] };
+  function chartCfg(){ try { var c = JSON.parse(localStorage.getItem(CACHE_NS + 'chart') || 'null'); if (c && c.inds) { if (c.v !== 2) { c.v = 2; c.smc = { show: {} }; c.sess = false; } return c; } } catch (e) {} return JSON.parse(JSON.stringify(CHART_DEF)); }
   function saveCfg(c){ try { localStorage.setItem(CACHE_NS + 'chart', JSON.stringify(c)); } catch (e) {} }
   function indLabel(x){
     if (x.t === 'fx') return x.name || 'Formula';
@@ -2656,8 +3271,14 @@
   function drawOwnChart(sym){
     var box = $('cx-own'), cfg = chartCfg();
     _chSym = sym;
-    box.innerHTML = chartToolbar(cfg) + '<div class="cx-adv" id="cx-adv"><div class="cx-legend" id="cx-legend"></div><div class="cx-lwc" id="cx-lwc"><div class="cx-sk" style="height:100%;border-radius:8px"></div></div></div><div class="cx-indpanel" id="cx-indpanel" hidden></div><p class="cx-credit">Charts powered by <a href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView</a></p>';
-    var fromYear = rangeFromYear(cfg.range); _chFrom = fromYear;
+    if (_smcCtx) {   // [v11.17] opened from a smart-money screen: that timeframe and that concept
+      var fl = { ms: 'bos', bos: 'bos', choch: 'bos', fvg: 'fvg', ob: 'ob', sweep: 'liq', liq: 'liq', pd: 'pd' }[_smcCtx.key] || 'bos';
+      cfg.tf = _smcCtx.tf; cfg.smc = { show: JSON.parse(JSON.stringify(SMC_SHOW_DEF)) }; cfg.smc.show[fl] = 1;   // [v11.18] only that concept
+      tfRange(cfg); saveCfg(cfg); _smcCtx = null;
+    }
+    box.innerHTML = chartToolbar(cfg) + smcBarHtml(cfg) + '<div class="cx-sess" id="cx-sess" hidden></div><div class="cx-adv" id="cx-adv"><div class="cx-legend" id="cx-legend"></div><div class="cx-lwc" id="cx-lwc"><div class="cx-sk" style="height:100%;border-radius:8px"></div></div></div><div class="cx-indpanel" id="cx-indpanel" hidden></div><p class="cx-credit">Charts powered by <a href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView</a></p>';
+    renderSess(!!cfg.sess);
+    var fromYear = Math.min(rangeFromYear(cfg.range), cfg.tf === 'M' ? new Date().getFullYear() - 6 : cfg.tf === 'W' ? new Date().getFullYear() - 3 : 9999); _chFrom = fromYear;
     // [v11.10] while the price database is still being published, add the 30-day candles and stored closes
     var bars = pxBars(sym, fromYear).catch(function(){ return []; }).then(function(px){
       if (px.length >= 60) return px;
@@ -2683,14 +3304,17 @@
     return '<div class="cx-ctb" role="toolbar" aria-label="Chart controls">' +
       '<div class="cx-ctb-g">' + R.map(function(r){ return '<button type="button" data-xr="' + r + '" aria-pressed="' + (cfg.range === r) + '">' + (r === 'MAX' ? 'All' : r) + '</button>'; }).join('') + '</div>' +
       '<select class="cx-select" data-xtype aria-label="Chart type">' + [['candles', 'Candles'], ['heikin', 'Heikin Ashi'], ['bars', 'Bars'], ['line', 'Line'], ['area', 'Area']].map(function(t){ return '<option value="' + t[0] + '"' + (cfg.type === t[0] ? ' selected' : '') + '>' + t[1] + '</option>'; }).join('') + '</select>' +
+      '<div class="cx-ctb-g cx-ctb-tf" role="group" aria-label="Timeframe">' + [['D', 'Daily'], ['W', 'Weekly'], ['M', 'Monthly']].map(function(t){ return '<button type="button" data-xtf="' + t[0] + '" aria-pressed="' + ((cfg.tf || 'D') === t[0]) + '">' + t[1] + '</button>'; }).join('') + '</div>' +
       '<button type="button" class="cx-ctb-btn" data-xind>&#402;x Indicators <span class="cx-count">' + cfg.inds.length + '</span></button>' +
+      '<button type="button" class="cx-ctb-btn cx-ctb-tg" data-xsess aria-pressed="' + !!cfg.sess + '" title="Show the opening and closing times of world markets in IST">&#127760; Global sessions</button>' +
       '<button type="button" class="cx-ctb-btn" data-xfull title="Full screen" aria-label="Full screen">&#x26F6;</button></div>';
   }
   function fmtN(v){ if (v === null || v === undefined || !isFinite(v)) return '–'; var a = Math.abs(v); return a >= 1e7 ? (v / 1e7).toFixed(2) + ' Cr' : a >= 1e5 ? (v / 1e5).toFixed(2) + ' L' : a >= 1000 ? Math.round(v).toLocaleString('en-IN') : a >= 100 ? v.toFixed(1) : v.toFixed(2); }
   function renderAdv(sym, cfg){
     disposeChart();
     var LW = window.LightweightCharts, el = $('cx-lwc'); el.innerHTML = '';
-    var bars = cfg.type === 'heikin' ? heikin(_chBars) : _chBars, raw = _chBars;
+    var tf = cfg.tf || 'D', base = tf === 'D' || !window.SMC ? _chBars : SMC.agg(_chBars, tf);   // [v11.17] weekly / monthly candles
+    var bars = cfg.type === 'heikin' ? heikin(base) : base, raw = base, smcInfo = null;
     _ch = LW.createChart(el, {
       autoSize: true,
       layout: { attributionLogo: false, background: { type: 'solid', color: '#ffffff' }, textColor: '#46546b', fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif', fontSize: 11, panes: { separatorColor: '#e2e7ee', enableResize: true } },
@@ -2742,6 +3366,11 @@
         var bull = pat._cat === 'bull', last = raw[raw.length - 1].time;
         mk.push({ time: last, position: bull ? 'belowBar' : 'aboveBar', color: bull ? UP : pat._cat === 'bear' ? DN : '#7a8699', shape: bull ? 'arrowUp' : pat._cat === 'bear' ? 'arrowDown' : 'circle', text: pat._main });
       }
+      if (tf !== 'D') mk = mk.map(function(m){ var tt = m.time; for (var q = raw.length - 1; q >= 0; q--) if (raw[q].time <= tt) { m.time = raw[q].time; break; } return m; });
+      if (smcAny(cfg) && window.SMC) {   // [v11.18] only the concepts the user picked
+        try { var ov = smcOverlay(raw, cfg.smc.show, tf); main.attachPrimitive(new ZonesPrimitive(ov.items)); mk = mk.concat(ov.marks); smcInfo = ov.res; }
+        catch (se) { errs.push('Smart money: ' + se.message); }
+      }
       if (mk.length) LW.createSeriesMarkers(main, mk.sort(function(a, b){ return a.time < b.time ? -1 : a.time > b.time ? 1 : 0; }));
       var setup = null;
       if (state.ideas && state.ideas.lists) IDEA_ORDER.forEach(function(t){ (state.ideas.lists[t] || []).forEach(function(x){ if (!setup && x.symbol === sym) setup = x; }); });
@@ -2762,10 +3391,24 @@
       var vals = legendSeries.filter(function(x){ return !x.pane; }).map(one);
       var pv = legendSeries.filter(function(x){ return x.pane; }).map(one);
       lg.innerHTML = '<b>' + h(sym) + '</b> <span class="mute">' + h(fmtIsoShort(b.time)) + '</span> O <b>' + fmtP(b.open) + '</b> H <b>' + fmtP(b.high) + '</b> L <b>' + fmtP(b.low) + '</b> C <b class="' + cls(chg) + '">' + fmtP(b.close) + ' (' + pct(chg, 2) + ')</b>' +
-        (vals.length ? '<br>' + vals.join(' &nbsp;') : '') + (pv.length ? '<br>' + pv.join(' &nbsp;') : '') + (errs.length ? '<br><span class="dn">' + h(errs.join(' | ')) + '</span>' : '');
+        (vals.length ? '<br>' + vals.join(' &nbsp;') : '') + (pv.length ? '<br>' + pv.join(' &nbsp;') : '') + (smcInfo ? '<br>' + smcLegend(smcInfo, tf) : '') + (errs.length ? '<br><span class="dn">' + h(errs.join(' | ')) + '</span>' : '');
     };
     _ch.subscribeCrosshairMove(legend); legend(null);
-    $('cx-modal-f').textContent = 'Daily prices from the official NSE Bhavcopy (' + h(raw[0].time.slice(0, 4)) + ' to ' + fmtIsoShort(raw[raw.length - 1].time) + '), adjusted for splits and bonuses' + (_chAuto.length ? ' (including ' + _chAuto.map(function(x){ return fmtIsoShort(x.date); }).join(', ') + ', found from the price gap)' : '') + '. Charting by TradingView Lightweight Charts. Drag to pan, scroll or pinch to zoom. Educational use only, not investment advice. SEBI Reg. No. INZ000008037.';
+    $('cx-modal-f').textContent = (tf === 'W' ? 'Weekly candles (Monday to Friday) built from daily prices' : tf === 'M' ? 'Monthly candles built from daily prices' : 'Daily prices') + ' from the official NSE Bhavcopy (' + h(raw[0].time.slice(0, 4)) + ' to ' + fmtIsoShort(raw[raw.length - 1].time) + '), adjusted for splits and bonuses' + (_chAuto.length ? ' (including ' + _chAuto.map(function(x){ return fmtIsoShort(x.date); }).join(', ') + ', found from the price gap)' : '') + '. Charting by TradingView Lightweight Charts. Drag to pan, scroll or pinch to zoom. Educational use only, not investment advice. SEBI Reg. No. INZ000008037.';
+  }
+  // [v11.17] weekly and monthly candles need a longer window to be readable
+  function tfRange(cfg){
+    if (cfg.tf === 'W' && ['1M', '3M', '6M', 'YTD'].indexOf(cfg.range) !== -1) cfg.range = '1Y';
+    if (cfg.tf === 'M' && ['3Y', '5Y', 'MAX'].indexOf(cfg.range) === -1) cfg.range = '5Y';
+    if ((cfg.tf || 'D') === 'D' && smcAny(cfg) && ['3Y', '5Y', 'MAX'].indexOf(cfg.range) !== -1) cfg.range = '1Y';
+  }
+  function smcLegend(r, tf){
+    var ev = r.events.length ? r.events[r.events.length - 1] : null;
+    var nu = r.fvgs.filter(function(g){ return g.filled < 0 && g.dir > 0; }).length, nd = r.fvgs.filter(function(g){ return g.filled < 0 && g.dir < 0; }).length;
+    return '<span class="cx-smc-lg">Smart money (' + ({ D: 'daily', W: 'weekly', M: 'monthly' })[tf] + '): ' +
+      '<b class="' + (r.trend > 0 ? 'up' : r.trend < 0 ? 'dn' : '') + '">' + (r.trend > 0 ? 'bullish' : r.trend < 0 ? 'bearish' : 'no') + ' structure</b>' +
+      (ev ? ' · last ' + ev.type + ' ' + (ev.dir > 0 ? 'up' : 'down') + ' on ' + h(fmtIsoShort(r.bars[ev.at].time)) + ' at ' + fmtP(ev.level) : '') +
+      ' · open FVGs ' + nu + ' bullish / ' + nd + ' bearish' + (r.range ? ' · ' + Math.max(0, Math.min(100, Math.round(r.range.pos * 100))) + '% of range' : '') + '</span>';
   }
   function setRange(r){
     if (!_ch || !_chBars || !_chBars.length) return;
@@ -2805,6 +3448,11 @@
         if (rangeFromYear(r) < _chFrom || !_ch) drawOwnChart(_chSym); else setRange(r);
         return; }
       if ((el = t.closest('[data-xind]'))) { var p = $('cx-indpanel'); if (p.hidden) renderIndPanel(); p.hidden = !p.hidden; return; }
+      if ((el = t.closest('[data-xtf]'))) { cfg = chartCfg(); var tv = el.getAttribute('data-xtf'); if ((cfg.tf || 'D') === tv) return; cfg.tf = tv; tfRange(cfg); saveCfg(cfg); drawOwnChart(_chSym); return; }
+      if ((el = t.closest('[data-smcchip]'))) { cfg = chartCfg(); cfg.smc = cfg.smc || {}; cfg.smc.show = cfg.smc.show || {}; var ck = el.getAttribute('data-smcchip'); cfg.smc.show[ck] = cfg.smc.show[ck] ? 0 : 1; smcBarSync(cfg); chartChanged(cfg); return; }
+      if ((el = t.closest('[data-smcall]')) || t.closest('[data-smcnone]')) { cfg = chartCfg(); var on1 = el ? 1 : 0; cfg.smc = { show: {} }; SMC_CHIPS.forEach(function(c){ cfg.smc.show[c[0]] = on1; }); smcBarSync(cfg); chartChanged(cfg); return; }
+      if ((el = t.closest('[data-xsess]'))) { cfg = chartCfg(); cfg.sess = !cfg.sess; saveCfg(cfg); el.setAttribute('aria-pressed', cfg.sess); renderSess(cfg.sess); return; }
+      if ((el = t.closest('[data-smchub]'))) { e.preventDefault(); closeChart(); location.hash = '#smart-money-concepts'; return; }
       if ((el = t.closest('[data-xfull]'))) { md.querySelector('.cx-modal-box').classList.toggle('cx-full'); return; }
       if ((el = t.closest('[data-irm]'))) { cfg = chartCfg(); cfg.inds.splice(+el.getAttribute('data-irm'), 1); chartChanged(cfg); renderIndPanel(); return; }
       if ((el = t.closest('[data-ireset]'))) { cfg = JSON.parse(JSON.stringify(CHART_DEF)); cfg.range = chartCfg().range; chartChanged(cfg); renderIndPanel(); return; }
@@ -2982,6 +3630,7 @@
       if ((el = t.closest('[data-star]'))) { e.preventDefault(); toggleWl(el.getAttribute('data-star')); return; }
       if ((el = t.closest('[data-share]'))) { e.preventDefault(); doShare(el.getAttribute('data-share') === 'stock'); return; }
       if ((el = t.closest('[data-chart]'))) { e.preventDefault(); openChart(el.getAttribute('data-chart'), el.getAttribute('data-name') || ''); return; }
+      if (smcClick(e)) return;   // [v11.17]
       if ((el = t.closest('[data-sgroup]'))) { var gg = SCR_GROUPS.filter(function(x){ return x.id === el.getAttribute('data-sgroup'); })[0]; if (gg.items.indexOf(state.scrType) === -1) state.scrType = gg.items[0]; renderScreens(); syncUrl(true); return; }
       if ((el = t.closest('[data-etfcat]'))) { state.etfCat = el.getAttribute('data-etfcat'); renderEtf(); syncUrl(true); var lt = $('cx-etf-list'); if (lt && window.innerWidth < 760) lt.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
       if ((el = t.closest('[data-idxg]'))) { state.idxGrp = el.getAttribute('data-idxg'); renderMarket(); return; }
@@ -2998,7 +3647,7 @@
       if ((el = t.closest('[data-wl-reg]'))) { openReg(function(){ renderWatch(); }, []); return; }
       if ((el = t.closest('[data-wl-dismiss]'))) { state.wlImport = []; renderWatch(); syncUrl(false); return; }
       if ((el = t.closest('[data-type]'))) { state.ideaType = el.getAttribute('data-type'); renderIdeas(); syncUrl(true); return; }
-      if ((el = t.closest('[data-scr]'))) { state.scrType = el.getAttribute('data-scr'); renderScreens(); syncUrl(true); return; }
+      if ((el = t.closest('[data-scr]'))) { state.scrType = el.getAttribute('data-scr'); state.smcHub = false; renderScreens(); syncUrl(true); return; }
       if ((el = t.closest('[data-expand]'))) { toggleDetail(el.getAttribute('data-expand'), el); return; }
       if ((el = t.closest('[data-kpi]'))) {
         var k = el.getAttribute('data-kpi');
@@ -3095,7 +3744,7 @@
   }
   function closeChart(){
     $('cx-modal').hidden = true;
-    disposeChart(); _chSym = '';
+    disposeChart(); _chSym = ''; if (_sessT) { clearInterval(_sessT); _sessT = null; }
     var bx = $('cx-modal').querySelector('.cx-modal-box'); if (bx) bx.classList.remove('cx-full');
     $('cx-tv').innerHTML = ''; $('cx-own').innerHTML = ''; $('cx-nse').innerHTML = ''; _chartSym = ''; if ($('cx-modal-ca')) $('cx-modal-ca').innerHTML = '';
     if (arguments[0] !== true) syncUrl(false); else seoUpdate();
@@ -3155,6 +3804,7 @@
     load('indices', function(d){ state.indices = d || { error: 'No data' }; renderPulse(); renderMarket(); });
     load('deals', function(d){ state.deals = d || { error: 'No data' }; renderScreens(); });
     load('fo', function(d){ state.fo = d && !d.error ? d : { error: 'No data' }; renderScreens(); });
+    loadDataFile('smc', function(d){ state.smc = d; if (state.tab === 'screens') renderScreens(); });   // [v11.17]
     load('corpact', function(d){ state.ca = d && d.rows ? d : { error: 'No data' }; renderScreens(); if (_chartSym) renderModalCa(_chartSym); });
     load('etfnav', function(d){ state.etfnav = d && d.s ? d : null; if (state.tab === 'etf') renderEtf(); });
     // [v10.9] check for a newer published session every 10 minutes while the page is open
