@@ -1,5 +1,5 @@
 <!-- ═══════════════════════════════════════════════════════════════════
-  MNCL SHARE MARKET TODAY -- page fragment v11.16
+  MNCL SHARE MARKET TODAY -- page fragment v11.18
   CMS SETTINGS: Page title  : Share Market Today: Nifty, Sensex, FII DII, Global Markets | MNCL
                 URL         : /share-market-today
 ═══════════════════════════════════════════════════════════════════ -->
@@ -145,7 +145,7 @@
   // [v11.13] Set by the loader on separate website pages (mnclgroup.com/<section>).
   var MNCL_PG = window.MNCL_PAGE || {}, PAGE_SLUG = MNCL_PG.app === 'market' ? (MNCL_PG.slug || '') : '', LIVE_PAGES = MNCL_PG.live || [], SITE_URL = MNCL_PG.site || 'https://www.mnclgroup.com/';
   function livePage(slug){ return LIVE_PAGES.indexOf(slug) !== -1; }
-  var APP_VERSION = 'v11.16';
+  var APP_VERSION = 'v11.17';
   var $ = function(id){ return document.getElementById(id); };
   function h(s){ return String(s === undefined || s === null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
   function num(v){ var x = parseFloat(v); return isFinite(x) ? x : null; }
