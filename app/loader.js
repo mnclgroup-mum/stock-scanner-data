@@ -1,4 +1,4 @@
-/* MNCL screener loader, generated 2026-10-26 22:01 IST. Do not edit: the system rewrites it. */
+/* MNCL screener loader, generated 2026-10-27 22:06 IST. Do not edit: the system rewrites it. */
 (function(){
   var BASE = "https://mnclgroup-mum.github.io/stock-scanner-data/app/", V = {"screener":"20261024152210","market":"20261024152220"}, LIVE = [];
   var SITE_HOSTS = ["localhost","127.0.0.1","192.168.112.254","mnclgroup.com",".mnclgroup.com","mnclgroup-mum.github.io",".mohit-jain.workers.dev"];
