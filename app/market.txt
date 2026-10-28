@@ -1,27 +1,28 @@
 <!-- ═══════════════════════════════════════════════════════════════════
-  MNCL SHARE MARKET TODAY -- page fragment v11.18
-  CMS SETTINGS: Page title  : Share Market Today: Nifty, Sensex, FII DII, Global Markets | MNCL
+  SHARE MARKET TODAY -- page fragment v12.1
+  TEMPLATE: upload in Admin > Upload; {{...}} fields are filled from Admin > Site settings.
+  CMS SETTINGS: Page title  : Share Market Today: Nifty, Sensex, FII DII, Global Markets | Stock Screener
                 URL         : /share-market-today
 ═══════════════════════════════════════════════════════════════════ -->
 <meta name="description" content="Stock market today in India: Nifty and Sensex close, sector indices, FII and DII data, global markets, crude, gold, rupee and bond yields, with a daily morning note and evening wrap.">
 <meta name="keywords" content="share market today, stock market today, nifty today, sensex today, fii dii data today, fii dii activity, global markets today, gift nifty, dow jones today, crude oil price today, gold price today, usd inr today, rupee vs dollar, us 10 year bond yield, nifty pcr today, max pain, india vix, market news today, pre market report, closing bell">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Share Market Today: Nifty, Sensex, FII DII, Global Markets | MNCL">
+<meta property="og:title" content="Share Market Today: Nifty, Sensex, FII DII, Global Markets | Stock Screener">
 <meta property="og:description" content="Stock market today in India: Nifty and Sensex close, sector indices, FII and DII data, global markets, crude, gold, rupee and bond yields, with a daily morning note and evening wrap.">
-<meta property="og:url" content="https://www.mnclgroup.com/share-market-today">
-<meta property="og:site_name" content="MNCL">
-<meta property="og:image" content="https://www.mnclgroup.com/images/presenting-resach.png">
+<meta property="og:url" content="https://mnclgroup-mum.github.io/stock-scanner-data/share-market-today/">
+<meta property="og:site_name" content="Stock Screener">
+
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Share Market Today: Nifty, Sensex, FII DII, Global Markets | MNCL">
+<meta name="twitter:title" content="Share Market Today: Nifty, Sensex, FII DII, Global Markets | Stock Screener">
 <meta name="twitter:description" content="Stock market today in India: Nifty and Sensex close, sector indices, FII and DII data, global markets, crude, gold, rupee and bond yields, with a daily morning note and evening wrap.">
-<meta name="twitter:image" content="https://www.mnclgroup.com/images/presenting-resach.png">
-<link rel="canonical" href="https://www.mnclgroup.com/share-market-today">
-<link rel="preconnect" href="https://mnclgroup-mum.github.io" crossorigin>
+
+<link rel="canonical" href="https://mnclgroup-mum.github.io/stock-scanner-data/share-market-today/">
+<link rel="preconnect" href="https://mnclgroup-mum.github.io/stock-scanner-data/" crossorigin>
 <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://www.mnclgroup.com/#org", "name": "Monarch Networth Capital Limited", "alternateName": "MNCL", "url": "https://www.mnclgroup.com"}, {"@type": "WebPage", "@id": "https://www.mnclgroup.com/share-market-today#webpage", "url": "https://www.mnclgroup.com/share-market-today", "name": "Share Market Today: Nifty, Sensex, FII DII, Global Markets | MNCL", "description": "Stock market today in India: Nifty and Sensex close, sector indices, FII and DII data, global markets, crude, gold, rupee and bond yields, with a daily morning note and evening wrap.", "inLanguage": "en-IN", "dateModified": "2026-10-17", "publisher": {"@id": "https://www.mnclgroup.com/#org"}, "primaryImageOfPage": "https://www.mnclgroup.com/images/presenting-resach.png", "breadcrumb": {"@id": "https://www.mnclgroup.com/share-market-today#breadcrumb"}, "about": [{"@type": "Thing", "name": "Stock market"}, {"@type": "Thing", "name": "Nifty 50"}, {"@type": "Thing", "name": "Sensex"}, {"@type": "Thing", "name": "FII and DII"}, {"@type": "Thing", "name": "Global stock indices"}, {"@type": "Thing", "name": "Commodity prices"}, {"@type": "Thing", "name": "Currency exchange rates"}, {"@type": "Thing", "name": "Bond yields"}], "relatedLink": ["https://www.mnclgroup.com/candlestick-patterns"]}, {"@type": "BreadcrumbList", "@id": "https://www.mnclgroup.com/share-market-today#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.mnclgroup.com/"}, {"@type": "ListItem", "position": 2, "name": "Share market today", "item": "https://www.mnclgroup.com/share-market-today"}]}, {"@type": "FAQPage", "@id": "https://www.mnclgroup.com/share-market-today#faq", "mainEntity": [{"@type": "Question", "name": "What is FII and DII data?", "acceptedAnswer": {"@type": "Answer", "text": "FII (foreign institutional investors, also called FPIs) and DII (domestic institutional investors such as mutual funds, insurers and pension funds) data shows how much each group bought and sold in the Indian cash market in a session, in ₹ crore. NSE publishes provisional figures after the close."}}, {"@type": "Question", "name": "What time is the share market open in India?", "acceptedAnswer": {"@type": "Answer", "text": "NSE and BSE equity markets trade from 9:15 AM to 3:30 PM IST on weekdays, with a pre-open session from 9:00 AM. They are closed on weekends and exchange holidays."}}, {"@type": "Question", "name": "What is the put-call ratio (PCR)?", "acceptedAnswer": {"@type": "Answer", "text": "The put-call ratio divides open interest in put options by open interest in call options. It describes how option positions are spread across traders; it is not a forecast of the market’s direction."}}, {"@type": "Question", "name": "Why do global markets matter for Indian stocks?", "acceptedAnswer": {"@type": "Answer", "text": "US markets close after India, so their last session, along with crude oil, the dollar and US bond yields, often shapes the next morning’s mood in India. Foreign investors also move money across markets together."}}, {"@type": "Question", "name": "How often is this page updated?", "acceptedAnswer": {"@type": "Answer", "text": "Indian indices and F&O data update after the close each trading day. Global indices, currencies, commodities and bond yields refresh every 30 minutes with a 15–20 minute delay. The morning note is written at 8:15 AM and the evening wrap at 7:30 PM IST."}}]}]}</script>
-<!--MNCL-APP--><style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://mnclgroup-mum.github.io/stock-scanner-data/#org", "name": "Stock Screener", "alternateName": "Stock Screener", "url": "https://mnclgroup-mum.github.io/stock-scanner-data/"}, {"@type": "WebPage", "@id": "https://mnclgroup-mum.github.io/stock-scanner-data/share-market-today/#webpage", "url": "https://mnclgroup-mum.github.io/stock-scanner-data/share-market-today/", "name": "Share Market Today: Nifty, Sensex, FII DII, Global Markets | Stock Screener", "description": "Stock market today in India: Nifty and Sensex close, sector indices, FII and DII data, global markets, crude, gold, rupee and bond yields, with a daily morning note and evening wrap.", "inLanguage": "en-IN", "dateModified": "2026-10-17", "publisher": {"@id": "https://mnclgroup-mum.github.io/stock-scanner-data/#org"}, "primaryImageOfPage": "", "breadcrumb": {"@id": "https://mnclgroup-mum.github.io/stock-scanner-data/share-market-today/#breadcrumb"}, "about": [{"@type": "Thing", "name": "Stock market"}, {"@type": "Thing", "name": "Nifty 50"}, {"@type": "Thing", "name": "Sensex"}, {"@type": "Thing", "name": "FII and DII"}, {"@type": "Thing", "name": "Global stock indices"}, {"@type": "Thing", "name": "Commodity prices"}, {"@type": "Thing", "name": "Currency exchange rates"}, {"@type": "Thing", "name": "Bond yields"}], "relatedLink": ["https://mnclgroup-mum.github.io/stock-scanner-data/stock-scanner/"]}, {"@type": "BreadcrumbList", "@id": "https://mnclgroup-mum.github.io/stock-scanner-data/share-market-today/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://mnclgroup-mum.github.io/stock-scanner-data/"}, {"@type": "ListItem", "position": 2, "name": "Share market today", "item": "https://mnclgroup-mum.github.io/stock-scanner-data/share-market-today/"}]}, {"@type": "FAQPage", "@id": "https://mnclgroup-mum.github.io/stock-scanner-data/share-market-today/#faq", "mainEntity": [{"@type": "Question", "name": "What is FII and DII data?", "acceptedAnswer": {"@type": "Answer", "text": "FII (foreign institutional investors, also called FPIs) and DII (domestic institutional investors such as mutual funds, insurers and pension funds) data shows how much each group bought and sold in the Indian cash market in a session, in ₹ crore. NSE publishes provisional figures after the close."}}, {"@type": "Question", "name": "What time is the share market open in India?", "acceptedAnswer": {"@type": "Answer", "text": "NSE and BSE equity markets trade from 9:15 AM to 3:30 PM IST on weekdays, with a pre-open session from 9:00 AM. They are closed on weekends and exchange holidays."}}, {"@type": "Question", "name": "What is the put-call ratio (PCR)?", "acceptedAnswer": {"@type": "Answer", "text": "The put-call ratio divides open interest in put options by open interest in call options. It describes how option positions are spread across traders; it is not a forecast of the market’s direction."}}, {"@type": "Question", "name": "Why do global markets matter for Indian stocks?", "acceptedAnswer": {"@type": "Answer", "text": "US markets close after India, so their last session, along with crude oil, the dollar and US bond yields, often shapes the next morning’s mood in India. Foreign investors also move money across markets together."}}, {"@type": "Question", "name": "How often is this page updated?", "acceptedAnswer": {"@type": "Answer", "text": "Indian indices and F&O data update after the close each trading day. Global indices, currencies, commodities and bond yields refresh every 30 minutes with a 15–20 minute delay. The morning note is written at 8:15 AM and the evening wrap at 7:30 PM IST."}}]}]}</script>
+<!--SCANNER-APP--><style>
 .mk{--ink:#0f3460;--ink2:#46546b;--mute:#7a8699;--line:#e2e7ee;--line2:#eef1f5;--bg:#f5f7fa;--card:#fff;--brand:#1a7f6e;--brand2:#2196a8;--brandbg:#e8f5f2;
   --up:#13805c;--upbg:#e3f4ec;--dn:#c23b32;--dnbg:#fbe9e7;--r:10px;color:var(--ink);font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-variant-numeric:tabular-nums;margin:0 0 28px}
 .mk *,.mk *::before,.mk *::after{box-sizing:border-box}
@@ -102,7 +103,7 @@
       <p class="mk-sub" id="mk-sub">Indian indices at the latest close, global markets, FII and DII flows, F&amp;O data, commodities, currencies and bond yields, with a morning note and an evening wrap.</p>
     </div>
     <div class="mk-top-a">
-      <a class="mk-btn pri" id="mk-to-screener" href="https://www.mnclgroup.com/candlestick-patterns">Open the stock screener &#8250;</a>
+      <a class="mk-btn pri" id="mk-to-screener" href="https://mnclgroup-mum.github.io/stock-scanner-data/stock-scanner/">Open the stock screener &#8250;</a>
       <button type="button" class="mk-btn" id="mk-share" aria-label="Share this section">Share</button>
     </div>
   </header>
@@ -119,33 +120,36 @@
     <button role="tab" data-mt="impact" aria-selected="false">Impact on stocks</button>
   </nav>
   <section class="mk-panel" id="mk-p" aria-live="polite"><div class="mk-sk"></div><div class="mk-sk" style="height:220px"></div></section>
-  <p class="mk-disc" id="mk-disc">Fully automatic summary based on market data and technical rules, for educational reference only. Not a buy/sell recommendation. Please contact a SEBI-registered investment adviser before investing. MNCL is not responsible for any profit or loss arising from the use of this information.</p>
+  <p class="mk-disc" id="mk-disc">Fully automatic summary based on market data and technical rules, for educational reference only. Not a buy/sell recommendation. Please contact a SEBI-registered investment adviser before investing. We are not responsible for any profit or loss arising from the use of this information.</p>
   <div class="mk-toast" id="mk-toast" role="status" hidden></div>
 </div>
-<!--/MNCL-APP--><section class="mk mk-seo" aria-label="About this page" style="margin-top:20px">
+<!--/SCANNER-APP--><section class="mk mk-seo" aria-label="About this page" style="margin-top:20px">
 <h2>About the share market today page</h2>
 <p>This page brings together what moved the Indian stock market today: the closing values of the Nifty 50, Sensex, Bank Nifty and every NSE sectoral and thematic index; foreign (FII/FPI) and domestic (DII) institutional flows in the cash market; index option data such as the put-call ratio, max pain and open-interest levels; global indices from the US, Europe and Asia; crude oil, gold, silver and base metals; the rupee against the dollar and other currencies; and US Treasury and Indian government bond markets.</p>
 <p>A short <b>morning note</b> (8:15 AM IST) summarises overnight global cues, and an <b>evening wrap</b> (7:30 PM IST) summarises the Indian session, breadth, sectors, flows and the next day's corporate actions. Both are written automatically from the data and contain no recommendations.</p>
-<p>To find individual stocks, use the <a href="https://www.mnclgroup.com/candlestick-patterns">MNCL stock screener</a>: daily technical screens, open-interest build-up, corporate actions, candlestick patterns and charts.</p>
+<p>To find individual stocks, use the <a href="https://mnclgroup-mum.github.io/stock-scanner-data/stock-scanner/">Stock Screener</a>: daily technical screens, open-interest build-up, corporate actions, candlestick patterns and charts.</p>
 </section>
-<!--MNCL-APP--><script>
+<!--SCANNER-APP--><script>
 (function () {
   'use strict';
   // ═════════════════════════════════════════════════════════════════
   //  SETTINGS
   // ═════════════════════════════════════════════════════════════════
-  var GAS = 'https://script.google.com/macros/s/AKfycbyq3rAvyse__FASkf1JB1n61NSalgqmnxfY7K8FS1g_HjtJ3hdG1OUfVFLRtzzSDOWM/exec';
-  var DATA_BASE = 'https://mnclgroup-mum.github.io/stock-scanner-data/data/';
-  var DATA_BASE_RAW = 'https://raw.githubusercontent.com/mnclgroup-mum/stock-scanner-data/main/data/';
-  var PAGE_URL = 'https://www.mnclgroup.com/share-market-today';          // this page
-  var SCREENER_URL = 'https://www.mnclgroup.com/candlestick-patterns';    // the stock screener page
-  var SHARE_BASE = 'https://mnclgroup-mum.github.io/stock-scanner-data/';  // share pages (social previews)
-  var PATH_ROUTES = false;   // true once the web team adds /share-market-today/<section> routes
+  // [v12.0] nothing to edit: everything comes from Admin > Site settings
+  var SITE = window.SCANNER_SITE || /*SITE_CFG*/{"brand":"","appName":"Stock Screener","title":"Stock Screener","short":"Stock Screener","orgName":"","orgUrl":"","regNote":"","disclaimer":"Fully automatic screener based on technical rules, for educational reference only. Not a buy/sell recommendation. Please contact a SEBI-registered investment adviser. We shall not be responsible for any profit or loss from using this data.","siteUrl":"","scannerPath":"stock-scanner","marketPath":"share-market-today","scannerUrl":"https://mnclgroup-mum.github.io/stock-scanner-data/stock-scanner/","marketUrl":"https://mnclgroup-mum.github.io/stock-scanner-data/share-market-today/","webHosts":[],"hosts":["localhost","127.0.0.1","mnclgroup-mum.github.io"],"legacyPrefix":"","privacyUrl":"","ogImage":"","guideBase":"","ctaText":"","ctaUrl":"","pathRoutes":false,"pagesBase":"https://mnclgroup-mum.github.io/stock-scanner-data/","dataBase":"https://mnclgroup-mum.github.io/stock-scanner-data/data/","dataRaw":"https://raw.githubusercontent.com/mnclgroup-mum/stock-scanner-data/main/data/","hide":[],"gas":"https://script.google.com/macros/s/AKfycbyq3rAvyse__FASkf1JB1n61NSalgqmnxfY7K8FS1g_HjtJ3hdG1OUfVFLRtzzSDOWM/exec","v":"v12.1","publisher":"Stock Screener","home":"https://mnclgroup-mum.github.io/stock-scanner-data/","loader":"https://mnclgroup-mum.github.io/stock-scanner-data/app/loader.js"}/*/SITE_CFG*/;
+  var GAS = SITE.gas || '';
+  var DATA_BASE = SITE.dataBase || '';
+  var DATA_BASE_RAW = SITE.dataRaw || '';
+  var PAGE_URL = SITE.marketUrl || location.href.split('#')[0].split('?')[0];   // this page
+  var SCREENER_URL = SITE.scannerUrl || '';                                      // the stock screener page
+  var SHARE_BASE = SITE.pagesBase || '';                                         // share pages (social previews)
+  var PATH_ROUTES = !!SITE.pathRoutes;   // true once the web team adds /<market page>/<section> routes
+  var BRAND = SITE.short || 'Stock Screener';
   // ═════════════════════════════════════════════════════════════════
-  // [v11.13] Set by the loader on separate website pages (mnclgroup.com/<section>).
-  var MNCL_PG = window.MNCL_PAGE || {}, PAGE_SLUG = MNCL_PG.app === 'market' ? (MNCL_PG.slug || '') : '', LIVE_PAGES = MNCL_PG.live || [], SITE_URL = MNCL_PG.site || 'https://www.mnclgroup.com/';
+  // [v11.13] Set by the loader on separate website pages (<site>/<section>).
+  var SC_PG = window.SCANNER_PAGE || {}, PAGE_SLUG = SC_PG.app === 'market' ? (SC_PG.slug || '') : '', LIVE_PAGES = SC_PG.live || [], SITE_URL = SC_PG.site || SITE.siteUrl || SHARE_BASE;
   function livePage(slug){ return LIVE_PAGES.indexOf(slug) !== -1; }
-  var APP_VERSION = 'v11.17';
+  var APP_VERSION = 'v12.1';
   var $ = function(id){ return document.getElementById(id); };
   function h(s){ return String(s === undefined || s === null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
   function num(v){ var x = parseFloat(v); return isFinite(x) ? x : null; }
@@ -166,15 +170,15 @@
 
   // ── sections, addresses and search titles ──
   var SECT = {
-    overview:  { slug: 'share-market-today', title: 'Share Market Today: Nifty, Sensex, FII DII, Global Markets | MNCL', desc: 'Stock market today in India: Nifty and Sensex close, sector indices, FII and DII data, global markets, crude, gold, rupee and bond yields, with a daily morning note and evening wrap.', h1: 'Share market today' },
-    india:     { slug: 'indian-indices-today', title: 'Nifty, Bank Nifty & Sectoral Indices Today: Close, P/E | MNCL', desc: 'NSE indices at the latest close: Nifty 50, Bank Nifty, midcap, smallcap, sectoral and thematic indices with open, high, low, close, volume, P/E, P/B and dividend yield.', h1: 'Indian indices today' },
-    global:    { slug: 'global-markets-today', title: 'Global Markets Today: Dow, Nasdaq, Nikkei, Hang Seng | MNCL', desc: 'Global stock market indices today: Dow Jones, S&P 500, Nasdaq, FTSE, DAX, Nikkei, Hang Seng, KOSPI and more, with change and previous close.', h1: 'Global markets today' },
-    fii:       { slug: 'fii-dii-today', title: 'FII DII Data Today: Net Buy/Sell in Cash Market | MNCL', desc: 'FII and DII activity today in the Indian cash market: buy, sell and net values in ₹ crore, month-to-date flows, 30-session trend and FII positions in index futures.', h1: 'FII and DII data today' },
-    fno:       { slug: 'fno-data-today', title: 'Nifty PCR, Max Pain & OI Data Today | MNCL', desc: 'F&O data today: Nifty and Bank Nifty put-call ratio, max pain, highest call and put open interest, FII index futures long-short ratio and open-interest build-up.', h1: 'F&O data today' },
-    commodity: { slug: 'commodity-prices-today', title: 'Gold, Silver & Crude Oil Prices Today | MNCL', desc: 'Commodity prices today: gold and silver in dollars and rupees, Brent and WTI crude oil, natural gas and copper, with daily change.', h1: 'Commodity prices today' },
-    currency:  { slug: 'currency-rates-today', title: 'Rupee vs Dollar Today: USD/INR, EUR/INR, GBP/INR | MNCL', desc: 'Currency rates today: USD/INR, EUR/INR, GBP/INR, JPY/INR and the US dollar index, with daily change.', h1: 'Currency rates today' },
-    bond:      { slug: 'bond-yields-today', title: 'Bond Yields Today: US 10-Year, India G-Sec Index | MNCL', desc: 'Bond market today: US 10-year and 30-year Treasury yields and NSE government bond (G-Sec) indices for India.', h1: 'Bond yields today' },
-    impact:    { slug: 'market-impact-today', title: 'How Crude, Rupee, Yields & FII Flows Affect Stocks Today | MNCL', desc: 'How today’s moves in crude oil, the rupee, US bond yields, gold, metals and FII flows usually relate to Indian sectors, with links to the related stock screens.', h1: 'Impact on Indian stocks today' }
+    overview:  { slug: 'share-market-today', title: 'Share Market Today: Nifty, Sensex, FII DII, Global Markets | ' + BRAND, desc: 'Stock market today in India: Nifty and Sensex close, sector indices, FII and DII data, global markets, crude, gold, rupee and bond yields, with a daily morning note and evening wrap.', h1: 'Share market today' },
+    india:     { slug: 'indian-indices-today', title: 'Nifty, Bank Nifty & Sectoral Indices Today: Close, P/E | ' + BRAND, desc: 'NSE indices at the latest close: Nifty 50, Bank Nifty, midcap, smallcap, sectoral and thematic indices with open, high, low, close, volume, P/E, P/B and dividend yield.', h1: 'Indian indices today' },
+    global:    { slug: 'global-markets-today', title: 'Global Markets Today: Dow, Nasdaq, Nikkei, Hang Seng | ' + BRAND, desc: 'Global stock market indices today: Dow Jones, S&P 500, Nasdaq, FTSE, DAX, Nikkei, Hang Seng, KOSPI and more, with change and previous close.', h1: 'Global markets today' },
+    fii:       { slug: 'fii-dii-today', title: 'FII DII Data Today: Net Buy/Sell in Cash Market | ' + BRAND, desc: 'FII and DII activity today in the Indian cash market: buy, sell and net values in ₹ crore, month-to-date flows, 30-session trend and FII positions in index futures.', h1: 'FII and DII data today' },
+    fno:       { slug: 'fno-data-today', title: 'Nifty PCR, Max Pain & OI Data Today | ' + BRAND, desc: 'F&O data today: Nifty and Bank Nifty put-call ratio, max pain, highest call and put open interest, FII index futures long-short ratio and open-interest build-up.', h1: 'F&O data today' },
+    commodity: { slug: 'commodity-prices-today', title: 'Gold, Silver & Crude Oil Prices Today | ' + BRAND, desc: 'Commodity prices today: gold and silver in dollars and rupees, Brent and WTI crude oil, natural gas and copper, with daily change.', h1: 'Commodity prices today' },
+    currency:  { slug: 'currency-rates-today', title: 'Rupee vs Dollar Today: USD/INR, EUR/INR, GBP/INR | ' + BRAND, desc: 'Currency rates today: USD/INR, EUR/INR, GBP/INR, JPY/INR and the US dollar index, with daily change.', h1: 'Currency rates today' },
+    bond:      { slug: 'bond-yields-today', title: 'Bond Yields Today: US 10-Year, India G-Sec Index | ' + BRAND, desc: 'Bond market today: US 10-year and 30-year Treasury yields and NSE government bond (G-Sec) indices for India.', h1: 'Bond yields today' },
+    impact:    { slug: 'market-impact-today', title: 'How Crude, Rupee, Yields & FII Flows Affect Stocks Today | ' + BRAND, desc: 'How today’s moves in crude oil, the rupee, US bond yields, gold, metals and FII flows usually relate to Indian sectors, with links to the related stock screens.', h1: 'Impact on Indian stocks today' }
   };
   var BY_SLUG = {}; Object.keys(SECT).forEach(function(k){ BY_SLUG[SECT[k].slug] = k; });
   function setMeta(sel, attr, val){ var el = document.querySelector(sel); if (!el) { el = document.createElement('meta'); var m = sel.match(/\[(name|property)="([^"]+)"\]/); if (!m) return; el.setAttribute(m[1], m[2]); document.head.appendChild(el); } el.setAttribute(attr, val); }
@@ -223,10 +227,11 @@
     return Promise.all([getJSON(DATA_BASE + 'market_today.json?t=' + t, 9000).catch(function(){ return null; }), getJSON(DATA_BASE_RAW + 'market_today.json?t=' + t, 9000).catch(function(){ return null; })])
       .then(function(r){ var a = r[0], b = r[1]; var best = !a ? b : !b ? a : (String(a.at_iso) >= String(b.at_iso) ? a : b); return best || getJSON(GAS + '?action=market_today', 45000).catch(function(){ return null; }); });
   }
-  function hostOk(h){ h = String(h || '').toLowerCase(); if (h === '') return true; return ['localhost', '127.0.0.1', '192.168.112.254', 'mnclgroup.com', '.mnclgroup.com', 'mnclgroup-mum.github.io', '.mohit-jain.workers.dev'].some(function(x){ return x.charAt(0) === '.' ? h.slice(-x.length) === x : h === x; }); }   // [v11.16] '' = a file opened from a drive; '.x.com' = any subdomain of x.com
+  function hostOk(h){ h = String(h || '').toLowerCase(); if (h === '') return true; return (SITE.hosts || []).some(function(x){ x = String(x).toLowerCase(); return x.charAt(0) === '.' ? (h === x.slice(1) || h.slice(-x.length) === x) : (h === x || h === 'www.' + x || 'www.' + h === x); }); }
   function start(){
-    // [v11.13] runs only on mnclgroup.com
-    if (!hostOk(location.hostname)) { var lk = document.getElementById('mk-app'); if (lk) lk.innerHTML = '<p style="padding:16px;font:15px/1.5 sans-serif">This tool is available on <a href="https://www.mnclgroup.com/share-market-today">mnclgroup.com</a>.</p>'; return; }
+    // [v11.13] runs only on the allowed domains (Admin > Site settings)
+    if (!GAS && !DATA_BASE) { var lk0 = document.getElementById('mk-app'); if (lk0) lk0.innerHTML = '<p style="padding:16px;font:15px/1.5 sans-serif">This page file is not connected yet. Upload it in Admin &gt; Upload, then use the short page code from the page kit.</p>'; return; }
+    if (!hostOk(location.hostname)) { var lk = document.getElementById('mk-app'); if (lk) lk.innerHTML = '<p style="padding:16px;font:15px/1.5 sans-serif">This tool is available on <a href="' + h(PAGE_URL) + '">' + h(String(PAGE_URL).replace(/^[a-z]+:\/\/|\/.*$/gi, '')) + '</a>.</p>'; return; }
     S.tab = fromHash(); go(S.tab, false);
     Promise.all([manifest(DATA_BASE), manifest(DATA_BASE_RAW)]).then(function(r){
       var best = null; r.forEach(function(x){ if (x && x.m && (!best || String(x.m.version) > String(best.m.version))) best = x; });
@@ -450,4 +455,4 @@
   console.log('[market-today ' + APP_VERSION + ']');
 })();
 
-</script><!--/MNCL-APP-->
+</script><!--/SCANNER-APP-->
